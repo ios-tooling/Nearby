@@ -23,7 +23,8 @@ public class PeerSession: NSObject {
 	public var isActive = false
 	public var messageRouter: PeerMessageRouter?
 	public var application: UIApplication!
-	
+	public var serviceType: String!
+
 	public var peerID: MCPeerID { return PeerDevice.localDevice.peerID }
 	public var devices: [MCPeerID: PeerDevice] = [:]
 	
@@ -55,6 +56,7 @@ extension PeerSession {
 		
 		assert(self.messageRouter != nil, "You must set a message router before starting a PeerSession.")
 		assert(self.application != nil, "You must set a UIApplication before starting a PeerSession.")
+		assert(self.serviceType != nil, "You must set a serviceType before starting a PeerSession.")
 
 		if self.isActive { return }
 		self.isActive = true

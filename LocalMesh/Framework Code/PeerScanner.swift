@@ -23,17 +23,16 @@ class PeerScanner: NSObject {
 	var isBrowsing = false { didSet { self.updateState() }}
 	var isAdvertising = false { didSet { self.updateState() }}
 	
-	let serviceType = "SpotEmSAI"
 	var peerID: MCPeerID { return PeerSession.instance.peerID }
 	
 	init(delegate: DeviceLocatorDelegate) {
 		super.init()
 		
 		self.delegate = delegate
-		self.advertiser = MCNearbyServiceAdvertiser(peer: self.peerID, discoveryInfo: PeerDevice.localDevice.discoveryInfo, serviceType: self.serviceType)
+		self.advertiser = MCNearbyServiceAdvertiser(peer: self.peerID, discoveryInfo: PeerDevice.localDevice.discoveryInfo, serviceType: PeerSession.instance.serviceType)
 		self.advertiser.delegate = self
 		
-		self.browser = MCNearbyServiceBrowser(peer: self.peerID, serviceType: self.serviceType)
+		self.browser = MCNearbyServiceBrowser(peer: self.peerID, serviceType: PeerSession.instance.serviceType)
 		self.browser.delegate = self
 	}
 }
