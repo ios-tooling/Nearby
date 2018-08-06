@@ -35,7 +35,7 @@ public class PeerSession: NSObject {
 		NotificationCenter.default.removeObserver(self, name: .UIApplicationWillEnterForeground, object: nil)
 	}
 	
-	var connectedDevices: [PeerDevice] { return self.devices.values.filter { $0.state == .connected }}
+	public var connectedDevices: [PeerDevice] { return self.devices.values.filter { $0.state == .connected }}
 	
 	func checkForLostSession() {
 //		if !self.isShuttingDown, self.connectedDevices.isEmpty {
