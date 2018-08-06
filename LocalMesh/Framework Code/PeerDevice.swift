@@ -102,10 +102,14 @@ public class PeerDevice: NSObject {
 		}
 		super.init()
 		self.startSession()
-		NotificationCenter.default.addObserver(self, selector: #selector(disconnectFromPeers), name: .UIApplicationDidEnterBackground, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(enteredBackground), name: .UIApplicationDidEnterBackground, object: nil)
 	}
 	
-	@objc func disconnectFromPeers(completion: (() -> Void)?) {
+	@objc func enteredBackground() {
+		self.disconnectFromPeers(completion: nil)
+	}
+	
+	func disconnectFromPeers(completion: (() -> Void)?) {
 		print("Disconnecting from peers")
 		let taskID = PeerSession.instance.application.beginBackgroundTask {
 			completion?()
