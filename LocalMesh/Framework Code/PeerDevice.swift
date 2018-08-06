@@ -17,7 +17,8 @@ public protocol PeerDeviceDelegate: class {
 
 public class PeerDevice: NSObject {
 	public struct Notifications {
-		public static let deviceStateChanged = Notification.Name("device-connected")
+		public static let deviceStateChanged = Notification.Name("device-state-changed")
+		public static let deviceConnected = Notification.Name("device-connected")
 		public static let deviceDisconnected = Notification.Name("device-disconnected")
 	}
 	
@@ -184,6 +185,10 @@ public class PeerDevice: NSObject {
 			self.session = MCSession(peer: PeerDevice.localDevice.peerID, securityIdentity: nil, encryptionPreference: .required)
 			self.session?.delegate = self
 		}
+	}
+	
+	func didConnect() {
+		DispatchQueue.main.async { NotificationCenter.default.post(name: PeerDevice.Notifications.deviceConnected, object: self)}
 	}
 	
 	public func send<MessageType: PeerMessage>(message: MessageType, completion: (() -> Void)? = nil) {
