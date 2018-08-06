@@ -157,15 +157,19 @@ public class PeerDevice: NSObject {
 		self.state = newState
 		
 		if self.state == .connected {
-			DispatchQueue.main.async { NotificationCenter.default.post(name: Notifications.deviceStateChanged, object: self)}
+			DispatchQueue.main.async {
+				NotificationCenter.default.post(name: Notifications.deviceStateChanged, object: self)
+				NotificationCenter.default.post(name: PeerDevice.Notifications.deviceConnected, object: self)
+			}
+			return
 		} else if self.state == .connecting {
 			self.startSession()
 		}
 		
+		DispatchQueue.main.async { NotificationCenter.default.post(name: Notifications.deviceStateChanged, object: self)}
 		if self.state != .connected, oldState == .connected {
 			DispatchQueue.main.async { NotificationCenter.default.post(name: Notifications.deviceDisconnected, object: self)}
 		}
-		DispatchQueue.main.async { NotificationCenter.default.post(name: Notifications.deviceStateChanged, object: self)}
 	}
 	
 	public func disconnect() {
@@ -185,10 +189,6 @@ public class PeerDevice: NSObject {
 			self.session = MCSession(peer: PeerDevice.localDevice.peerID, securityIdentity: nil, encryptionPreference: .required)
 			self.session?.delegate = self
 		}
-	}
-	
-	func didConnect() {
-		DispatchQueue.main.async { NotificationCenter.default.post(name: PeerDevice.Notifications.deviceConnected, object: self)}
 	}
 	
 	public func send<MessageType: PeerMessage>(message: MessageType, completion: (() -> Void)? = nil) {

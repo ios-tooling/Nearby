@@ -121,7 +121,6 @@ extension PeerSession {
 extension PeerSession: DeviceLocatorDelegate {
 	func didLocate(device: PeerDevice) {
 		self.devices[device.peerID] = device
-		device.didConnect()
 	}
 	
 	func didFailToLocateDevice() {
