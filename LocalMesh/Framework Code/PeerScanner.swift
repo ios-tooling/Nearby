@@ -73,7 +73,7 @@ extension PeerScanner: MCNearbyServiceAdvertiserDelegate {
 		if let device = PeerSession.instance.device(for: peerID) {
 			device.receivedInvitation(withContext: context, handler: invitationHandler)
 		} else if let data = context, let info = try? JSONDecoder().decode([String: String].self, from: data) {
-			let device = PeerDevice(peerID: peerID, info: info)
+			let device = PeerSession.deviceClass.init(peerID: peerID, info: info)
 			self.delegate.didLocate(device: device)
 		} else {
 			invitationHandler(false, nil)
@@ -93,7 +93,7 @@ extension PeerScanner: MCNearbyServiceBrowserDelegate {
 			return
 		}
 		Logger.instance.log("Found peer: \(peerID.displayName)")
-		let device = PeerSession.instance.device(for: peerID) ?? PeerDevice(peerID: peerID, info: info)
+		let device = PeerSession.instance.device(for: peerID) ?? PeerSession.deviceClass.init(peerID: peerID, info: info)
 		self.delegate.didLocate(device: device)
 		if device.state != .connected && device.state != .invited {
 			device.state = .found

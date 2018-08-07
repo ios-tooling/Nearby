@@ -24,6 +24,7 @@ public class PeerSession: NSObject {
 	public var messageRouter: PeerMessageRouter?
 	public var application: UIApplication!
 	public var serviceType: String!
+	static public var deviceClass = PeerDevice.self
 
 	public var peerID: MCPeerID { return PeerDevice.localDevice.peerID }
 	public var devices: [MCPeerID: PeerDevice] = [:]

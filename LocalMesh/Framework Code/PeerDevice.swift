@@ -15,14 +15,14 @@ public protocol PeerDeviceDelegate: class {
 	func didChangeState(for: PeerDevice)
 }
 
-public class PeerDevice: NSObject {
+open class PeerDevice: NSObject {
 	public struct Notifications {
 		public static let deviceStateChanged = Notification.Name("device-state-changed")
 		public static let deviceConnected = Notification.Name("device-connected")
 		public static let deviceDisconnected = Notification.Name("device-disconnected")
 	}
 	
-	public static let localDevice = PeerDevice(asLocalDevice: true)
+	public static let localDevice = PeerSession.deviceClass.init(asLocalDevice: true)
 	
 	public enum State: Int, Comparable { case none, found, invited, connecting, connected
 		var description: String {
@@ -52,8 +52,8 @@ public class PeerDevice: NSObject {
 	public var displayName: String
 	public weak var delegate: PeerDeviceDelegate?
 	public let peerID: MCPeerID
-	public var discoveryInfo: [String: String]?
-	public var state: State = .none { didSet {
+	open var discoveryInfo: [String: String]?
+	open var state: State = .none { didSet {
 		if self.state == oldValue { return }
 		Logger.instance.log("\(self.displayName), \(oldValue.description) -> \(self.state.description)")
 		self.delegate?.didChangeState(for: self)
@@ -73,14 +73,14 @@ public class PeerDevice: NSObject {
 		return NSAttributedString(string: self.displayName, attributes: [.foregroundColor: self.state.color, .font: UIFont.boldSystemFont(ofSize: 14)])
 	}
 	
-	public override var description: String {
+	open override var description: String {
 		var string = self.displayName
 		if self.isIPad { string += ", iPad" }
 		if self.isIPhone { string += ", iPhone" }
 		return string
 	}
 
-	private init(asLocalDevice: Bool) {
+	public required init(asLocalDevice: Bool) {
 		self.isLocalDevice = asLocalDevice
 		self.uniqueID = UIDevice.current.identifierForVendor?.uuidString ?? ""
 		self.discoveryInfo = [Keys.name: UIDevice.current.name, Keys.unique: self.uniqueID, Keys.idiom: "\(UIDevice.current.userInterfaceIdiom.rawValue)"]
@@ -90,7 +90,7 @@ public class PeerDevice: NSObject {
 		super.init()
 	}
 	
-	init(peerID: MCPeerID, info: [String: String]) {
+	public required init(peerID: MCPeerID, info: [String: String]) {
 		self.isLocalDevice = false
 		self.peerID = peerID
 		self.displayName = PeerSession.instance.uniqueDisplayName(from: self.peerID.displayName)
@@ -172,7 +172,7 @@ public class PeerDevice: NSObject {
 		}
 	}
 	
-	public func disconnect() {
+	open func disconnect() {
 		self.state = .none
 		DispatchQueue.main.async { NotificationCenter.default.post(name: Notifications.deviceDisconnected, object: self)}
 		self.stopSession()
@@ -191,7 +191,7 @@ public class PeerDevice: NSObject {
 		}
 	}
 	
-	public func send<MessageType: PeerMessage>(message: MessageType, completion: (() -> Void)? = nil) {
+	open func send<MessageType: PeerMessage>(message: MessageType, completion: (() -> Void)? = nil) {
 		if self.isLocalDevice || self.session == nil {
 			completion?()
 			return
