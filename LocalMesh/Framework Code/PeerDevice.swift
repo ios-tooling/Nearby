@@ -197,7 +197,7 @@ open class PeerDevice: NSObject {
 			return
 		}
 
-		Logger.instance.log("Sending \(message.command) to \(self.displayName)")
+		Logger.instance.log("Sending \(message.command) as a \(type(of: message)) to \(self.displayName)")
 		let payload = PeerMessagePayload(message: message)
 		self.send(payload: payload)
 		completion?()
