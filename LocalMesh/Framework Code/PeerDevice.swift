@@ -13,6 +13,7 @@ import MultipeerConnectivity
 public protocol PeerDeviceDelegate: class {
 	func didReceive(message: PeerMessage, from: PeerDevice)
 	func didReceiveFirstInfo(from: PeerDevice)
+	func didChangeInfo(from: PeerDevice)
 	func didChangeState(for: PeerDevice)
 }
 
@@ -22,6 +23,7 @@ open class PeerDevice: NSObject {
 		public static let deviceConnected = Notification.Name("device-connected")
 		public static let deviceConnectedWithInfo = Notification.Name("device-connected-with-info")
 		public static let deviceDisconnected = Notification.Name("device-disconnected")
+		public static let deviceChangedInfo = Notification.Name("device-changed-info")
 	}
 	
 	public static let localDevice = PeerSession.deviceClass.init(asLocalDevice: true)
@@ -52,10 +54,14 @@ open class PeerDevice: NSObject {
 	}
 	
 	open var discoveryInfo: [String: String]?
-	public var deviceInfo: [String: Any]? { didSet {
+	public var deviceInfo: [String: String]? { didSet {
 		if oldValue == nil {
 			self.delegate?.didReceiveFirstInfo(from: self)
 			NotificationCenter.default.post(name: PeerDevice.Notifications.deviceConnectedWithInfo, object: self)
+			NotificationCenter.default.post(name: PeerDevice.Notifications.deviceChangedInfo, object: self)
+		} else if self.deviceInfo != oldValue {
+			self.delegate?.didChangeInfo(from: self)
+			NotificationCenter.default.post(name: PeerDevice.Notifications.deviceChangedInfo, object: self)
 		}
 	}}
 	public var displayName: String
