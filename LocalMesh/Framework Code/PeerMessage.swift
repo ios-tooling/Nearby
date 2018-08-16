@@ -27,11 +27,24 @@ public class PeerSystemMessage: PeerMessage {
 }
 
 extension PeerSystemMessage {
-	class DeviceInfo: PeerSystemMessage {
-		var deviceInfo: [String: Codable]?
+	class DeviceInfo: PeerMessage {
+		var command: String { return self.kind.rawValue }
 		
-		convenience init() {
-			self.init(kind: .deviceInfo)
+		enum CodableKeys: String, CodingKey { case deviceInfo }
+		var deviceInfo: [String: String]?
+		
+		func encode(to encoder: Encoder) throws {
+			var container = encoder.container(keyedBy: CodableKeys.self)
+			try? container.encode(self.deviceInfo, forKey: .deviceInfo)
+		}
+		public var kind = PeerSystemMessage.Kind.deviceInfo
+
+		required init(from decoder: Decoder) throws {
+			let container = try decoder.container(keyedBy: CodableKeys.self)
+			self.deviceInfo = try container.decode([String: String].self, forKey: .deviceInfo)
+		}
+		
+		init() {
 			self.deviceInfo = PeerSession.instance.localDeviceInfo
 		}
 	}

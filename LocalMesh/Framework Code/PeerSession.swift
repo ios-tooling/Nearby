@@ -19,7 +19,7 @@ public class PeerSession: NSObject {
 	
 	var deviceLocator: PeerScanner!
 //	var session: MCSession!
-	public var localDeviceInfo: [String: Codable] = [:] { didSet { self.broadcastDeviceInfoChange() }}
+	public var localDeviceInfo: [String: String] = [:] { didSet { self.broadcastDeviceInfoChange() }}
 	public var isShuttingDown = false
 	public var isActive = false
 	public var messageRouter: PeerMessageRouter?
@@ -66,7 +66,6 @@ extension PeerSession {
 		if let app = application { self.application = app }
 
 		
-		assert(self.messageRouter != nil, "You must set a message router before starting a PeerSession.")
 		assert(self.application != nil, "You must set a UIApplication before starting a PeerSession.")
 		assert(self.serviceType != nil, "You must set a serviceType before starting a PeerSession.")
 
@@ -100,7 +99,7 @@ extension PeerSession {
 	}
 	
 	@objc func willEnterForeground() {
-		if let router = self.messageRouter { self.startup(withRouter: router) }
+		if let app = self.application { self.startup(withRouter: self.messageRouter, application: app) }
 	}
 	
 	public func locateDevice() {
