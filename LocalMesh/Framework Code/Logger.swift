@@ -17,6 +17,7 @@ public class Logger {
 	let semaphore = DispatchSemaphore(value: 1)
 	
 	public var logs: [String] = []
+	public var echo = false
 	
 	public func log(_ string: String) {
 		self.semaphore.wait()
@@ -24,7 +25,7 @@ public class Logger {
 		self.semaphore.signal()
 		
 		DispatchQueue.main.async { NotificationCenter.default.post(name: Notifications.logged, object: string)}
-		print("######### " + string)
+		if self.echo { print("######### " + string) }
 	}
 	
 	public func clear() {

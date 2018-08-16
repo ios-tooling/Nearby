@@ -13,7 +13,7 @@ public protocol PeerMessage: class, Codable {
 }
 
 public class PeerSystemMessage: PeerMessage {
-	public enum Kind: String, Codable { case ping = "*system-ping*", disconnect = "*system-disconnect*" }
+	public enum Kind: String, Codable { case ping = "*system-ping*", disconnect = "*system-disconnect*", deviceInfo = "*device-info*" }
 	
 	public static var ping: PeerSystemMessage = PeerSystemMessage(kind: Kind.ping)
 	public static var disconnect: PeerSystemMessage = PeerSystemMessage(kind: Kind.disconnect)
@@ -23,6 +23,17 @@ public class PeerSystemMessage: PeerMessage {
 	
 	init(kind: Kind) {
 		self.kind = kind
+	}
+}
+
+extension PeerSystemMessage {
+	class DeviceInfo: PeerSystemMessage {
+		var deviceInfo: [String: Codable]?
+		
+		convenience init() {
+			self.init(kind: .deviceInfo)
+			self.deviceInfo = PeerSession.instance.localDeviceInfo
+		}
 	}
 }
 

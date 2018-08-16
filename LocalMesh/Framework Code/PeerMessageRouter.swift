@@ -19,25 +19,18 @@ class InternalRouter: PeerMessageRouter {
 	func route(_ payload: PeerMessagePayload, from device: PeerDevice) -> PeerMessage? {
 		guard let kind = PeerSystemMessage.Kind(rawValue: payload.command) else { return nil }
 		
-		switch kind {
-		case .ping:
-			Logger.instance.log("PING")
-//		case .match:
-//			if let match = message.match {
-//				SpotEmGame.instance.received(match: match, from: device)
-//			}
-			
-//		case .selectedSigils:
-//			if let data = message.data, let payload = try? JSONDecoder().decode(Message.SigilsSelectedPayload.self, from: data) {
-//				Logger.instance.log("Selected \(payload.sigils)")
-//				SpotEmGame.instance.received(selectedSigils: payload.sigils, from: payload.playerID)
-//			}
-			
-		case .disconnect:
-			device.disconnect()
-		}
-
 		do {
+			switch kind {
+			case .ping: Logger.instance.log("PING")
+			case .disconnect: device.disconnect()
+				
+			case .deviceInfo:
+				if let message: PeerSystemMessage.DeviceInfo = try payload.reconstitute() {
+					device.deviceInfo = message.deviceInfo
+					return message
+				}
+			}
+
 			let message: PeerSystemMessage? = try payload.reconstitute()
 			return message
 		} catch {

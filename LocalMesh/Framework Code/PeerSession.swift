@@ -19,11 +19,13 @@ public class PeerSession: NSObject {
 	
 	var deviceLocator: PeerScanner!
 //	var session: MCSession!
+	public var localDeviceInfo: [String: Codable] = [:] { didSet { self.broadcastDeviceInfoChange() }}
 	public var isShuttingDown = false
 	public var isActive = false
 	public var messageRouter: PeerMessageRouter?
 	public var application: UIApplication!
 	public var serviceType: String!
+	public var alwaysRequestInfo = true
 	static public var deviceClass = PeerDevice.self
 
 	public var peerID: MCPeerID { return PeerDevice.localDevice.peerID }
@@ -31,13 +33,22 @@ public class PeerSession: NSObject {
 	
 	override init() {
 		super.init()
-		
-		NotificationCenter.default.removeObserver(self, name: .UIApplicationDidEnterBackground, object: nil)
-		NotificationCenter.default.removeObserver(self, name: .UIApplicationWillEnterForeground, object: nil)
 	}
 	
 	public var connectedDevices: [PeerDevice] { return self.devices.values.filter { $0.state == .connected }}
 	
+	func broadcastDeviceInfoChange() {
+		PeerSession.instance.sendToAll(message: PeerSystemMessage.DeviceInfo())
+	}
+	
+	open func sendToAll<MessageType: PeerMessage>(message: MessageType) {
+		Logger.instance.log("Sending \(message.command) as a \(type(of: message)) to all")
+		let payload = PeerMessagePayload(message: message)
+		for device in self.connectedDevices {
+			device.send(payload: payload)
+		}
+	}
+
 	func checkForLostSession() {
 //		if !self.isShuttingDown, self.connectedDevices.isEmpty {
 //			Logger.instance.log("No devices found, resetting session")

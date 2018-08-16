@@ -12,6 +12,7 @@ import MultipeerConnectivity
 
 public protocol PeerDeviceDelegate: class {
 	func didReceive(message: PeerMessage, from: PeerDevice)
+	func didReceiveFirstInfo(from: PeerDevice)
 	func didChangeState(for: PeerDevice)
 }
 
@@ -19,6 +20,7 @@ open class PeerDevice: NSObject {
 	public struct Notifications {
 		public static let deviceStateChanged = Notification.Name("device-state-changed")
 		public static let deviceConnected = Notification.Name("device-connected")
+		public static let deviceConnectedWithInfo = Notification.Name("device-connected-with-info")
 		public static let deviceDisconnected = Notification.Name("device-disconnected")
 	}
 	
@@ -49,10 +51,19 @@ open class PeerDevice: NSObject {
 
 	}
 	
+	open var discoveryInfo: [String: String]?
+	public var deviceInfo: [String: Any]? { didSet {
+		if oldValue == nil {
+			self.delegate?.didReceiveFirstInfo(from: self)
+			NotificationCenter.default.post(name: PeerDevice.Notifications.deviceConnectedWithInfo, object: self)
+		}
+	}}
 	public var displayName: String
 	public weak var delegate: PeerDeviceDelegate?
 	public let peerID: MCPeerID
-	open var discoveryInfo: [String: String]?
+	public let isLocalDevice: Bool
+	public var uniqueID: String!
+	
 	open var state: State = .none { didSet {
 		if self.state == oldValue { return }
 		Logger.instance.log("\(self.displayName), \(oldValue.description) -> \(self.state.description)")
@@ -64,8 +75,6 @@ open class PeerDevice: NSObject {
 	var isIPhone: Bool { return self.idiom == .phone }
 	public var session: MCSession?
 	public let invitationTimeout: TimeInterval = 30.0
-	public let isLocalDevice: Bool
-	public var uniqueID: String!
 	weak var rsvpCheckTimer: Timer?
 	
 	public var attributedDescription: NSAttributedString {
@@ -111,7 +120,7 @@ open class PeerDevice: NSObject {
 	}
 	
 	func disconnectFromPeers(completion: (() -> Void)?) {
-		print("Disconnecting from peers")
+		Logger.instance.log("Disconnecting from peers")
 		let taskID = PeerSession.instance.application.beginBackgroundTask {
 			completion?()
 		}
@@ -160,6 +169,9 @@ open class PeerDevice: NSObject {
 			DispatchQueue.main.async {
 				NotificationCenter.default.post(name: Notifications.deviceStateChanged, object: self)
 				NotificationCenter.default.post(name: PeerDevice.Notifications.deviceConnected, object: self)
+			}
+			if PeerSession.instance.alwaysRequestInfo {
+				self.send(message: PeerSystemMessage.DeviceInfo())
 			}
 			return
 		} else if self.state == .connecting {
