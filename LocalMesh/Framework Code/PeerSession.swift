@@ -19,7 +19,9 @@ public class PeerSession: NSObject {
 	
 	var deviceLocator: PeerScanner!
 //	var session: MCSession!
-	public var localDeviceInfo: [String: String] = [:] { didSet { self.broadcastDeviceInfoChange() }}
+	public var localDeviceInfo: [String: String] = [:] { didSet {
+		if self.localDeviceInfo != oldValue { self.broadcastDeviceInfoChange() }
+	}}
 	public var isShuttingDown = false
 	public var isActive = false
 	public var messageRouter: PeerMessageRouter?
