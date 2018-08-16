@@ -175,6 +175,7 @@ open class PeerDevice: NSObject {
 			DispatchQueue.main.async {
 				NotificationCenter.default.post(name: Notifications.deviceStateChanged, object: self)
 				NotificationCenter.default.post(name: PeerDevice.Notifications.deviceConnected, object: self)
+				if self.deviceInfo != nil { NotificationCenter.default.post(name: PeerDevice.Notifications.deviceConnectedWithInfo, object: self) }
 			}
 			if PeerSession.instance.alwaysRequestInfo {
 				self.send(message: PeerSystemMessage.DeviceInfo())
