@@ -17,7 +17,7 @@
                BlueprintIdentifier = "B504E6661A89690C001B414B"
                BuildableName = "Combined Framework"
                BlueprintName = "Combined Framework"
-               ReferencedContainer = "container:LocalMesh.xcodeproj">
+               ReferencedContainer = "container:Nearby.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -48,7 +48,7 @@
             BlueprintIdentifier = "B504E6661A89690C001B414B"
             BuildableName = "Combined Framework"
             BlueprintName = "Combined Framework"
-            ReferencedContainer = "container:LocalMesh.xcodeproj">
+            ReferencedContainer = "container:Nearby.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -66,7 +66,7 @@
             BlueprintIdentifier = "B504E6661A89690C001B414B"
             BuildableName = "Combined Framework"
             BlueprintName = "Combined Framework"
-            ReferencedContainer = "container:LocalMesh.xcodeproj">
+            ReferencedContainer = "container:Nearby.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

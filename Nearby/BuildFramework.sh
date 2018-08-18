@@ -7,12 +7,12 @@
 #  Copyright (c) 2015 Stand Alone, Inc. All rights reserved.
 
 BASE_BUILD_DIR="${BUILD_DIR}"
-FRAMEWORK_NAME="LocalMesh"
+FRAMEWORK_NAME="Nearby"
 IOS_SUFFIX=""
 MAC_SUFFIX=""
 CONFIG=$CONFIGURATION
 UNIVERSAL_OUTPUTFOLDER="Build/${CONFIG}-universal"
-PROJECT_NAME="LocalMesh"
+PROJECT_NAME="Nearby"
 
 GIT_BRANCH=`git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1/"`
 GIT_REV=`git rev-parse --short HEAD`
@@ -21,13 +21,13 @@ BUILD_DATE=`date "+%c%m%d%H%M%S"`
 BRANCH=`git rev-parse --abbrev-ref HEAD`
 BUILD_NUMBER=`echo $(expr $(git rev-list $BRANCH --count) - $(git rev-list HEAD..$BRANCH --count))`
 
-IOS_PLIST_PATH="${PROJECT_DIR}/LocalMesh/iOS/info.plist"
+IOS_PLIST_PATH="${PROJECT_DIR}/Nearby/iOS/info.plist"
 /usr/libexec/PlistBuddy "${IOS_PLIST_PATH}" -c "Add :branch string ${GIT_BRANCH}"
 /usr/libexec/PlistBuddy "${IOS_PLIST_PATH}" -c "Add :rev string ${GIT_REV}"
 /usr/libexec/PlistBuddy "${IOS_PLIST_PATH}" -c "Add :built string ${BUILD_DATE}"
 /usr/libexec/PlistBuddy "${IOS_PLIST_PATH}" -c "Add :git_number string ${BUILD_NUMBER}"
 
-MAC_PLIST_PATH="${PROJECT_DIR}/LocalMesh/Mac/info.plist"
+MAC_PLIST_PATH="${PROJECT_DIR}/Nearby/Mac/info.plist"
 /usr/libexec/PlistBuddy "${MAC_PLIST_PATH}" -c "Add :branch string ${GIT_BRANCH}"
 /usr/libexec/PlistBuddy "${MAC_PLIST_PATH}" -c "Add :rev string ${GIT_REV}"
 /usr/libexec/PlistBuddy "${MAC_PLIST_PATH}" -c "Add :built string ${BUILD_DATE}"

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import LocalMesh
+import Nearby
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		NotificationCenter.default.addObserver(self, selector: #selector(discoveredDevice), name: PeerDevice.Notifications.deviceConnectedWithInfo, object: nil)
 		
 		PeerSession.instance.localDeviceInfo = ["Hello": "There"]
-		PeerSession.instance.serviceType = "localmesh-test"
+		PeerSession.instance.serviceType = "Nearby-test"
 		PeerSession.instance.startup(application: application)
 		
 		DispatchQueue.main.asyncAfter(deadline: .now() + 5) {

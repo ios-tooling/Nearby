@@ -17,7 +17,7 @@
                BlueprintIdentifier = "B54A9B492125B417008E646E"
                BuildableName = "iOSTestingHarness.app"
                BlueprintName = "iOSTestingHarness"
-               ReferencedContainer = "container:LocalMesh.xcodeproj">
+               ReferencedContainer = "container:Nearby.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "B54A9B5C2125B418008E646E"
                BuildableName = "iOSTestingHarnessTests.xctest"
                BlueprintName = "iOSTestingHarnessTests"
-               ReferencedContainer = "container:LocalMesh.xcodeproj">
+               ReferencedContainer = "container:Nearby.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -45,7 +45,7 @@
                BlueprintIdentifier = "B54A9B672125B418008E646E"
                BuildableName = "iOSTestingHarnessUITests.xctest"
                BlueprintName = "iOSTestingHarnessUITests"
-               ReferencedContainer = "container:LocalMesh.xcodeproj">
+               ReferencedContainer = "container:Nearby.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,7 +55,7 @@
             BlueprintIdentifier = "B54A9B492125B417008E646E"
             BuildableName = "iOSTestingHarness.app"
             BlueprintName = "iOSTestingHarness"
-            ReferencedContainer = "container:LocalMesh.xcodeproj">
+            ReferencedContainer = "container:Nearby.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -78,7 +78,7 @@
             BlueprintIdentifier = "B54A9B492125B417008E646E"
             BuildableName = "iOSTestingHarness.app"
             BlueprintName = "iOSTestingHarness"
-            ReferencedContainer = "container:LocalMesh.xcodeproj">
+            ReferencedContainer = "container:Nearby.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -97,7 +97,7 @@
             BlueprintIdentifier = "B54A9B492125B417008E646E"
             BuildableName = "iOSTestingHarness.app"
             BlueprintName = "iOSTestingHarness"
-            ReferencedContainer = "container:LocalMesh.xcodeproj">
+            ReferencedContainer = "container:Nearby.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

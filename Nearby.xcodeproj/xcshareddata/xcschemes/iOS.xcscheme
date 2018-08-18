@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B504E6AE1A898110001B414B"
+               BlueprintIdentifier = "B504E6451A8968DC001B414B"
                BuildableName = "LocalMesh.framework"
-               BlueprintName = "LocalMesh_Mac"
-               ReferencedContainer = "container:LocalMesh.xcodeproj">
+               BlueprintName = "Nearby_iOS"
+               ReferencedContainer = "container:Nearby.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,10 +45,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B504E6AE1A898110001B414B"
+            BlueprintIdentifier = "B504E6451A8968DC001B414B"
             BuildableName = "LocalMesh.framework"
-            BlueprintName = "LocalMesh_Mac"
-            ReferencedContainer = "container:LocalMesh.xcodeproj">
+            BlueprintName = "Nearby_iOS"
+            ReferencedContainer = "container:Nearby.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -63,10 +63,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B504E6AE1A898110001B414B"
+            BlueprintIdentifier = "B504E6451A8968DC001B414B"
             BuildableName = "LocalMesh.framework"
-            BlueprintName = "LocalMesh_Mac"
-            ReferencedContainer = "container:LocalMesh.xcodeproj">
+            BlueprintName = "Nearby_iOS"
+            ReferencedContainer = "container:Nearby.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
