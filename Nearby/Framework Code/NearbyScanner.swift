@@ -70,7 +70,7 @@ extension NearbyScanner {
 extension NearbyScanner: MCNearbyServiceAdvertiserDelegate {
 	func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
 		if let device = NearbySession.instance.device(for: peerID) {
-			device.receivedInvitation(withContext: context, handler: invitationHandler)
+			device.receivedInvitation(from: peerID, withContext: context, handler: invitationHandler)
 		} else if let data = context, let info = try? JSONDecoder().decode([String: String].self, from: data) {
 			let device = NearbySession.deviceClass.init(peerID: peerID, info: info)
 			self.delegate.didLocate(device: device)

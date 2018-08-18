@@ -145,7 +145,7 @@ open class NearbyDevice: NSObject {
 		browser.invitePeer(self.peerID, to: self.session!, withContext: data, timeout: self.invitationTimeout)
 	}
 	
-	func receivedInvitation(withContext context: Data?, handler: @escaping (Bool, MCSession?) -> Void) {
+	func receivedInvitation(from: MCPeerID, withContext context: Data?, handler: @escaping (Bool, MCSession?) -> Void) {
 		self.state = .connected
 		self.startSession()
 		handler(true, self.session)

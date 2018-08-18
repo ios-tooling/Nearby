@@ -25,8 +25,6 @@
 		B5026C7321169177009763F0 /* NearbyDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6821169177009763F0 /* NearbyDevice.swift */; };
 		B5026C7421169177009763F0 /* MCPeerID+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6921169177009763F0 /* MCPeerID+Additions.swift */; };
 		B5026C7521169177009763F0 /* MCPeerID+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6921169177009763F0 /* MCPeerID+Additions.swift */; };
-		B5026C7621169177009763F0 /* NearbySession+MCSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6A21169177009763F0 /* NearbySession+MCSessionDelegate.swift */; };
-		B5026C7721169177009763F0 /* NearbySession+MCSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6A21169177009763F0 /* NearbySession+MCSessionDelegate.swift */; };
 		B5026C7821169177009763F0 /* NearbyMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6B21169177009763F0 /* NearbyMessage.swift */; };
 		B5026C7921169177009763F0 /* NearbyMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6B21169177009763F0 /* NearbyMessage.swift */; };
 		B5026C7A21169177009763F0 /* NearbyDevice+Checks.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6C21169177009763F0 /* NearbyDevice+Checks.swift */; };
@@ -95,7 +93,6 @@
 /* Begin PBXFileReference section */
 		B5026C6821169177009763F0 /* NearbyDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyDevice.swift; sourceTree = "<group>"; };
 		B5026C6921169177009763F0 /* MCPeerID+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MCPeerID+Additions.swift"; sourceTree = "<group>"; };
-		B5026C6A21169177009763F0 /* NearbySession+MCSessionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NearbySession+MCSessionDelegate.swift"; sourceTree = "<group>"; };
 		B5026C6B21169177009763F0 /* NearbyMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMessage.swift; sourceTree = "<group>"; };
 		B5026C6C21169177009763F0 /* NearbyDevice+Checks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NearbyDevice+Checks.swift"; sourceTree = "<group>"; };
 		B5026C6D21169177009763F0 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -175,7 +172,6 @@
 				B5026C6E21169177009763F0 /* NearbySession.swift */,
 				B5026C6821169177009763F0 /* NearbyDevice.swift */,
 				B5026C6921169177009763F0 /* MCPeerID+Additions.swift */,
-				B5026C6A21169177009763F0 /* NearbySession+MCSessionDelegate.swift */,
 				B5026C6B21169177009763F0 /* NearbyMessage.swift */,
 				B5026C6C21169177009763F0 /* NearbyDevice+Checks.swift */,
 				B5026C6D21169177009763F0 /* Logger.swift */,
@@ -533,7 +529,6 @@
 				B5026C8021169177009763F0 /* NearbyMessageRouter.swift in Sources */,
 				B5026C7221169177009763F0 /* NearbyDevice.swift in Sources */,
 				B5026C7A21169177009763F0 /* NearbyDevice+Checks.swift in Sources */,
-				B5026C7621169177009763F0 /* NearbySession+MCSessionDelegate.swift in Sources */,
 				B5026C8221169177009763F0 /* NearbyDevice+MCSessionDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -550,7 +545,6 @@
 				B5026C8121169177009763F0 /* NearbyMessageRouter.swift in Sources */,
 				B5026C7321169177009763F0 /* NearbyDevice.swift in Sources */,
 				B5026C7B21169177009763F0 /* NearbyDevice+Checks.swift in Sources */,
-				B5026C7721169177009763F0 /* NearbySession+MCSessionDelegate.swift in Sources */,
 				B5026C8321169177009763F0 /* NearbyDevice+MCSessionDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -886,7 +880,7 @@
 				DEVELOPMENT_TEAM = YY6CWUX533;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = iOSTestingHarness/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -914,7 +908,7 @@
 				DEVELOPMENT_TEAM = YY6CWUX533;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = iOSTestingHarness/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.standalone.iOSTestingHarness;

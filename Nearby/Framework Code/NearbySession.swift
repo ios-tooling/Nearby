@@ -17,7 +17,6 @@ public class NearbySession: NSObject {
 	public static let instance = NearbySession()
 	
 	var deviceLocator: NearbyScanner!
-//	var session: MCSession!
 	public var localDeviceInfo: [String: String] = [:] { didSet {
 		if self.localDeviceInfo != oldValue { self.broadcastDeviceInfoChange() }
 	}}
@@ -30,7 +29,7 @@ public class NearbySession: NSObject {
 	static public var deviceClass = NearbyDevice.self
 
 	public var peerID: MCPeerID { return NearbyDevice.localDevice.peerID }
-	public var devices: [MCPeerID: NearbyDevice] = [:]
+	public var devices: [Int: NearbyDevice] = [:]
 	
 	override init() {
 		super.init()
@@ -49,16 +48,6 @@ public class NearbySession: NSObject {
 			device.send(payload: payload)
 		}
 	}
-
-	func checkForLostSession() {
-//		if !self.isShuttingDown, self.connectedDevices.isEmpty {
-//			Logger.instance.log("No devices found, resetting session")
-//			self.shutdown()
-//			Dispatcher.main.wait(2.5) {
-//				self.startup()
-//			}
-//		}
-	}
 }
 
 extension NearbySession {
@@ -74,8 +63,6 @@ extension NearbySession {
 		self.isActive = true
 		self.isShuttingDown = false
 		self.devices = [:]
-//		self.session = MCSession(peer: self.peerID, securityIdentity: nil, encryptionPreference: .required)
-//		self.session.delegate = self
 		self.locateDevice()
 		DispatchQueue.main.async { NotificationCenter.default.post(name: Notifications.didStartUp, object: self)}
 	}
@@ -87,8 +74,6 @@ extension NearbySession {
 		self.isShuttingDown = true
 		self.deviceLocator?.stopLocating()
 		self.deviceLocator = nil
-//		self.session.disconnect()
-//		self.session = nil
 		for device in self.devices.values {
 			device.state = .none
 		}
@@ -132,10 +117,19 @@ extension NearbySession {
 
 extension NearbySession: DeviceLocatorDelegate {
 	func didLocate(device: NearbyDevice) {
-		self.devices[device.peerID] = device
+		self.devices[device.peerID.hashValue] = device
 	}
 	
 	func didFailToLocateDevice() {
 		self.deviceLocator?.stopLocating()
 	}
+	
+	func device(for peerID: MCPeerID) -> NearbyDevice? {
+		if let device = self.devices[peerID.hashValue] {
+			return device
+		}
+		
+		return nil
+	}
+
 }
