@@ -26,7 +26,7 @@ public class PeerSession: NSObject {
 	public var isActive = false
 	public var messageRouter: PeerMessageRouter?
 	public var application: UIApplication!
-	public var serviceType: String!
+	public var serviceType: String! { didSet { assert(self.serviceType.count <= 15, "Your serviceType string is longer than 15 characters.") }}
 	public var alwaysRequestInfo = true
 	static public var deviceClass = PeerDevice.self
 
