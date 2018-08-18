@@ -24,14 +24,13 @@ class InternalRouter: NearbyMessageRouter {
 			case .disconnect: device.disconnect()
 				
 			case .deviceInfo:
-				if let message: NearbySystemMessage.DeviceInfo = try payload.reconstitute() {
+				if let message = try payload.reconstitute(NearbySystemMessage.DeviceInfo.self) {
 					device.deviceInfo = message.deviceInfo
 					return message
 				}
 			}
 
-			let message: NearbySystemMessage? = try payload.reconstitute()
-			return message
+			return try payload.reconstitute(NearbySystemMessage.self)
 		} catch {
 			Logger.instance.log("Failed to reconstitute a \(payload.command) message")
 		}

@@ -67,7 +67,7 @@ public struct NearbyMessagePayload {
 		self.data = data
 	}
 	
-	public func reconstitute<MessageType: NearbyMessage>() throws -> MessageType? {
+	public func reconstitute<MessageType>(_ type: MessageType.Type) throws -> MessageType? where MessageType : NearbyMessage {
 		let cls = NSClassFromString(self.className) as? MessageType.Type
 		if cls != MessageType.self { return nil }
 		return try JSONDecoder().decode(MessageType.self, from: self.data)
