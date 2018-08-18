@@ -1,6 +1,5 @@
 //
-//  DeviceSession.swift
-//  SpotEm
+//  NearbySession.swift
 //
 //  Created by Ben Gottlieb on 5/18/18.
 //  Copyright © 2018 Stand Alone, Inc. All rights reserved.
@@ -9,43 +8,43 @@
 import Foundation
 import MultipeerConnectivity
 
-public class PeerSession: NSObject {
+public class NearbySession: NSObject {
 	public struct Notifications {
 		public static let didStartUp = Notification.Name("session-didStartUp")
 		public static let didShutDown = Notification.Name("session-didShutDown")
 	}
 	
-	public static let instance = PeerSession()
+	public static let instance = NearbySession()
 	
-	var deviceLocator: PeerScanner!
+	var deviceLocator: NearbyScanner!
 //	var session: MCSession!
 	public var localDeviceInfo: [String: String] = [:] { didSet {
 		if self.localDeviceInfo != oldValue { self.broadcastDeviceInfoChange() }
 	}}
 	public var isShuttingDown = false
 	public var isActive = false
-	public var messageRouter: PeerMessageRouter?
+	public var messageRouter: NearbyMessageRouter?
 	public var application: UIApplication!
 	public var serviceType: String! { didSet { assert(self.serviceType.count <= 15, "Your serviceType string is longer than 15 characters.") }}
 	public var alwaysRequestInfo = true
-	static public var deviceClass = PeerDevice.self
+	static public var deviceClass = NearbyDevice.self
 
-	public var peerID: MCPeerID { return PeerDevice.localDevice.peerID }
-	public var devices: [MCPeerID: PeerDevice] = [:]
+	public var peerID: MCPeerID { return NearbyDevice.localDevice.peerID }
+	public var devices: [MCPeerID: NearbyDevice] = [:]
 	
 	override init() {
 		super.init()
 	}
 	
-	public var connectedDevices: [PeerDevice] { return self.devices.values.filter { $0.state == .connected }}
+	public var connectedDevices: [NearbyDevice] { return self.devices.values.filter { $0.state == .connected }}
 	
 	func broadcastDeviceInfoChange() {
-		PeerSession.instance.sendToAll(message: PeerSystemMessage.DeviceInfo())
+		NearbySession.instance.sendToAll(message: NearbySystemMessage.DeviceInfo())
 	}
 	
-	open func sendToAll<MessageType: PeerMessage>(message: MessageType) {
+	open func sendToAll<MessageType: NearbyMessage>(message: MessageType) {
 		Logger.instance.log("Sending \(message.command) as a \(type(of: message)) to all")
-		let payload = PeerMessagePayload(message: message)
+		let payload = NearbyMessagePayload(message: message)
 		for device in self.connectedDevices {
 			device.send(payload: payload)
 		}
@@ -62,14 +61,14 @@ public class PeerSession: NSObject {
 	}
 }
 
-extension PeerSession {
-	public func startup(withRouter: PeerMessageRouter? = nil, application: UIApplication? = nil) {
+extension NearbySession {
+	public func startup(withRouter: NearbyMessageRouter? = nil, application: UIApplication? = nil) {
 		if let router = withRouter { self.messageRouter = router }
 		if let app = application { self.application = app }
 
 		
-		assert(self.application != nil, "You must set a UIApplication before starting a PeerSession.")
-		assert(self.serviceType != nil, "You must set a serviceType before starting a PeerSession.")
+		assert(self.application != nil, "You must set a UIApplication before starting a NearbySession.")
+		assert(self.serviceType != nil, "You must set a serviceType before starting a NearbySession.")
 
 		if self.isActive { return }
 		self.isActive = true
@@ -107,7 +106,7 @@ extension PeerSession {
 	public func locateDevice() {
 		if self.deviceLocator != nil { return }			//already locating
 		
-		self.deviceLocator = PeerScanner(delegate: self)
+		self.deviceLocator = NearbyScanner(delegate: self)
 		self.deviceLocator?.startLocating()
 	}
 	
@@ -131,8 +130,8 @@ extension PeerSession {
 	}
 }
 
-extension PeerSession: DeviceLocatorDelegate {
-	func didLocate(device: PeerDevice) {
+extension NearbySession: DeviceLocatorDelegate {
+	func didLocate(device: NearbyDevice) {
 		self.devices[device.peerID] = device
 	}
 	

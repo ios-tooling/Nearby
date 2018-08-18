@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	
 	@objc func discoveredDevice(note: Notification) {
-		if let device = note.object as? PeerDevice {
+		if let device = note.object as? NearbyDevice {
 			print("Found: \(device.deviceInfo!)")
 		}
 	}
@@ -24,14 +24,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
 		
-		NotificationCenter.default.addObserver(self, selector: #selector(discoveredDevice), name: PeerDevice.Notifications.deviceConnectedWithInfo, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(discoveredDevice), name: NearbyDevice.Notifications.deviceConnectedWithInfo, object: nil)
 		
-		PeerSession.instance.localDeviceInfo = ["Hello": "There"]
-		PeerSession.instance.serviceType = "Nearby-test"
-		PeerSession.instance.startup(application: application)
+		NearbySession.instance.localDeviceInfo = ["Hello": "There"]
+		NearbySession.instance.serviceType = "Nearby-test"
+		NearbySession.instance.startup(application: application)
 		
 		DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-			PeerSession.instance.localDeviceInfo = ["Goodbye": "There"]
+			NearbySession.instance.localDeviceInfo = ["Goodbye": "There"]
 		}
 		return true
 	}

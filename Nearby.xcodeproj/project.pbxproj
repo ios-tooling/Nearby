@@ -21,26 +21,26 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		B5026C7221169177009763F0 /* PeerDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6821169177009763F0 /* PeerDevice.swift */; };
-		B5026C7321169177009763F0 /* PeerDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6821169177009763F0 /* PeerDevice.swift */; };
+		B5026C7221169177009763F0 /* NearbyDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6821169177009763F0 /* NearbyDevice.swift */; };
+		B5026C7321169177009763F0 /* NearbyDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6821169177009763F0 /* NearbyDevice.swift */; };
 		B5026C7421169177009763F0 /* MCPeerID+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6921169177009763F0 /* MCPeerID+Additions.swift */; };
 		B5026C7521169177009763F0 /* MCPeerID+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6921169177009763F0 /* MCPeerID+Additions.swift */; };
-		B5026C7621169177009763F0 /* PeerSession+MCSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6A21169177009763F0 /* PeerSession+MCSessionDelegate.swift */; };
-		B5026C7721169177009763F0 /* PeerSession+MCSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6A21169177009763F0 /* PeerSession+MCSessionDelegate.swift */; };
-		B5026C7821169177009763F0 /* PeerMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6B21169177009763F0 /* PeerMessage.swift */; };
-		B5026C7921169177009763F0 /* PeerMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6B21169177009763F0 /* PeerMessage.swift */; };
-		B5026C7A21169177009763F0 /* PeerDevice+Checks.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6C21169177009763F0 /* PeerDevice+Checks.swift */; };
-		B5026C7B21169177009763F0 /* PeerDevice+Checks.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6C21169177009763F0 /* PeerDevice+Checks.swift */; };
+		B5026C7621169177009763F0 /* NearbySession+MCSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6A21169177009763F0 /* NearbySession+MCSessionDelegate.swift */; };
+		B5026C7721169177009763F0 /* NearbySession+MCSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6A21169177009763F0 /* NearbySession+MCSessionDelegate.swift */; };
+		B5026C7821169177009763F0 /* NearbyMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6B21169177009763F0 /* NearbyMessage.swift */; };
+		B5026C7921169177009763F0 /* NearbyMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6B21169177009763F0 /* NearbyMessage.swift */; };
+		B5026C7A21169177009763F0 /* NearbyDevice+Checks.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6C21169177009763F0 /* NearbyDevice+Checks.swift */; };
+		B5026C7B21169177009763F0 /* NearbyDevice+Checks.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6C21169177009763F0 /* NearbyDevice+Checks.swift */; };
 		B5026C7C21169177009763F0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6D21169177009763F0 /* Logger.swift */; };
 		B5026C7D21169177009763F0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6D21169177009763F0 /* Logger.swift */; };
-		B5026C7E21169177009763F0 /* PeerSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6E21169177009763F0 /* PeerSession.swift */; };
-		B5026C7F21169177009763F0 /* PeerSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6E21169177009763F0 /* PeerSession.swift */; };
-		B5026C8021169177009763F0 /* PeerMessageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6F21169177009763F0 /* PeerMessageRouter.swift */; };
-		B5026C8121169177009763F0 /* PeerMessageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6F21169177009763F0 /* PeerMessageRouter.swift */; };
-		B5026C8221169177009763F0 /* PeerDevice+MCSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C7021169177009763F0 /* PeerDevice+MCSessionDelegate.swift */; };
-		B5026C8321169177009763F0 /* PeerDevice+MCSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C7021169177009763F0 /* PeerDevice+MCSessionDelegate.swift */; };
-		B5026C8421169177009763F0 /* PeerScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C7121169177009763F0 /* PeerScanner.swift */; };
-		B5026C8521169177009763F0 /* PeerScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C7121169177009763F0 /* PeerScanner.swift */; };
+		B5026C7E21169177009763F0 /* NearbySession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6E21169177009763F0 /* NearbySession.swift */; };
+		B5026C7F21169177009763F0 /* NearbySession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6E21169177009763F0 /* NearbySession.swift */; };
+		B5026C8021169177009763F0 /* NearbyMessageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6F21169177009763F0 /* NearbyMessageRouter.swift */; };
+		B5026C8121169177009763F0 /* NearbyMessageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C6F21169177009763F0 /* NearbyMessageRouter.swift */; };
+		B5026C8221169177009763F0 /* NearbyDevice+MCSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C7021169177009763F0 /* NearbyDevice+MCSessionDelegate.swift */; };
+		B5026C8321169177009763F0 /* NearbyDevice+MCSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C7021169177009763F0 /* NearbyDevice+MCSessionDelegate.swift */; };
+		B5026C8421169177009763F0 /* NearbyScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C7121169177009763F0 /* NearbyScanner.swift */; };
+		B5026C8521169177009763F0 /* NearbyScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C7121169177009763F0 /* NearbyScanner.swift */; };
 		B54A9B4D2125B417008E646E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54A9B4C2125B417008E646E /* AppDelegate.swift */; };
 		B54A9B4F2125B417008E646E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54A9B4E2125B417008E646E /* ViewController.swift */; };
 		B54A9B522125B417008E646E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B54A9B502125B417008E646E /* Main.storyboard */; };
@@ -93,16 +93,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		B5026C6821169177009763F0 /* PeerDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeerDevice.swift; sourceTree = "<group>"; };
+		B5026C6821169177009763F0 /* NearbyDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyDevice.swift; sourceTree = "<group>"; };
 		B5026C6921169177009763F0 /* MCPeerID+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MCPeerID+Additions.swift"; sourceTree = "<group>"; };
-		B5026C6A21169177009763F0 /* PeerSession+MCSessionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PeerSession+MCSessionDelegate.swift"; sourceTree = "<group>"; };
-		B5026C6B21169177009763F0 /* PeerMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeerMessage.swift; sourceTree = "<group>"; };
-		B5026C6C21169177009763F0 /* PeerDevice+Checks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PeerDevice+Checks.swift"; sourceTree = "<group>"; };
+		B5026C6A21169177009763F0 /* NearbySession+MCSessionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NearbySession+MCSessionDelegate.swift"; sourceTree = "<group>"; };
+		B5026C6B21169177009763F0 /* NearbyMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMessage.swift; sourceTree = "<group>"; };
+		B5026C6C21169177009763F0 /* NearbyDevice+Checks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NearbyDevice+Checks.swift"; sourceTree = "<group>"; };
 		B5026C6D21169177009763F0 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		B5026C6E21169177009763F0 /* PeerSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeerSession.swift; sourceTree = "<group>"; };
-		B5026C6F21169177009763F0 /* PeerMessageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeerMessageRouter.swift; sourceTree = "<group>"; };
-		B5026C7021169177009763F0 /* PeerDevice+MCSessionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PeerDevice+MCSessionDelegate.swift"; sourceTree = "<group>"; };
-		B5026C7121169177009763F0 /* PeerScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeerScanner.swift; sourceTree = "<group>"; };
+		B5026C6E21169177009763F0 /* NearbySession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbySession.swift; sourceTree = "<group>"; };
+		B5026C6F21169177009763F0 /* NearbyMessageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMessageRouter.swift; sourceTree = "<group>"; };
+		B5026C7021169177009763F0 /* NearbyDevice+MCSessionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NearbyDevice+MCSessionDelegate.swift"; sourceTree = "<group>"; };
+		B5026C7121169177009763F0 /* NearbyScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyScanner.swift; sourceTree = "<group>"; };
 		B5026C8621169714009763F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Nearby/iOS/Info.plist; sourceTree = "<group>"; };
 		B5026C8721169714009763F0 /* Nearby.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Nearby.h; path = Nearby/iOS/Nearby.h; sourceTree = "<group>"; };
 		B5026C8821169720009763F0 /* Nearby.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Nearby.h; path = Nearby/Mac/Nearby.h; sourceTree = "<group>"; };
@@ -172,16 +172,16 @@
 		B5026C6721169177009763F0 /* Framework Code */ = {
 			isa = PBXGroup;
 			children = (
-				B5026C6E21169177009763F0 /* PeerSession.swift */,
-				B5026C6821169177009763F0 /* PeerDevice.swift */,
+				B5026C6E21169177009763F0 /* NearbySession.swift */,
+				B5026C6821169177009763F0 /* NearbyDevice.swift */,
 				B5026C6921169177009763F0 /* MCPeerID+Additions.swift */,
-				B5026C6A21169177009763F0 /* PeerSession+MCSessionDelegate.swift */,
-				B5026C6B21169177009763F0 /* PeerMessage.swift */,
-				B5026C6C21169177009763F0 /* PeerDevice+Checks.swift */,
+				B5026C6A21169177009763F0 /* NearbySession+MCSessionDelegate.swift */,
+				B5026C6B21169177009763F0 /* NearbyMessage.swift */,
+				B5026C6C21169177009763F0 /* NearbyDevice+Checks.swift */,
 				B5026C6D21169177009763F0 /* Logger.swift */,
-				B5026C6F21169177009763F0 /* PeerMessageRouter.swift */,
-				B5026C7021169177009763F0 /* PeerDevice+MCSessionDelegate.swift */,
-				B5026C7121169177009763F0 /* PeerScanner.swift */,
+				B5026C6F21169177009763F0 /* NearbyMessageRouter.swift */,
+				B5026C7021169177009763F0 /* NearbyDevice+MCSessionDelegate.swift */,
+				B5026C7121169177009763F0 /* NearbyScanner.swift */,
 			);
 			name = "Framework Code";
 			path = "Nearby/Framework Code";
@@ -525,16 +525,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5026C8421169177009763F0 /* PeerScanner.swift in Sources */,
+				B5026C8421169177009763F0 /* NearbyScanner.swift in Sources */,
 				B5026C7421169177009763F0 /* MCPeerID+Additions.swift in Sources */,
 				B5026C7C21169177009763F0 /* Logger.swift in Sources */,
-				B5026C7821169177009763F0 /* PeerMessage.swift in Sources */,
-				B5026C7E21169177009763F0 /* PeerSession.swift in Sources */,
-				B5026C8021169177009763F0 /* PeerMessageRouter.swift in Sources */,
-				B5026C7221169177009763F0 /* PeerDevice.swift in Sources */,
-				B5026C7A21169177009763F0 /* PeerDevice+Checks.swift in Sources */,
-				B5026C7621169177009763F0 /* PeerSession+MCSessionDelegate.swift in Sources */,
-				B5026C8221169177009763F0 /* PeerDevice+MCSessionDelegate.swift in Sources */,
+				B5026C7821169177009763F0 /* NearbyMessage.swift in Sources */,
+				B5026C7E21169177009763F0 /* NearbySession.swift in Sources */,
+				B5026C8021169177009763F0 /* NearbyMessageRouter.swift in Sources */,
+				B5026C7221169177009763F0 /* NearbyDevice.swift in Sources */,
+				B5026C7A21169177009763F0 /* NearbyDevice+Checks.swift in Sources */,
+				B5026C7621169177009763F0 /* NearbySession+MCSessionDelegate.swift in Sources */,
+				B5026C8221169177009763F0 /* NearbyDevice+MCSessionDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,16 +542,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5026C8521169177009763F0 /* PeerScanner.swift in Sources */,
+				B5026C8521169177009763F0 /* NearbyScanner.swift in Sources */,
 				B5026C7521169177009763F0 /* MCPeerID+Additions.swift in Sources */,
 				B5026C7D21169177009763F0 /* Logger.swift in Sources */,
-				B5026C7921169177009763F0 /* PeerMessage.swift in Sources */,
-				B5026C7F21169177009763F0 /* PeerSession.swift in Sources */,
-				B5026C8121169177009763F0 /* PeerMessageRouter.swift in Sources */,
-				B5026C7321169177009763F0 /* PeerDevice.swift in Sources */,
-				B5026C7B21169177009763F0 /* PeerDevice+Checks.swift in Sources */,
-				B5026C7721169177009763F0 /* PeerSession+MCSessionDelegate.swift in Sources */,
-				B5026C8321169177009763F0 /* PeerDevice+MCSessionDelegate.swift in Sources */,
+				B5026C7921169177009763F0 /* NearbyMessage.swift in Sources */,
+				B5026C7F21169177009763F0 /* NearbySession.swift in Sources */,
+				B5026C8121169177009763F0 /* NearbyMessageRouter.swift in Sources */,
+				B5026C7321169177009763F0 /* NearbyDevice.swift in Sources */,
+				B5026C7B21169177009763F0 /* NearbyDevice+Checks.swift in Sources */,
+				B5026C7721169177009763F0 /* NearbySession+MCSessionDelegate.swift in Sources */,
+				B5026C8321169177009763F0 /* NearbyDevice+MCSessionDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

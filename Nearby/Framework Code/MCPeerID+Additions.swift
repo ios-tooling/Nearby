@@ -1,6 +1,5 @@
 //
 //  MCPeerID+Additions.swift
-//  SpotEm
 //
 //  Created by Ben Gottlieb on 5/18/18.
 //  Copyright © 2018 Stand Alone, Inc. All rights reserved.
@@ -33,8 +32,4 @@ extension MCPeerID {
 	static func from(data: Data) -> MCPeerID? {
 		return NSKeyedUnarchiver.unarchiveObject(with: data) as? MCPeerID
 	}
-}
-
-extension MCPeerID {
-	
 }

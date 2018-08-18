@@ -1,6 +1,5 @@
 //
 //  Device+MCSessionDelegate.swift
-//  SpotEm
 //
 //  Created by Ben Gottlieb on 6/1/18.
 //  Copyright © 2018 Stand Alone, Inc. All rights reserved.
@@ -9,7 +8,7 @@
 import Foundation
 import MultipeerConnectivity
 
-extension PeerDevice: MCSessionDelegate {
+extension NearbyDevice: MCSessionDelegate {
 	public func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
 		self.session(didChange: state)
 	}

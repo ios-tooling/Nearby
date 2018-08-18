@@ -1,5 +1,5 @@
 //
-//  PeerMessage.Payload.swift
+//  NearbyMessage.Payload.swift
 //  VisionTools
 //
 //  Created by Ben Gottlieb on 8/3/18.
@@ -8,15 +8,15 @@
 
 import Foundation
 
-public protocol PeerMessage: class, Codable {
+public protocol NearbyMessage: class, Codable {
 	var command: String { get }
 }
 
-public class PeerSystemMessage: PeerMessage {
+public class NearbySystemMessage: NearbyMessage {
 	public enum Kind: String, Codable { case ping = "*system-ping*", disconnect = "*system-disconnect*", deviceInfo = "*device-info*" }
 	
-	public static var ping: PeerSystemMessage = PeerSystemMessage(kind: Kind.ping)
-	public static var disconnect: PeerSystemMessage = PeerSystemMessage(kind: Kind.disconnect)
+	public static var ping: NearbySystemMessage = NearbySystemMessage(kind: Kind.ping)
+	public static var disconnect: NearbySystemMessage = NearbySystemMessage(kind: Kind.disconnect)
 
 	public var kind: Kind
 	public var command: String { return self.kind.rawValue }
@@ -26,8 +26,8 @@ public class PeerSystemMessage: PeerMessage {
 	}
 }
 
-extension PeerSystemMessage {
-	class DeviceInfo: PeerMessage {
+extension NearbySystemMessage {
+	class DeviceInfo: NearbyMessage {
 		var command: String { return self.kind.rawValue }
 		
 		enum CodableKeys: String, CodingKey { case deviceInfo }
@@ -37,7 +37,7 @@ extension PeerSystemMessage {
 			var container = encoder.container(keyedBy: CodableKeys.self)
 			try? container.encode(self.deviceInfo, forKey: .deviceInfo)
 		}
-		public var kind = PeerSystemMessage.Kind.deviceInfo
+		public var kind = NearbySystemMessage.Kind.deviceInfo
 
 		required init(from decoder: Decoder) throws {
 			let container = try decoder.container(keyedBy: CodableKeys.self)
@@ -45,18 +45,18 @@ extension PeerSystemMessage {
 		}
 		
 		init() {
-			self.deviceInfo = PeerSession.instance.localDeviceInfo
+			self.deviceInfo = NearbySession.instance.localDeviceInfo
 		}
 	}
 }
 
-public struct PeerMessagePayload {
+public struct NearbyMessagePayload {
 	public let identifier: String
 	public let command: String
 	public let className: String
 	public let data: Data
 	
-	init?<MessageType: PeerMessage>(command: String? = nil, message: MessageType) {
+	init?<MessageType: NearbyMessage>(command: String? = nil, message: MessageType) {
 		self.className = NSStringFromClass(MessageType.self)
 		self.identifier = UUID().uuidString
 		self.command = command ?? message.command
@@ -67,7 +67,7 @@ public struct PeerMessagePayload {
 		self.data = data
 	}
 	
-	public func reconstitute<MessageType: PeerMessage>() throws -> MessageType? {
+	public func reconstitute<MessageType: NearbyMessage>() throws -> MessageType? {
 		let cls = NSClassFromString(self.className) as? MessageType.Type
 		if cls != MessageType.self { return nil }
 		return try JSONDecoder().decode(MessageType.self, from: self.data)

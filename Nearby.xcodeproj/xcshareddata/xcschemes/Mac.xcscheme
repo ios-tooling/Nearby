@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B504E6AE1A898110001B414B"
-               BuildableName = "LocalMesh.framework"
+               BuildableName = "Nearby.framework"
                BlueprintName = "Nearby_Mac"
                ReferencedContainer = "container:Nearby.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B504E6AE1A898110001B414B"
-            BuildableName = "LocalMesh.framework"
+            BuildableName = "Nearby.framework"
             BlueprintName = "Nearby_Mac"
             ReferencedContainer = "container:Nearby.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B504E6AE1A898110001B414B"
-            BuildableName = "LocalMesh.framework"
+            BuildableName = "Nearby.framework"
             BlueprintName = "Nearby_Mac"
             ReferencedContainer = "container:Nearby.xcodeproj">
          </BuildableReference>

@@ -1,6 +1,5 @@
 //
-//  Device.swift
-//  SpotEm
+//  NearbyDevice.swift
 //
 //  Created by Ben Gottlieb on 5/18/18.
 //  Copyright © 2018 Stand Alone, Inc. All rights reserved.
@@ -10,14 +9,14 @@ import Foundation
 import MultipeerConnectivity
 
 
-public protocol PeerDeviceDelegate: class {
-	func didReceive(message: PeerMessage, from: PeerDevice)
-	func didReceiveFirstInfo(from: PeerDevice)
-	func didChangeInfo(from: PeerDevice)
-	func didChangeState(for: PeerDevice)
+public protocol NearbyDeviceDelegate: class {
+	func didReceive(message: NearbyMessage, from: NearbyDevice)
+	func didReceiveFirstInfo(from: NearbyDevice)
+	func didChangeInfo(from: NearbyDevice)
+	func didChangeState(for: NearbyDevice)
 }
 
-open class PeerDevice: NSObject {
+open class NearbyDevice: NSObject {
 	public struct Notifications {
 		public static let deviceStateChanged = Notification.Name("device-state-changed")
 		public static let deviceConnected = Notification.Name("device-connected")
@@ -26,7 +25,7 @@ open class PeerDevice: NSObject {
 		public static let deviceChangedInfo = Notification.Name("device-changed-info")
 	}
 	
-	public static let localDevice = PeerSession.deviceClass.init(asLocalDevice: true)
+	public static let localDevice = NearbySession.deviceClass.init(asLocalDevice: true)
 	
 	public enum State: Int, Comparable { case none, found, invited, connecting, connected
 		var description: String {
@@ -57,15 +56,15 @@ open class PeerDevice: NSObject {
 	public var deviceInfo: [String: String]? { didSet {
 		if oldValue == nil {
 			self.delegate?.didReceiveFirstInfo(from: self)
-			NotificationCenter.default.post(name: PeerDevice.Notifications.deviceConnectedWithInfo, object: self)
-			NotificationCenter.default.post(name: PeerDevice.Notifications.deviceChangedInfo, object: self)
+			NotificationCenter.default.post(name: NearbyDevice.Notifications.deviceConnectedWithInfo, object: self)
+			NotificationCenter.default.post(name: NearbyDevice.Notifications.deviceChangedInfo, object: self)
 		} else if self.deviceInfo != oldValue {
 			self.delegate?.didChangeInfo(from: self)
-			NotificationCenter.default.post(name: PeerDevice.Notifications.deviceChangedInfo, object: self)
+			NotificationCenter.default.post(name: NearbyDevice.Notifications.deviceChangedInfo, object: self)
 		}
 	}}
 	public var displayName: String
-	public weak var delegate: PeerDeviceDelegate?
+	public weak var delegate: NearbyDeviceDelegate?
 	public let peerID: MCPeerID
 	public let isLocalDevice: Bool
 	public var uniqueID: String!
@@ -108,7 +107,7 @@ open class PeerDevice: NSObject {
 	public required init(peerID: MCPeerID, info: [String: String]) {
 		self.isLocalDevice = false
 		self.peerID = peerID
-		self.displayName = PeerSession.instance.uniqueDisplayName(from: self.peerID.displayName)
+		self.displayName = NearbySession.instance.uniqueDisplayName(from: self.peerID.displayName)
 		self.discoveryInfo = info
 		self.uniqueID = info[Keys.unique]
 		if let string = info[Keys.idiom], let int = Int(string), let idiom = UIUserInterfaceIdiom(rawValue: int) {
@@ -127,20 +126,20 @@ open class PeerDevice: NSObject {
 	
 	func disconnectFromPeers(completion: (() -> Void)?) {
 		Logger.instance.log("Disconnecting from peers")
-		let taskID = PeerSession.instance.application.beginBackgroundTask {
+		let taskID = NearbySession.instance.application.beginBackgroundTask {
 			completion?()
 		}
-		self.send(message: PeerSystemMessage.disconnect, completion: {
+		self.send(message: NearbySystemMessage.disconnect, completion: {
 			self.stopSession()
 			DispatchQueue.main.asyncAfter(wallDeadline: .now() + 1) {
 				completion?()
-				PeerSession.instance.application.endBackgroundTask(taskID)
+				NearbySession.instance.application.endBackgroundTask(taskID)
 			}
 		})
 	}
 
 	func invite(with browser: MCNearbyServiceBrowser) {
-		guard let info = PeerDevice.localDevice.discoveryInfo, let data = try? JSONEncoder().encode(info) else { return }
+		guard let info = NearbyDevice.localDevice.discoveryInfo, let data = try? JSONEncoder().encode(info) else { return }
 		self.state = .invited
 		self.startSession()
 		browser.invitePeer(self.peerID, to: self.session!, withContext: data, timeout: self.invitationTimeout)
@@ -165,7 +164,7 @@ open class PeerDevice: NSObject {
 		case .notConnected:
 			newState = .found
 			self.disconnect()
-			PeerSession.instance.deviceLocator?.reinvite(device: self)
+			NearbySession.instance.deviceLocator?.reinvite(device: self)
 		}
 		
 		if newState == self.state { return }				// no change
@@ -174,11 +173,11 @@ open class PeerDevice: NSObject {
 		if self.state == .connected {
 			DispatchQueue.main.async {
 				NotificationCenter.default.post(name: Notifications.deviceStateChanged, object: self)
-				NotificationCenter.default.post(name: PeerDevice.Notifications.deviceConnected, object: self)
-				if self.deviceInfo != nil { NotificationCenter.default.post(name: PeerDevice.Notifications.deviceConnectedWithInfo, object: self) }
+				NotificationCenter.default.post(name: NearbyDevice.Notifications.deviceConnected, object: self)
+				if self.deviceInfo != nil { NotificationCenter.default.post(name: NearbyDevice.Notifications.deviceConnectedWithInfo, object: self) }
 			}
-			if PeerSession.instance.alwaysRequestInfo {
-				self.send(message: PeerSystemMessage.DeviceInfo())
+			if NearbySession.instance.alwaysRequestInfo {
+				self.send(message: NearbySystemMessage.DeviceInfo())
 			}
 			return
 		} else if self.state == .connecting {
@@ -205,24 +204,24 @@ open class PeerDevice: NSObject {
 	
 	func startSession() {
 		if self.session == nil {
-			self.session = MCSession(peer: PeerDevice.localDevice.peerID, securityIdentity: nil, encryptionPreference: .required)
+			self.session = MCSession(peer: NearbyDevice.localDevice.peerID, securityIdentity: nil, encryptionPreference: .required)
 			self.session?.delegate = self
 		}
 	}
 	
-	open func send<MessageType: PeerMessage>(message: MessageType, completion: (() -> Void)? = nil) {
+	open func send<MessageType: NearbyMessage>(message: MessageType, completion: (() -> Void)? = nil) {
 		if self.isLocalDevice || self.session == nil {
 			completion?()
 			return
 		}
 
 		Logger.instance.log("Sending \(message.command) as a \(type(of: message)) to \(self.displayName)")
-		let payload = PeerMessagePayload(message: message)
+		let payload = NearbyMessagePayload(message: message)
 		self.send(payload: payload)
 		completion?()
 	}
 	
-	func send(payload: PeerMessagePayload?) {
+	func send(payload: NearbyMessagePayload?) {
 		guard let data = payload?.payloadData else { return }
 		do {
 			try self.session?.send(data, toPeers: [self.peerID], with: .reliable)
@@ -232,14 +231,14 @@ open class PeerDevice: NSObject {
 	}
 	
 	func session(didReceive data: Data) {
-		guard let payload = PeerMessagePayload(data: data) else {
+		guard let payload = NearbyMessagePayload(data: data) else {
 			Logger.instance.log("Failed to decode message from \(data)")
 			return
 		}
 		
 		if let message = InternalRouter.instance.route(payload, from: self) {
 			self.delegate?.didReceive(message: message, from: self)
-		} else if let message = PeerSession.instance.messageRouter?.route(payload, from: self) {
+		} else if let message = NearbySession.instance.messageRouter?.route(payload, from: self) {
 			self.delegate?.didReceive(message: message, from: self)
 		}
 	}
@@ -256,12 +255,12 @@ open class PeerDevice: NSObject {
 		
 	}
 	
-	static func ==(lhs: PeerDevice, rhs: PeerDevice) -> Bool {
+	static func ==(lhs: NearbyDevice, rhs: NearbyDevice) -> Bool {
 		return lhs.peerID == rhs.peerID
 	}
 }
 
-extension PeerDevice {
+extension NearbyDevice {
 	struct Keys {
 		static let name = "name"
 		static let idiom = "idiom"
