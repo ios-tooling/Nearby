@@ -48,6 +48,13 @@ open class NearbyDevice: NSObject {
 			}
 		}
 		
+		var contrastingColor: UIColor {
+			switch self {
+			case .none, .found, .invited, .connected: return .black
+			default: return .white
+			}
+		}
+		
 		public static func < (lhs: State, rhs: State) -> Bool { return lhs.rawValue < rhs.rawValue }
 
 	}
@@ -117,7 +124,7 @@ open class NearbyDevice: NSObject {
 		}
 		super.init()
 		self.startSession()
-		NotificationCenter.default.addObserver(self, selector: #selector(enteredBackground), name: .UIApplicationDidEnterBackground, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(enteredBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
 	}
 	
 	@objc func enteredBackground() {

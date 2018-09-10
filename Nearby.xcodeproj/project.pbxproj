@@ -39,6 +39,7 @@
 		B5026C8321169177009763F0 /* NearbyDevice+MCSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C7021169177009763F0 /* NearbyDevice+MCSessionDelegate.swift */; };
 		B5026C8421169177009763F0 /* NearbyScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C7121169177009763F0 /* NearbyScanner.swift */; };
 		B5026C8521169177009763F0 /* NearbyScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5026C7121169177009763F0 /* NearbyScanner.swift */; };
+		B547A9182146E30C0003C8A4 /* NearbyStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B547A9172146E30C0003C8A4 /* NearbyStatusView.swift */; };
 		B54A9B4D2125B417008E646E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54A9B4C2125B417008E646E /* AppDelegate.swift */; };
 		B54A9B4F2125B417008E646E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54A9B4E2125B417008E646E /* ViewController.swift */; };
 		B54A9B522125B417008E646E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B54A9B502125B417008E646E /* Main.storyboard */; };
@@ -107,6 +108,7 @@
 		B504E6461A8968DC001B414B /* Nearby.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Nearby.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B504E66A1A896980001B414B /* BuildFramework.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = BuildFramework.sh; path = Nearby/BuildFramework.sh; sourceTree = "<group>"; };
 		B504E6AF1A898110001B414B /* Nearby.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Nearby.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B547A9172146E30C0003C8A4 /* NearbyStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyStatusView.swift; sourceTree = "<group>"; };
 		B54A9B4A2125B417008E646E /* iOSTestingHarness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSTestingHarness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B54A9B4C2125B417008E646E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B54A9B4E2125B417008E646E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				B5026C6F21169177009763F0 /* NearbyMessageRouter.swift */,
 				B5026C7021169177009763F0 /* NearbyDevice+MCSessionDelegate.swift */,
 				B5026C7121169177009763F0 /* NearbyScanner.swift */,
+				B547A9172146E30C0003C8A4 /* NearbyStatusView.swift */,
 			);
 			name = "Framework Code";
 			path = "Nearby/Framework Code";
@@ -405,7 +408,7 @@
 				TargetAttributes = {
 					B504E6451A8968DC001B414B = {
 						CreatedOnToolsVersion = 6.1.1;
-						LastSwiftMigration = 0820;
+						LastSwiftMigration = 1000;
 					};
 					B504E6661A89690C001B414B = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -528,6 +531,7 @@
 				B5026C7E21169177009763F0 /* NearbySession.swift in Sources */,
 				B5026C8021169177009763F0 /* NearbyMessageRouter.swift in Sources */,
 				B5026C7221169177009763F0 /* NearbyDevice.swift in Sources */,
+				B547A9182146E30C0003C8A4 /* NearbyStatusView.swift in Sources */,
 				B5026C7A21169177009763F0 /* NearbyDevice+Checks.swift in Sources */,
 				B5026C8221169177009763F0 /* NearbyDevice+MCSessionDelegate.swift in Sources */,
 			);
@@ -746,6 +750,7 @@
 				PRODUCT_NAME = Nearby;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -773,6 +778,7 @@
 				PRODUCT_NAME = Nearby;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
