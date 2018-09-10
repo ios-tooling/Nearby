@@ -204,7 +204,7 @@ open class NearbyDevice: NSObject {
 	
 	func startSession() {
 		if self.session == nil {
-			self.session = MCSession(peer: NearbyDevice.localDevice.peerID, securityIdentity: nil, encryptionPreference: .required)
+			self.session = MCSession(peer: NearbyDevice.localDevice.peerID, securityIdentity: nil, encryptionPreference: NearbySession.instance.useEncryption ? .required : .none)
 			self.session?.delegate = self
 		}
 	}

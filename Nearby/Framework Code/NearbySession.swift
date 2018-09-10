@@ -22,6 +22,7 @@ public class NearbySession: NSObject {
 	}}
 	public var isShuttingDown = false
 	public var isActive = false
+	public var useEncryption = false
 	public var messageRouter: NearbyMessageRouter?
 	public var application: UIApplication!
 	public var serviceType: String! { didSet { assert(self.serviceType.count <= 15, "Your serviceType string is longer than 15 characters.") }}
