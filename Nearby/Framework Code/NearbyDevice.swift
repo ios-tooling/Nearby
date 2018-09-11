@@ -18,7 +18,7 @@ public protocol NearbyDeviceDelegate: class {
 
 open class NearbyDevice: NSObject {
 	public struct Notifications {
-		public static let deviceStateChanged = Notification.Name("device-state-changed")
+		public static let deviceChangedState = Notification.Name("device-state-changed")
 		public static let deviceConnected = Notification.Name("device-connected")
 		public static let deviceConnectedWithInfo = Notification.Name("device-connected-with-info")
 		public static let deviceDisconnected = Notification.Name("device-disconnected")
@@ -50,7 +50,7 @@ open class NearbyDevice: NSObject {
 		
 		var contrastingColor: UIColor {
 			switch self {
-			case .none, .found, .invited, .connected: return .black
+			case .found, .invited, .connected: return .black
 			default: return .white
 			}
 		}
@@ -59,15 +59,16 @@ open class NearbyDevice: NSObject {
 
 	}
 	
+	public var lastReceivedSessionState = MCSessionState.connected
 	open var discoveryInfo: [String: String]?
 	public var deviceInfo: [String: String]? { didSet {
 		if oldValue == nil {
 			self.delegate?.didReceiveFirstInfo(from: self)
-			NotificationCenter.default.post(name: NearbyDevice.Notifications.deviceConnectedWithInfo, object: self)
-			NotificationCenter.default.post(name: NearbyDevice.Notifications.deviceChangedInfo, object: self)
+			NearbyDevice.Notifications.deviceConnectedWithInfo.post(with: self)
+			NearbyDevice.Notifications.deviceChangedInfo.post(with: self)
 		} else if self.deviceInfo != oldValue {
 			self.delegate?.didChangeInfo(from: self)
-			NotificationCenter.default.post(name: NearbyDevice.Notifications.deviceChangedInfo, object: self)
+			NearbyDevice.Notifications.deviceChangedInfo.post(with: self)
 		}
 	}}
 	public var displayName: String
@@ -78,7 +79,7 @@ open class NearbyDevice: NSObject {
 	
 	open var state: State = .none { didSet {
 		if self.state == oldValue { return }
-		Logger.instance.log("\(self.displayName), \(oldValue.description) -> \(self.state.description)")
+		//Logger.instance.log("\(self.displayName), \(oldValue.description) -> \(self.state.description)")
 		self.delegate?.didChangeState(for: self)
 		self.checkForRSVP(self.state == .invited)
 	}}
@@ -159,6 +160,7 @@ open class NearbyDevice: NSObject {
 	}
 	
 	func session(didChange state: MCSessionState) {
+		self.lastReceivedSessionState = state
 		var newState = self.state
 		let oldState = self.state
 		
@@ -174,15 +176,22 @@ open class NearbyDevice: NSObject {
 			NearbySession.instance.deviceLocator?.reinvite(device: self)
 		}
 		
-		if newState == self.state { return }				// no change
+		if newState == self.state {
+			if state == .connected {
+				if self.deviceInfo != nil {
+					NearbyDevice.Notifications.deviceConnectedWithInfo.post(with: self)
+				} else {
+					NearbyDevice.Notifications.deviceConnected.post(with: self)
+				}
+			}
+			return
+		}
 		self.state = newState
+		defer { Notifications.deviceChangedState.post(with: self) }
 		
 		if self.state == .connected {
-			DispatchQueue.main.async {
-				NotificationCenter.default.post(name: Notifications.deviceStateChanged, object: self)
-				NotificationCenter.default.post(name: NearbyDevice.Notifications.deviceConnected, object: self)
-				if self.deviceInfo != nil { NotificationCenter.default.post(name: NearbyDevice.Notifications.deviceConnectedWithInfo, object: self) }
-			}
+			NearbyDevice.Notifications.deviceConnected.post(with: self)
+			if self.deviceInfo != nil { NearbyDevice.Notifications.deviceConnectedWithInfo.post(with: self) }
 			if NearbySession.instance.alwaysRequestInfo {
 				self.send(message: NearbySystemMessage.DeviceInfo())
 			}
@@ -191,15 +200,14 @@ open class NearbyDevice: NSObject {
 			self.startSession()
 		}
 		
-		DispatchQueue.main.async { NotificationCenter.default.post(name: Notifications.deviceStateChanged, object: self)}
 		if self.state != .connected, oldState == .connected {
-			DispatchQueue.main.async { NotificationCenter.default.post(name: Notifications.deviceDisconnected, object: self)}
+			Notifications.deviceDisconnected.post(with: self)
 		}
 	}
 	
 	open func disconnect() {
 		self.state = .none
-		DispatchQueue.main.async { NotificationCenter.default.post(name: Notifications.deviceDisconnected, object: self)}
+		Notifications.deviceDisconnected.post(with: self)
 		self.stopSession()
 	}
 	
@@ -272,5 +280,15 @@ extension NearbyDevice {
 		static let name = "name"
 		static let idiom = "idiom"
 		static let unique = "unique"
+	}
+}
+
+extension MCSessionState: CustomStringConvertible {
+	public var description: String {
+		switch self {
+		case .connected: return "*conected*"
+		case .notConnected: return "*notConnected*"
+		case .connecting: return "*connecting*"
+		}
 	}
 }

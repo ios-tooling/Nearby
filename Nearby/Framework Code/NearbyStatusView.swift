@@ -13,16 +13,33 @@ public class NearbyStatusView: UIView {
 	
 	public var parentViewController: UIViewController?
 	
+	var reloadButton: UIButton!
+	
 	override public func didMoveToSuperview() {
 		super.didMoveToSuperview()
 		
 		if self.configured { return }
 		
+		self.reloadButton = UIButton(type: .custom)
+		self.reloadButton.setTitle("↺", for: .normal)
+		self.reloadButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 23)
+		self.reloadButton.setTitleColor(.blue, for: .normal)
+		let size: CGFloat = 44
+		self.reloadButton.frame = CGRect(x: self.bounds.width - size, y: self.bounds.height - size, width: size, height: size)
+		self.addSubview(self.reloadButton)
+		self.reloadButton.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin]
+		self.reloadButton.showsTouchWhenHighlighted = true
+		self.reloadButton.addTarget(self, action: #selector(reloadTapped), for: .touchUpInside)
+		
 		self.configured = true
 		NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: NearbyDevice.Notifications.deviceChangedInfo, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: NearbyDevice.Notifications.deviceDisconnected, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: NearbyDevice.Notifications.deviceConnected, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: NearbyDevice.Notifications.deviceStateChanged, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: NearbyDevice.Notifications.deviceChangedState, object: nil)
+	}
+	
+	@objc func reloadTapped() {
+		self.updateUI()
 	}
 	
 	var buttons: [DeviceButton] = []
@@ -87,10 +104,22 @@ extension NearbyStatusView {
 			for (key, value) in device.discoveryInfo ?? [:] {
 				message += "\(key): \(value)\n"
 			}
-			message += "State: \(device.state.description)"
+			
+			for (key, value) in device.deviceInfo ?? [:] {
+				message += "\(key): \(value.description.trimmed(to: 20))\n"
+			}
+			message += "State: \(device.state.description)\n"
+			message += "MCState: \(device.lastReceivedSessionState.description)";
 			
 			let alert = UIAlertController(title: device.displayName, message: message, preferredStyle: .alert)
 			alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+			alert.addAction(UIAlertAction(title: "Send Connected", style: .default, handler: { _ in
+				NearbyDevice.Notifications.deviceConnected.post(with: device)
+			}))
+			alert.addAction(UIAlertAction(title: "Send Connected With Info", style: .default, handler: { _ in
+				NearbyDevice.Notifications.deviceConnectedWithInfo.post(with: device)
+			}))
+
 			(self.superview as? NearbyStatusView)?.parentViewController?.present(alert, animated: true, completion: nil)
 		}
 		
@@ -99,9 +128,16 @@ extension NearbyStatusView {
 			self.setTitle("   \(device.displayName)   ", for: .normal)
 			self.setTitleColor(device.state.contrastingColor, for: .normal)
 			self.backgroundColor = device.state.color
-			self.layer.borderColor = device.state.contrastingColor.cgColor
+			self.layer.borderColor = UIColor.black.cgColor
 			self.layer.cornerRadius = 15
 			self.layer.borderWidth = 1
 		}
+	}
+}
+
+extension String {
+	func trimmed(to length: Int) -> String {
+		if self.count > length { return String(self[...self.index(self.startIndex, offsetBy: length)]) }
+		return self
 	}
 }
