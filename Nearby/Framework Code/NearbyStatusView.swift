@@ -95,6 +95,9 @@ extension NearbyStatusView {
 			self.update()
 			self.showsTouchWhenHighlighted = true
 			self.addTarget(self, action: #selector(tapped), for: .touchUpInside)
+			self.layer.borderColor = UIColor.black.cgColor
+			self.layer.cornerRadius = 15
+			self.layer.borderWidth = 1
 		}
 		
 		@objc func tapped() {
@@ -124,13 +127,14 @@ extension NearbyStatusView {
 		}
 		
 		func update() {
-			guard let device = self.device else { return }
+			guard let device = self.device else {
+				self.alpha = 0.2
+				return
+			}
+			self.alpha = 1.0
 			self.setTitle("   \(device.displayName)   ", for: .normal)
 			self.setTitleColor(device.state.contrastingColor, for: .normal)
 			self.backgroundColor = device.state.color
-			self.layer.borderColor = UIColor.black.cgColor
-			self.layer.cornerRadius = 15
-			self.layer.borderWidth = 1
 		}
 	}
 }

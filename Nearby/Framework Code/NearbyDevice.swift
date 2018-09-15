@@ -78,6 +78,10 @@ open class NearbyDevice: NSObject {
 	public var uniqueID: String!
 	
 	open var state: State = .none { didSet {
+		if self.state == .connected {
+			if self.deviceInfo != nil { NearbyDevice.Notifications.deviceConnectedWithInfo.post(with: self) }
+			NearbyDevice.Notifications.deviceConnected.post(with: self)
+		}
 		if self.state == oldValue { return }
 		//Logger.instance.log("\(self.displayName), \(oldValue.description) -> \(self.state.description)")
 		self.delegate?.didChangeState(for: self)
@@ -177,13 +181,6 @@ open class NearbyDevice: NSObject {
 		}
 		
 		if newState == self.state {
-			if state == .connected {
-				if self.deviceInfo != nil {
-					NearbyDevice.Notifications.deviceConnectedWithInfo.post(with: self)
-				} else {
-					NearbyDevice.Notifications.deviceConnected.post(with: self)
-				}
-			}
 			return
 		}
 		self.state = newState
