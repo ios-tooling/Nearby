@@ -93,14 +93,19 @@ public struct NearbyMessagePayload {
 		var strings: [String] = []
 		var remainingData: Data?
 
-		data.withUnsafeBytes { (raw: UnsafePointer<UInt8>) in
-			let bytes = [UInt8](UnsafeBufferPointer(start: raw, count: data.count))
+		data.withUnsafeBytes { raw in
+			guard let bytes = raw.baseAddress?.assumingMemoryBound(to: UInt8.self) else { return }
+//			let bytes = [UInt8](UnsafeBufferPointer(start: raw.load(as: UnsafePointer<UInt8>.self), count: data.count))
 			let stringCount = Int(bytes[0])
 			var offset = 1
 			
 			for _ in 0..<stringCount {
 				let length = Int(bytes[offset])
-				let stringBuffer = bytes[(offset + 1)..<Int(length + offset + 1)]
+				var stringBuffer = Array<UInt8>(repeating: 0, count: length)
+				for i in 0..<length {
+					stringBuffer[i] = bytes[offset + 1 + i]
+				}
+	//			let stringBuffer = bytes[(offset + 1)..<Int(length + offset + 1)]
 				if let string = String(bytes: stringBuffer, encoding: .utf8) {
 					strings.append(string)
 				}

@@ -178,6 +178,8 @@ open class NearbyDevice: NSObject {
 			newState = .found
 			self.disconnect()
 			NearbySession.instance.deviceLocator?.reinvite(device: self)
+
+		@unknown default: break
 		}
 		
 		if newState == self.state {
@@ -286,6 +288,7 @@ extension MCSessionState: CustomStringConvertible {
 		case .connected: return "*conected*"
 		case .notConnected: return "*notConnected*"
 		case .connecting: return "*connecting*"
+		@unknown default: return "*unknown*"
 		}
 	}
 }
