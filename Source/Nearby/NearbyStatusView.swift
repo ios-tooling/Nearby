@@ -6,6 +6,7 @@
 //  Copyright © 2018 Stand Alone, inc. All rights reserved.
 //
 
+#if canImport(UIKit)
 import UIKit
 
 public class NearbyStatusView: UIView {
@@ -145,3 +146,4 @@ extension String {
 		return self
 	}
 }
+#endif
