@@ -7,6 +7,7 @@
 
 import Foundation
 import MultipeerConnectivity
+import CrossPlatformKit
 
 public class NearbySession: NSObject {
 	public struct Notifications {
@@ -24,7 +25,7 @@ public class NearbySession: NSObject {
 	public var isActive = false
 	public var useEncryption = false
 	public var messageRouter: NearbyMessageRouter?
-	public var application: UIApplication!
+	public var application: UXApplication!
 	public var serviceType: String! { didSet { assert(self.serviceType.count <= 15, "Your serviceType string is longer than 15 characters.") }}
 	public var alwaysRequestInfo = true
 	static public var deviceClass = NearbyDevice.self
@@ -52,12 +53,12 @@ public class NearbySession: NSObject {
 }
 
 extension NearbySession {
-	public func startup(withRouter: NearbyMessageRouter? = nil, application: UIApplication? = nil) {
+	public func startup(withRouter: NearbyMessageRouter? = nil, application: UXApplication? = nil) {
 		if let router = withRouter { self.messageRouter = router }
 		if let app = application { self.application = app }
 
 		
-		assert(self.application != nil, "You must set a UIApplication before starting a NearbySession.")
+		assert(self.application != nil, "You must set a UXApplication before starting a NearbySession.")
 		assert(self.serviceType != nil, "You must set a serviceType before starting a NearbySession.")
 
 		if self.isActive { return }

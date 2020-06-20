@@ -7,7 +7,7 @@
 
 import Foundation
 import MultipeerConnectivity
-
+import CrossPlatformKit
 
 public protocol NearbyDeviceDelegate: class {
 	func didReceive(message: NearbyMessage, from: NearbyDevice)
@@ -38,7 +38,7 @@ open class NearbyDevice: NSObject {
 			}
 		}
 		
-		var color: UIColor {
+		var color: UXColor {
 			switch self {
 			case .none: return .gray
 			case .found: return .yellow
@@ -48,7 +48,7 @@ open class NearbyDevice: NSObject {
 			}
 		}
 		
-		var contrastingColor: UIColor {
+		var contrastingColor: UXColor {
 			switch self {
 			case .found, .invited, .connected: return .black
 			default: return .white
@@ -87,32 +87,46 @@ open class NearbyDevice: NSObject {
 		self.delegate?.didChangeState(for: self)
 		self.checkForRSVP(self.state == .invited)
 	}}
-	let idiom: UIUserInterfaceIdiom
-	var isIPad: Bool { return self.idiom == .pad }
-	var isIPhone: Bool { return self.idiom == .phone }
+	
+	#if os(iOS)
+		let idiom: UIUserInterfaceIdiom
+		var isIPad: Bool { return self.idiom == .pad }
+		var isIPhone: Bool { return self.idiom == .phone }
+	#endif
+	
 	public var session: MCSession?
 	public let invitationTimeout: TimeInterval = 30.0
 	weak var rsvpCheckTimer: Timer?
 	
 	public var attributedDescription: NSAttributedString {
-		if self.isLocalDevice { return NSAttributedString(string: "Local Device", attributes: [.foregroundColor: UIColor.black]) }
-		return NSAttributedString(string: self.displayName, attributes: [.foregroundColor: self.state.color, .font: UIFont.boldSystemFont(ofSize: 14)])
+		if self.isLocalDevice { return NSAttributedString(string: "Local Device", attributes: [.foregroundColor: UXColor.black]) }
+		return NSAttributedString(string: self.displayName, attributes: [.foregroundColor: self.state.color, .font: UXFont.boldSystemFont(ofSize: 14)])
 	}
 	
 	open override var description: String {
 		var string = self.displayName
-		if self.isIPad { string += ", iPad" }
-		if self.isIPhone { string += ", iPhone" }
+		#if os(iOS)
+			if self.isIPad { string += ", iPad" }
+			if self.isIPhone { string += ", iPhone" }
+		#endif
 		return string
 	}
 
 	public required init(asLocalDevice: Bool) {
 		self.isLocalDevice = asLocalDevice
-		self.uniqueID = UIDevice.current.identifierForVendor?.uuidString ?? ""
-		self.discoveryInfo = [Keys.name: UIDevice.current.name, Keys.unique: self.uniqueID, Keys.idiom: "\(UIDevice.current.userInterfaceIdiom.rawValue)"]
+		self.uniqueID = MCPeerID.deviceSerialNumber
+		self.discoveryInfo = [
+			Keys.name: MCPeerID.deviceName,
+			Keys.unique: self.uniqueID
+		]
+		
+		#if os(iOS)
+			self.idiom = UIDevice.current.userInterfaceIdiom
+			self.discoveryInfo[Keys.idiom] = "\(UIDevice.current.userInterfaceIdiom.rawValue)"
+		#endif
+		
 		self.peerID = MCPeerID.localPeerID
-		self.displayName = UIDevice.current.name
-		self.idiom = UIDevice.current.userInterfaceIdiom
+		self.displayName = MCPeerID.deviceName
 		super.init()
 	}
 	
@@ -122,14 +136,17 @@ open class NearbyDevice: NSObject {
 		self.displayName = NearbySession.instance.uniqueDisplayName(from: self.peerID.displayName)
 		self.discoveryInfo = info
 		self.uniqueID = info[Keys.unique]
-		if let string = info[Keys.idiom], let int = Int(string), let idiom = UIUserInterfaceIdiom(rawValue: int) {
-			self.idiom = idiom
-		} else {
-			self.idiom = .phone
-		}
+		#if os(iOS)
+			if let string = info[Keys.idiom], let int = Int(string), let idiom = UIUserInterfaceIdiom(rawValue: int) {
+				self.idiom = idiom
+			} else {
+				self.idiom = .phone
+			}
+
+			NotificationCenter.default.addObserver(self, selector: #selector(enteredBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+		#endif
 		super.init()
 		self.startSession()
-		NotificationCenter.default.addObserver(self, selector: #selector(enteredBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
 	}
 	
 	@objc func enteredBackground() {
@@ -138,16 +155,20 @@ open class NearbyDevice: NSObject {
 	
 	func disconnectFromPeers(completion: (() -> Void)?) {
 		Logger.instance.log("Disconnecting from peers")
-		let taskID = NearbySession.instance.application.beginBackgroundTask {
-			completion?()
-		}
-		self.send(message: NearbySystemMessage.disconnect, completion: {
-			self.stopSession()
-			DispatchQueue.main.asyncAfter(wallDeadline: .now() + 1) {
+		#if os(iOS)
+			let taskID = NearbySession.instance.application.beginBackgroundTask {
 				completion?()
-				NearbySession.instance.application.endBackgroundTask(taskID)
 			}
-		})
+			self.send(message: NearbySystemMessage.disconnect, completion: {
+				self.stopSession()
+				DispatchQueue.main.asyncAfter(wallDeadline: .now() + 1) {
+					completion?()
+					NearbySession.instance.application.endBackgroundTask(taskID)
+				}
+			})
+		#else
+			self.send(message: NearbySystemMessage.disconnect, completion: { completion?() })
+		#endif
 	}
 
 	func invite(with browser: MCNearbyServiceBrowser) {

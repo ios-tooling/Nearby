@@ -7,8 +7,25 @@
 
 import Foundation
 import MultipeerConnectivity
+import Studio
 
 extension MCPeerID {
+	static var deviceName: String {
+		#if os(OSX)
+			return ProcessInfo.processInfo.hostName
+		#else
+			return UIDevice.current.name
+		#endif
+	}
+	
+	static var deviceSerialNumber: String {
+		#if os(OSX)
+			return Gestalt.serialNumber ?? ""
+		#else
+			return UIDevice.current.identifierForVendor?.uuidString ?? ""
+		#endif
+	}
+	
 	static var cachedLocalPeerID: MCPeerID?
 	static var localPeerID: MCPeerID {
 		if let id = self.cachedLocalPeerID { return id }
@@ -19,7 +36,7 @@ extension MCPeerID {
 			return id
 		}
 		
-		let peerID = MCPeerID(displayName: UIDevice.current.name)
+		let peerID = MCPeerID(displayName: Self.deviceName)
 		UserDefaults.standard.set(peerID.data, forKey: key)
 		self.cachedLocalPeerID = peerID
 		return peerID
