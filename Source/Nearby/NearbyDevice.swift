@@ -122,7 +122,7 @@ open class NearbyDevice: NSObject {
 		
 		#if os(iOS)
 			self.idiom = UIDevice.current.userInterfaceIdiom
-			self.discoveryInfo[Keys.idiom] = "\(UIDevice.current.userInterfaceIdiom.rawValue)"
+			self.discoveryInfo?[Keys.idiom] = "\(UIDevice.current.userInterfaceIdiom.rawValue)"
 		#endif
 		
 		self.peerID = MCPeerID.localPeerID
@@ -142,10 +142,11 @@ open class NearbyDevice: NSObject {
 			} else {
 				self.idiom = .phone
 			}
-
-			NotificationCenter.default.addObserver(self, selector: #selector(enteredBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
 		#endif
 		super.init()
+		#if os(iOS)
+			NotificationCenter.default.addObserver(self, selector: #selector(enteredBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+		#endif
 		self.startSession()
 	}
 	
