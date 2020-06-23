@@ -172,11 +172,14 @@ open class NearbyDevice: NSObject {
 		#endif
 	}
 
-	func invite(with browser: MCNearbyServiceBrowser) {
-		guard let info = NearbyDevice.localDevice.discoveryInfo, let data = try? JSONEncoder().encode(info) else { return }
-		self.state = .invited
+	@discardableResult
+	func invite(with browser: MCNearbyServiceBrowser) -> Bool {
+		guard let info = NearbyDevice.localDevice.discoveryInfo, let data = try? JSONEncoder().encode(info) else { return false }
 		self.startSession()
+		if self.session == nil { return false }
+		self.state = .invited
 		browser.invitePeer(self.peerID, to: self.session!, withContext: data, timeout: self.invitationTimeout)
+		return true
 	}
 	
 	func receivedInvitation(from: MCPeerID, withContext context: Data?, handler: @escaping (Bool, MCSession?) -> Void) {
