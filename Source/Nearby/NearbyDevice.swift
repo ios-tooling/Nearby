@@ -75,7 +75,7 @@ open class NearbyDevice: NSObject {
 	public weak var delegate: NearbyDeviceDelegate?
 	public let peerID: MCPeerID
 	public let isLocalDevice: Bool
-	public var uniqueID: String!
+	public var uniqueID: String
 	
 	open var state: State = .none { didSet {
 		if self.state == .connected {
@@ -135,7 +135,7 @@ open class NearbyDevice: NSObject {
 		self.peerID = peerID
 		self.displayName = NearbySession.instance.uniqueDisplayName(from: self.peerID.displayName)
 		self.discoveryInfo = info
-		self.uniqueID = info[Keys.unique]
+		self.uniqueID = info[Keys.unique] ?? peerID.displayName
 		#if os(iOS)
 			if let string = info[Keys.idiom], let int = Int(string), let idiom = UIUserInterfaceIdiom(rawValue: int) {
 				self.idiom = idiom
@@ -176,9 +176,9 @@ open class NearbyDevice: NSObject {
 	func invite(with browser: MCNearbyServiceBrowser) -> Bool {
 		guard let info = NearbyDevice.localDevice.discoveryInfo, let data = try? JSONEncoder().encode(info) else { return false }
 		self.startSession()
-		if self.session == nil { return false }
+		guard let session = self.session else { return false }
 		self.state = .invited
-		browser.invitePeer(self.peerID, to: self.session!, withContext: data, timeout: self.invitationTimeout)
+		browser.invitePeer(self.peerID, to: session, withContext: data, timeout: self.invitationTimeout)
 		return true
 	}
 	
