@@ -8,17 +8,21 @@
 import Foundation
 import MultipeerConnectivity
 import CrossPlatformKit
+import Studio
 
 #if canImport(Combine)
 import SwiftUI
 
 @available(OSX 10.15, iOS 13.0, *)
 extension NearbyDevice: ObservableObject, Identifiable {
-	public var id: String { "\(self.peerID)" }
+	public var id: String { self.peerID.id }
 }
 
 extension MCPeerID: Identifiable {
-	public var id: String { "\(self)" }
+	public var id: String {
+		let data = NSKeyedArchiver.archivedData(withRootObject: self)
+		return data.base64EncodedString()
+	}
 }
 #endif
 
@@ -195,7 +199,7 @@ open class NearbyDevice: NSObject {
 		browser.invitePeer(self.peerID, to: session, withContext: data, timeout: self.invitationTimeout)
 		return true
 	}
-	
+		
 	func receivedInvitation(from: MCPeerID, withContext context: Data?, handler: @escaping (Bool, MCSession?) -> Void) {
 		self.state = .connected
 		self.startSession()
@@ -260,6 +264,18 @@ open class NearbyDevice: NSObject {
 			self.session = MCSession(peer: NearbyDevice.localDevice.peerID, securityIdentity: nil, encryptionPreference: NearbySession.instance.useEncryption ? .required : .none)
 			self.session?.delegate = self
 		}
+	}
+	
+	open func send(dictionary: [String: String], completion: (() -> Void)? = nil) {
+		if self.isLocalDevice || self.session == nil {
+			completion?()
+			return
+		}
+
+		Logger.instance.log("Sending dictionary \(dictionary) to \(self.displayName)")
+		let payload = NearbyMessagePayload(message: NearbySystemMessage.DictionaryMessage(dictionary: dictionary))
+		self.send(payload: payload)
+		completion?()
 	}
 	
 	open func send<MessageType: NearbyMessage>(message: MessageType, completion: (() -> Void)? = nil) {

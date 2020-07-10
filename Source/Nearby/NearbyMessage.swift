@@ -13,7 +13,7 @@ public protocol NearbyMessage: class, Codable {
 }
 
 public class NearbySystemMessage: NearbyMessage {
-	public enum Kind: String, Codable { case ping = "*system-ping*", disconnect = "*system-disconnect*", deviceInfo = "*device-info*" }
+	public enum Kind: String, Codable { case ping = "*system-ping*", disconnect = "*system-disconnect*", deviceInfo = "*device-info*", dictionary = "*dictionary*" }
 	
 	public static var ping: NearbySystemMessage = NearbySystemMessage(kind: Kind.ping)
 	public static var disconnect: NearbySystemMessage = NearbySystemMessage(kind: Kind.disconnect)
@@ -46,6 +46,23 @@ extension NearbySystemMessage {
 		
 		init() {
 			self.deviceInfo = NearbySession.instance.localDeviceInfo
+		}
+	}
+	
+	class DictionaryMessage: NearbyMessage {
+		var command: String { return self.kind.rawValue }
+		public var kind = NearbySystemMessage.Kind.dictionary
+
+		enum CodableKeys: String, CodingKey { case info }
+		let info: [String: String]
+
+		required init(from decoder: Decoder) throws {
+			let container = try decoder.container(keyedBy: CodableKeys.self)
+			self.info = try container.decode([String: String].self, forKey: .info)
+		}
+
+		init(dictionary: [String: String]) {
+			self.info = dictionary
 		}
 	}
 }
