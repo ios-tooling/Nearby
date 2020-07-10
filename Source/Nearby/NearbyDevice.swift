@@ -202,7 +202,7 @@ open class NearbyDevice: NSObject {
 		case .notConnected:
 			newState = .found
 			self.disconnect()
-			NearbySession.instance.deviceLocator?.reinvite(device: self)
+			Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in NearbySession.instance.deviceLocator?.reinvite(device: self) }
 
 		@unknown default: break
 		}
