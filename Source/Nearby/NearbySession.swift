@@ -8,13 +8,18 @@
 import Foundation
 import MultipeerConnectivity
 import CrossPlatformKit
+import Studio
+
+#if canImport(Combine)
+import SwiftUI
+
+@available(OSX 10.15, iOS 13.0, *)
+extension NearbySession: ObservableObject {
+	
+}
+#endif
 
 public class NearbySession: NSObject {
-	public struct Notifications {
-		public static let didStartUp = Notification.Name("session-didStartUp")
-		public static let didShutDown = Notification.Name("session-didShutDown")
-	}
-	
 	public static let instance = NearbySession()
 	
 	var deviceLocator: NearbyScanner!
@@ -22,7 +27,7 @@ public class NearbySession: NSObject {
 		if self.localDeviceInfo != oldValue { self.broadcastDeviceInfoChange() }
 	}}
 	public var isShuttingDown = false
-	public var isActive = false
+	public var isActive = false { didSet { self.sendChanges() }}
 	public var useEncryption = false
 	public var messageRouter: NearbyMessageRouter?
 	public var application: UXApplication!
@@ -31,13 +36,24 @@ public class NearbySession: NSObject {
 	static public var deviceClass = NearbyDevice.self
 
 	public var peerID: MCPeerID { return NearbyDevice.localDevice.peerID }
-	public var devices: [Int: NearbyDevice] = [:]
-	
-	override init() {
-		super.init()
-	}
+	public var devices: [Int: NearbyDevice] = [:] { didSet { self.sendChanges() }}
 	
 	public var connectedDevices: [NearbyDevice] { return self.devices.values.filter { $0.state == .connected }}
+}
+
+extension NearbySession {
+	func sendChanges() {
+		if #available(OSX 10.15, iOS 13.0, *) {
+			#if canImport(Combine)
+				self.objectWillChange.send()
+			#endif
+		}
+	}
+	
+	public struct Notifications {
+		public static let didStartUp = Notification.Name("session-didStartUp")
+		public static let didShutDown = Notification.Name("session-didShutDown")
+	}
 	
 	func broadcastDeviceInfoChange() {
 		NearbySession.instance.sendToAll(message: NearbySystemMessage.DeviceInfo())

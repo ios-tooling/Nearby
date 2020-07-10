@@ -9,6 +9,19 @@ import Foundation
 import MultipeerConnectivity
 import CrossPlatformKit
 
+#if canImport(Combine)
+import SwiftUI
+
+@available(OSX 10.15, iOS 13.0, *)
+extension NearbyDevice: ObservableObject, Identifiable {
+	public var id: String { "\(self.peerID)" }
+}
+
+extension MCPeerID: Identifiable {
+	public var id: String { "\(self)" }
+}
+#endif
+
 public protocol NearbyDeviceDelegate: class {
 	func didReceive(message: NearbyMessage, from: NearbyDevice)
 	func didReceiveFirstInfo(from: NearbyDevice)
@@ -71,13 +84,14 @@ open class NearbyDevice: NSObject {
 			NearbyDevice.Notifications.deviceChangedInfo.post(with: self)
 		}
 	}}
-	public var displayName: String
+	public var displayName: String { didSet { sendChanges() }}
 	public weak var delegate: NearbyDeviceDelegate?
 	public let peerID: MCPeerID
 	public let isLocalDevice: Bool
 	public var uniqueID: String
 	
 	open var state: State = .none { didSet {
+		defer { self.sendChanges() }
 		if self.state == .connected {
 			if self.deviceInfo != nil { NearbyDevice.Notifications.deviceConnectedWithInfo.post(with: self) }
 			NearbyDevice.Notifications.deviceConnected.post(with: self)
@@ -296,6 +310,14 @@ open class NearbyDevice: NSObject {
 	
 	static func ==(lhs: NearbyDevice, rhs: NearbyDevice) -> Bool {
 		return lhs.peerID == rhs.peerID
+	}
+
+	func sendChanges() {
+		if #available(OSX 10.15, iOS 13.0, *) {
+			#if canImport(Combine)
+				self.objectWillChange.send()
+			#endif
+		}
 	}
 }
 
