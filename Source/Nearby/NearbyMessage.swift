@@ -71,6 +71,7 @@ public struct NearbyMessagePayload {
 	public let identifier: String
 	public let command: String
 	public let className: String
+	public var modulelessClassName: String { className.components(separatedBy: ".").last ?? className }
 	public let data: Data
 	
 	init?<MessageType: NearbyMessage>(command: String? = nil, message: MessageType) {
