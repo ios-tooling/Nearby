@@ -8,7 +8,7 @@
 import Foundation
 import MultipeerConnectivity
 
-protocol DeviceLocatorDelegate: class {
+protocol DeviceLocatorDelegate: AnyObject {
 	func didLocate(device: NearbyDevice)
 	func didFailToLocateDevice()
 }

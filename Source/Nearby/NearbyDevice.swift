@@ -26,7 +26,7 @@ extension MCPeerID: Identifiable {
 }
 #endif
 
-public protocol NearbyDeviceDelegate: class {
+public protocol NearbyDeviceDelegate: AnyObject {
 	func didReceive(message: NearbyMessage, from: NearbyDevice)
 	func didReceiveFirstInfo(from: NearbyDevice)
 	func didChangeInfo(from: NearbyDevice)
@@ -44,8 +44,8 @@ open class NearbyDevice: NSObject {
 	
 	public static let localDevice = NearbySession.deviceClass.init(asLocalDevice: true)
 	
-	public enum State: Int, Comparable { case none, found, invited, connecting, connected
-		var description: String {
+	public enum State: Int, Comparable, CustomStringConvertible { case none, found, invited, connecting, connected
+		public var description: String {
 			switch self {
 			case .none: return "None"
 			case .found: return "Found"
@@ -55,7 +55,7 @@ open class NearbyDevice: NSObject {
 			}
 		}
 		
-		var color: UXColor {
+		public var color: UXColor {
 			switch self {
 			case .none: return .gray
 			case .found: return .yellow
@@ -65,7 +65,7 @@ open class NearbyDevice: NSObject {
 			}
 		}
 		
-		var contrastingColor: UXColor {
+		public var contrastingColor: UXColor {
 			switch self {
 			case .found, .invited, .connected: return .black
 			default: return .white

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol NearbyMessage: class, Codable {
+public protocol NearbyMessage: AnyObject, Codable {
 	var command: String { get }
 }
 
