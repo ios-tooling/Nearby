@@ -298,6 +298,10 @@ open class NearbyDevice: NSObject {
 			Logger.instance.log("Error \(error) when sending to \(self.displayName)")
 		}
 	}
+    
+    open func send(file url: URL, named name: String, completion: ((Error?) -> Void)? = nil) {
+        self.session?.sendResource(at: url, withName: name, toPeer: peerID, withCompletionHandler:  completion)
+    }
 	
 	func session(didReceive data: Data) {
 		guard let payload = NearbyMessagePayload(data: data) else {
