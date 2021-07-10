@@ -79,6 +79,10 @@ open class NearbyDevice: NSObject {
 	public var lastReceivedSessionState = MCSessionState.connected
 	open var discoveryInfo: [String: String]?
 	public var deviceInfo: [String: String]? { didSet {
+		if self.isLocalDevice {
+			NearbySession.instance.localDeviceInfo = deviceInfo ?? [:]
+			return
+		}
 		if oldValue == nil {
 			self.delegate?.didReceiveFirstInfo(from: self)
 			NearbyDevice.Notifications.deviceConnectedWithInfo.post(with: self)
