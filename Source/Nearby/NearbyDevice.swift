@@ -20,8 +20,8 @@ extension NearbyDevice: ObservableObject, Identifiable {
 
 extension MCPeerID: Identifiable {
 	public var id: String {
-		let data = NSKeyedArchiver.archivedData(withRootObject: self)
-		return data.base64EncodedString()
+		let data = try? NSKeyedArchiver.archivedData(withRootObject: self, requiringSecureCoding: false)
+		return data?.base64EncodedString() ?? "MCPeerID"
 	}
 }
 #endif

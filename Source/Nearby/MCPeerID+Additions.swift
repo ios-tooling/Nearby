@@ -42,11 +42,16 @@ extension MCPeerID {
 		return peerID
 	}
 	
-	var data: Data {
-		return NSKeyedArchiver.archivedData(withRootObject: self)
+	var data: Data? {
+		do {
+			return try NSKeyedArchiver.archivedData(withRootObject: self, requiringSecureCoding: false)
+		} catch {
+			logg(error: error, "Problem archiving a PeerID")
+			return nil
+		}
 	}
 	
 	static func from(data: Data) -> MCPeerID? {
-		return NSKeyedUnarchiver.unarchiveObject(with: data) as? MCPeerID
+		return try? NSKeyedUnarchiver.unarchivedObject(ofClass: MCPeerID.self, from: data)
 	}
 }

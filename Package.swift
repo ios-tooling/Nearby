@@ -6,8 +6,8 @@ import PackageDescription
 let package = Package(
     name: "Nearby",
 	 platforms: [
-			  .macOS(.v10_13),
-			  .iOS(.v10),
+			  .macOS(.v10_15),
+			  .iOS(.v13),
 			  .watchOS(.v5)
 		 ],
     products: [
@@ -18,7 +18,7 @@ let package = Package(
     ],
     dependencies: [
 		.package(url: "https://github.com/bengottlieb/crossplatformkit.git", from: "1.0.3"),
-	   .package(url: "https://github.com/bengottlieb/suite.git", from: "1.0.5")
+	   .package(url: "https://github.com/bengottlieb/suite.git", from: "1.0.8")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
