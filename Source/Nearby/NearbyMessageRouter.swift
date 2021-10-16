@@ -10,10 +10,18 @@ import Foundation
 public protocol NearbyMessageRouter {
 	func route(_ payload: NearbyMessagePayload, from device: NearbyDevice) -> NearbyMessage?
 	func received(dictionary: [String: String], from device: NearbyDevice)
+	var fileID: String { get }
+}
+
+extension NearbyMessageRouter {
+	var moduleName: String {
+		fileID.components(separatedBy: "/").first!
+	}
 }
 
 class InternalRouter: NearbyMessageRouter {
 	static let instance = InternalRouter()
+	var fileID: String { #fileID }
 	
 	func received(dictionary: [String: String], from device: NearbyDevice) { }
 

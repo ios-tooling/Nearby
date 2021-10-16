@@ -85,8 +85,15 @@ public struct NearbyMessagePayload {
 		self.data = data
 	}
 	
+//	public static func reconstitutedClassName() -> String {
+//		print(NSStringFromClass(self as! AnyClass))
+//		return ""
+//	}
+	
 	public func reconstitute<MessageType>(_ type: MessageType.Type) throws -> MessageType? where MessageType : NearbyMessage {
-		let cls = NSClassFromString(self.className) as? MessageType.Type
+		let module = NearbySession.instance.messageRouter?.moduleName ?? ""
+		let localClassName = module + "." + (className.components(separatedBy: ".").last ?? "")
+		let cls = NSClassFromString(localClassName) as? MessageType.Type
 		if cls != MessageType.self { return nil }
 		return try JSONDecoder().decode(MessageType.self, from: self.data)
 	}
