@@ -110,12 +110,11 @@ open class NearbyDevice: NSObject {
 		self.checkForRSVP(self.state == .invited)
 	}}
 	
-	#if os(iOS)
-		let idiom: UIUserInterfaceIdiom
-		var isIPad: Bool { return self.idiom == .pad }
-		var isIPhone: Bool { return self.idiom == .phone }
-	#endif
-	
+	var idiom: String = "unknown"
+	var isIPad: Bool { return idiom == "pad" }
+	var isIPhone: Bool { return idiom == "phone" }
+	var isMac: Bool { return idiom == "mac" }
+
 	public var session: MCSession?
 	public let invitationTimeout: TimeInterval = 30.0
 	weak var rsvpCheckTimer: Timer?
@@ -127,10 +126,9 @@ open class NearbyDevice: NSObject {
 	
 	open override var description: String {
 		var string = self.displayName
-		#if os(iOS)
-			if self.isIPad { string += ", iPad" }
-			if self.isIPhone { string += ", iPhone" }
-		#endif
+		if self.isIPad { string += ", iPad" }
+		if self.isIPhone { string += ", iPhone" }
+		if self.isMac { string += ", Mac" }
 		return string
 	}
 
@@ -142,10 +140,21 @@ open class NearbyDevice: NSObject {
 			Keys.unique: self.uniqueID
 		]
 		
-		#if os(iOS)
-			self.idiom = UIDevice.current.userInterfaceIdiom
-			self.discoveryInfo?[Keys.idiom] = "\(UIDevice.current.userInterfaceIdiom.rawValue)"
-		#endif
+		if asLocalDevice {
+			#if os(macOS)
+				self.idiom = "mac"
+				self.discoveryInfo?[Keys.idiom] = "mac"
+			#endif
+			#if os(iOS)
+				switch UIDevice.current.userInterfaceIdiom {
+				case .phone: idiom = "phone"
+				case .pad: idiom = "pad"
+				case .mac: idiom = "mac"
+				default: idiom = "unknown"
+				}
+				self.discoveryInfo?[Keys.idiom] = idiom
+			#endif
+		}
 		
 		self.peerID = MCPeerID.localPeerID
 		self.displayName = MCPeerID.deviceName
@@ -158,13 +167,9 @@ open class NearbyDevice: NSObject {
 		self.displayName = NearbySession.instance.uniqueDisplayName(from: self.peerID.displayName)
 		self.discoveryInfo = info
 		self.uniqueID = info[Keys.unique] ?? peerID.displayName
-		#if os(iOS)
-			if let string = info[Keys.idiom], let int = Int(string), let idiom = UIUserInterfaceIdiom(rawValue: int) {
-				self.idiom = idiom
-			} else {
-				self.idiom = .phone
-			}
-		#endif
+		if let idiom = info[Keys.idiom] {
+			self.idiom = idiom
+		}
 		super.init()
 		#if os(iOS)
 			NotificationCenter.default.addObserver(self, selector: #selector(enteredBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
