@@ -69,6 +69,14 @@ extension NearbySession {
 }
 
 extension NearbySession {
+	public func cycle() {
+		if !isActive { return }
+		shutdown()
+		DispatchQueue.main.async(after: 1.0) {
+			self.startup()
+		}
+	}
+
 	public func startup(withRouter: NearbyMessageRouter? = nil, application: UXApplication? = nil) {
 		if let router = withRouter { self.messageRouter = router }
 		if let app = application { self.application = app }
