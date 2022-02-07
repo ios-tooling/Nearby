@@ -13,9 +13,18 @@ import Studio
 #if canImport(Combine)
 import SwiftUI
 
+public extension String {
+	var idBasedFilename: String {
+		let base = self
+		if base.count > 32 { return String(base[0...32]) }
+		return base
+	}
+}
+
 @available(OSX 10.15, iOS 13.0, *)
 extension NearbyDevice: ObservableObject, Identifiable {
-	public var id: String { self.peerID.id }
+	public var id: String { self.uniqueID }
+	public var filename: String { id.idBasedFilename }
 }
 
 extension MCPeerID: Identifiable {
@@ -44,7 +53,7 @@ open class NearbyDevice: NSObject {
 	
 	public static let localDevice = NearbySession.deviceClass.init(asLocalDevice: true)
 	
-	public enum State: Int, Comparable, CustomStringConvertible { case none, found, invited, connecting, connected
+	public enum State: Int, Comparable, CustomStringConvertible, Codable { case none, found, invited, connecting, connected, disconnected
 		public var description: String {
 			switch self {
 			case .none: return "None"
@@ -52,6 +61,7 @@ open class NearbyDevice: NSObject {
 			case .invited: return "Invited"
 			case .connected: return "Connected"
 			case .connecting: return "Connecting"
+			case .disconnected: return "Disconnected"
 			}
 		}
 		
@@ -62,6 +72,7 @@ open class NearbyDevice: NSObject {
 			case .invited: return .orange
 			case .connected: return .green
 			case .connecting: return .blue
+			case .disconnected: return .gray
 			}
 		}
 		
