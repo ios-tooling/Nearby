@@ -59,7 +59,7 @@ extension NearbySession {
 		NearbySession.instance.sendToAll(message: NearbySystemMessage.DeviceInfo())
 	}
 	
-	open func sendToAll<MessageType: NearbyMessage>(message: MessageType) {
+	public func sendToAll<MessageType: NearbyMessage>(message: MessageType) {
 		Logger.instance.log("Sending \(message.command) as a \(type(of: message)) to all")
 		let payload = NearbyMessagePayload(message: message)
 		for device in self.connectedDevices {
