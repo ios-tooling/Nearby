@@ -25,6 +25,9 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "Nearby",
-				dependencies: [.product(name: "CrossPlatformKit", package: "CrossPlatformKit"), .product(name: "Suite", package: "Suite")]),
+				dependencies: [
+					.product(name: "Suite", package: "Suite"),
+					.product(name: "CrossPlatformKit", package: "CrossPlatformKit"),
+				]),
     ]
 )

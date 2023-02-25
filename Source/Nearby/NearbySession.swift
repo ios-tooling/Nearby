@@ -31,7 +31,7 @@ public class NearbySession: NSObject {
 	public var useEncryption = false
 	public var messageRouter: NearbyMessageRouter?
 	public var application: UXApplication!
-	public var serviceType: String! { didSet { assert(self.serviceType.count <= 15, "Your serviceType string is longer than 15 characters.") }}
+	public var serviceType: String! { didSet { try! serviceType.validateBonjourServiceType() }}
 	public var alwaysRequestInfo = true
 	static public var deviceClass = NearbyDevice.self
 
@@ -78,6 +78,8 @@ extension NearbySession {
 	}
 
 	public func startup(withRouter: NearbyMessageRouter? = nil, application: UXApplication? = nil) {
+		try! serviceType.validateBonjourServiceType()
+		
 		if let router = withRouter { self.messageRouter = router }
 		if let app = application { self.application = app }
 
