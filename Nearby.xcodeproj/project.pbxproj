@@ -38,8 +38,8 @@
 		B5C8C7A32A365D5E0095788D /* NearbyMessageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7952A365D5E0095788D /* NearbyMessageRouter.swift */; };
 		B5C8C7A42A365D5E0095788D /* String+Bonjour.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7962A365D5E0095788D /* String+Bonjour.swift */; };
 		B5C8C7A52A365D5E0095788D /* String+Bonjour.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7962A365D5E0095788D /* String+Bonjour.swift */; };
-		B5C8C7A62A365D5E0095788D /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7972A365D5E0095788D /* Logger.swift */; };
-		B5C8C7A72A365D5E0095788D /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7972A365D5E0095788D /* Logger.swift */; };
+		B5C8C7A62A365D5E0095788D /* NearbyLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7972A365D5E0095788D /* NearbyLogger.swift */; };
+		B5C8C7A72A365D5E0095788D /* NearbyLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7972A365D5E0095788D /* NearbyLogger.swift */; };
 		B5C8C7A82A365D5E0095788D /* NearbyScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7982A365D5E0095788D /* NearbyScanner.swift */; };
 		B5C8C7A92A365D5E0095788D /* NearbyScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7982A365D5E0095788D /* NearbyScanner.swift */; };
 		B5C8C7AA2A365D5E0095788D /* NearbyDevice+Checks.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7992A365D5E0095788D /* NearbyDevice+Checks.swift */; };
@@ -126,7 +126,7 @@
 		B5C8C7942A365D5E0095788D /* MCPeerID+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MCPeerID+Additions.swift"; sourceTree = "<group>"; };
 		B5C8C7952A365D5E0095788D /* NearbyMessageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMessageRouter.swift; sourceTree = "<group>"; };
 		B5C8C7962A365D5E0095788D /* String+Bonjour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Bonjour.swift"; sourceTree = "<group>"; };
-		B5C8C7972A365D5E0095788D /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		B5C8C7972A365D5E0095788D /* NearbyLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyLogger.swift; sourceTree = "<group>"; };
 		B5C8C7982A365D5E0095788D /* NearbyScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyScanner.swift; sourceTree = "<group>"; };
 		B5C8C7992A365D5E0095788D /* NearbyDevice+Checks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NearbyDevice+Checks.swift"; sourceTree = "<group>"; };
 		B5C8C79A2A365D5E0095788D /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
@@ -290,7 +290,7 @@
 				B5C8C7942A365D5E0095788D /* MCPeerID+Additions.swift */,
 				B5C8C7952A365D5E0095788D /* NearbyMessageRouter.swift */,
 				B5C8C7962A365D5E0095788D /* String+Bonjour.swift */,
-				B5C8C7972A365D5E0095788D /* Logger.swift */,
+				B5C8C7972A365D5E0095788D /* NearbyLogger.swift */,
 				B5C8C7982A365D5E0095788D /* NearbyScanner.swift */,
 				B5C8C7992A365D5E0095788D /* NearbyDevice+Checks.swift */,
 				B5C8C79A2A365D5E0095788D /* Notifications.swift */,
@@ -426,8 +426,9 @@
 		B504E60B1A89230F001B414B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1000;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1500;
 				ORGANIZATIONNAME = "Stand Alone, inc.";
 				TargetAttributes = {
 					B504E6451A8968DC001B414B = {
@@ -563,7 +564,7 @@
 				B5C8C7A82A365D5E0095788D /* NearbyScanner.swift in Sources */,
 				B5C8C7A22A365D5E0095788D /* NearbyMessageRouter.swift in Sources */,
 				B5C8C7B62A365D5E0095788D /* NearbyDevice+MCSessionDelegate.swift in Sources */,
-				B5C8C7A62A365D5E0095788D /* Logger.swift in Sources */,
+				B5C8C7A62A365D5E0095788D /* NearbyLogger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -582,7 +583,7 @@
 				B5C8C7A92A365D5E0095788D /* NearbyScanner.swift in Sources */,
 				B5C8C7A32A365D5E0095788D /* NearbyMessageRouter.swift in Sources */,
 				B5C8C7B72A365D5E0095788D /* NearbyDevice+MCSessionDelegate.swift in Sources */,
-				B5C8C7A72A365D5E0095788D /* Logger.swift in Sources */,
+				B5C8C7A72A365D5E0095788D /* NearbyLogger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -675,6 +676,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -685,6 +687,7 @@
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -700,7 +703,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -733,6 +736,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -743,6 +747,7 @@
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -751,7 +756,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -766,13 +771,14 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = YES;
+				ENABLE_MODULE_VERIFIER = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -786,6 +792,8 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				PRODUCT_BUNDLE_IDENTIFIER = com.standalone.nearby;
 				PRODUCT_NAME = Nearby;
 				SKIP_INSTALL = YES;
@@ -801,13 +809,14 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = YES;
+				ENABLE_MODULE_VERIFIER = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Nearby/iOS/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -817,6 +826,8 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				PRODUCT_BUNDLE_IDENTIFIER = com.standalone.nearby;
 				PRODUCT_NAME = Nearby;
 				SKIP_INSTALL = YES;
@@ -850,11 +861,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YY6CWUX533;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks/MacFrameworks",
@@ -871,7 +884,9 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.standalone.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Nearby;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -891,12 +906,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YY6CWUX533;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks/MacFrameworks",
@@ -909,7 +926,9 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.standalone.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Nearby;
 				PROVISIONING_PROFILE_SPECIFIER = "";

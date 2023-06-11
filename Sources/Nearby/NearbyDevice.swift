@@ -116,7 +116,7 @@ open class NearbyDevice: NSObject {
 			NearbyDevice.Notifications.deviceConnected.post(with: self)
 		}
 		if self.state == oldValue { return }
-		//Logger.instance.log("\(self.displayName), \(oldValue.description) -> \(self.state.description)")
+		//NearbyLogger.instance.log("\(self.displayName), \(oldValue.description) -> \(self.state.description)")
 		self.delegate?.didChangeState(for: self)
 		self.checkForRSVP(self.state == .invited)
 	}}
@@ -193,7 +193,7 @@ open class NearbyDevice: NSObject {
 	}
 	
 	func disconnectFromPeers(completion: (() -> Void)?) {
-		Logger.instance.log("Disconnecting from peers")
+		NearbyLogger.instance.log("Disconnecting from peers")
 		#if os(iOS)
 			let taskID = NearbySession.instance.application.beginBackgroundTask {
 				completion?()
@@ -274,7 +274,7 @@ open class NearbyDevice: NSObject {
 	}
 	
 	func stopSession() {
-		Logger.instance.log("Stopping: \(self.session == nil ? "nothing" : "session")")
+		NearbyLogger.instance.log("Stopping: \(self.session == nil ? "nothing" : "session")")
 		self.session?.disconnect()
 		self.session = nil
 	}
@@ -292,7 +292,7 @@ open class NearbyDevice: NSObject {
 			return
 		}
 
-		Logger.instance.log("Sending dictionary \(dictionary) to \(self.displayName)")
+		NearbyLogger.instance.log("Sending dictionary \(dictionary) to \(self.displayName)")
 		let payload = NearbyMessagePayload(message: NearbySystemMessage.DictionaryMessage(dictionary: dictionary))
 		self.send(payload: payload)
 		completion?()
@@ -304,7 +304,7 @@ open class NearbyDevice: NSObject {
 			return
 		}
 
-		Logger.instance.log("Sending \(message.command) as a \(type(of: message)) to \(self.displayName)")
+		NearbyLogger.instance.log("Sending \(message.command) as a \(type(of: message)) to \(self.displayName)")
 		let payload = NearbyMessagePayload(message: message)
 		self.send(payload: payload)
 		completion?()
@@ -315,7 +315,7 @@ open class NearbyDevice: NSObject {
 		do {
 			try self.session?.send(data, toPeers: [self.peerID], with: .reliable)
 		} catch {
-			Logger.instance.log("Error \(error) when sending to \(self.displayName)")
+			NearbyLogger.instance.log("Error \(error) when sending to \(self.displayName)")
 		}
 	}
     
@@ -325,7 +325,7 @@ open class NearbyDevice: NSObject {
 	
 	func session(didReceive data: Data) {
 		guard let payload = NearbyMessagePayload(data: data) else {
-			Logger.instance.log("Failed to decode message from \(data)")
+			NearbyLogger.instance.log("Failed to decode message from \(data)")
 			return
 		}
 		
