@@ -8,13 +8,16 @@
 import Foundation
 
 extension String {
-	enum BonjourValidationError: Error { case tooShort, noInfoDictionary, noBonjourServicesDictionary, noTCPID, noUDPID }
+	enum BonjourValidationError: Error { case tooLong, noInfoDictionary, noBonjourServicesDictionary, noTCPID, noUDPID }
 	
 	func validateBonjourServiceType() throws {
-		if count >= 15 { throw BonjourValidationError.tooShort }
+		if count >= 15 { throw BonjourValidationError.tooLong }
 		
 		guard let dict = Bundle.main.infoDictionary else { throw BonjourValidationError.noInfoDictionary }
-		guard let services = dict["NSBonjourServices"] as? [String] else { throw BonjourValidationError.noBonjourServicesDictionary }
+		guard let services = dict["NSBonjourServices"] as? [String] else {
+			print("Please add an NSBonjourServices array to your info.plist. It should have two items for each service, each prefaced with '_' and suffixed with either '._tcp' or '_udp'")
+			throw BonjourValidationError.noBonjourServicesDictionary
+		}
 		
 		let tcpID = "_" + self + "._tcp"
 		let udpID = "_" + self + "._udp"

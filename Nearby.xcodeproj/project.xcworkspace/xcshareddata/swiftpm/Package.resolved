@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "crossplatformkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/bengottlieb/crossplatformkit",
+      "state" : {
+        "revision" : "eeaf28a917f394fea512b4b552889968bbd6d419",
+        "version" : "1.0.9"
+      }
+    },
+    {
+      "identity" : "suite",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/bengottlieb/suite",
+      "state" : {
+        "revision" : "dde3c9ab50a55c698fd0cb11fddad27c6d6c4694",
+        "version" : "1.0.87"
+      }
+    }
+  ],
+  "version" : 2
+}

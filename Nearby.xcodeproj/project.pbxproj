@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -21,28 +21,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		B5253E8B242D7B3800BCA814 /* MCPeerID+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5253E80242D7B3800BCA814 /* MCPeerID+Additions.swift */; };
-		B5253E8C242D7B3800BCA814 /* MCPeerID+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5253E80242D7B3800BCA814 /* MCPeerID+Additions.swift */; };
-		B5253E8D242D7B3800BCA814 /* NearbyMessageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5253E81242D7B3800BCA814 /* NearbyMessageRouter.swift */; };
-		B5253E8E242D7B3800BCA814 /* NearbyMessageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5253E81242D7B3800BCA814 /* NearbyMessageRouter.swift */; };
-		B5253E8F242D7B3800BCA814 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5253E82242D7B3800BCA814 /* Logger.swift */; };
-		B5253E90242D7B3800BCA814 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5253E82242D7B3800BCA814 /* Logger.swift */; };
-		B5253E91242D7B3800BCA814 /* NearbyScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5253E83242D7B3800BCA814 /* NearbyScanner.swift */; };
-		B5253E92242D7B3800BCA814 /* NearbyScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5253E83242D7B3800BCA814 /* NearbyScanner.swift */; };
-		B5253E93242D7B3800BCA814 /* NearbyDevice+Checks.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5253E84242D7B3800BCA814 /* NearbyDevice+Checks.swift */; };
-		B5253E94242D7B3800BCA814 /* NearbyDevice+Checks.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5253E84242D7B3800BCA814 /* NearbyDevice+Checks.swift */; };
-		B5253E95242D7B3800BCA814 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5253E85242D7B3800BCA814 /* Notifications.swift */; };
-		B5253E96242D7B3800BCA814 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5253E85242D7B3800BCA814 /* Notifications.swift */; };
-		B5253E97242D7B3800BCA814 /* NearbyMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5253E86242D7B3800BCA814 /* NearbyMessage.swift */; };
-		B5253E98242D7B3800BCA814 /* NearbyMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5253E86242D7B3800BCA814 /* NearbyMessage.swift */; };
-		B5253E99242D7B3800BCA814 /* NearbyStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5253E87242D7B3800BCA814 /* NearbyStatusView.swift */; };
-		B5253E9A242D7B3800BCA814 /* NearbyStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5253E87242D7B3800BCA814 /* NearbyStatusView.swift */; };
-		B5253E9B242D7B3800BCA814 /* NearbyDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5253E88242D7B3800BCA814 /* NearbyDevice.swift */; };
-		B5253E9C242D7B3800BCA814 /* NearbyDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5253E88242D7B3800BCA814 /* NearbyDevice.swift */; };
-		B5253E9D242D7B3800BCA814 /* NearbySession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5253E89242D7B3800BCA814 /* NearbySession.swift */; };
-		B5253E9E242D7B3800BCA814 /* NearbySession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5253E89242D7B3800BCA814 /* NearbySession.swift */; };
-		B5253E9F242D7B3800BCA814 /* NearbyDevice+MCSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5253E8A242D7B3800BCA814 /* NearbyDevice+MCSessionDelegate.swift */; };
-		B5253EA0242D7B3800BCA814 /* NearbyDevice+MCSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5253E8A242D7B3800BCA814 /* NearbyDevice+MCSessionDelegate.swift */; };
 		B54A9B4D2125B417008E646E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54A9B4C2125B417008E646E /* AppDelegate.swift */; };
 		B54A9B4F2125B417008E646E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54A9B4E2125B417008E646E /* ViewController.swift */; };
 		B54A9B522125B417008E646E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B54A9B502125B417008E646E /* Main.storyboard */; };
@@ -54,6 +32,32 @@
 		B54A9B7C2125B45B008E646E /* Nearby.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = B504E6461A8968DC001B414B /* Nearby.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B58D64791A898F89005A0002 /* Nearby.h in Headers */ = {isa = PBXBuildFile; fileRef = B58D64681A898F81005A0002 /* Nearby.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B58D64961A899285005A0002 /* Nearby.h in Headers */ = {isa = PBXBuildFile; fileRef = B58D646B1A898F81005A0002 /* Nearby.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B5C8C7A02A365D5E0095788D /* MCPeerID+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7942A365D5E0095788D /* MCPeerID+Additions.swift */; };
+		B5C8C7A12A365D5E0095788D /* MCPeerID+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7942A365D5E0095788D /* MCPeerID+Additions.swift */; };
+		B5C8C7A22A365D5E0095788D /* NearbyMessageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7952A365D5E0095788D /* NearbyMessageRouter.swift */; };
+		B5C8C7A32A365D5E0095788D /* NearbyMessageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7952A365D5E0095788D /* NearbyMessageRouter.swift */; };
+		B5C8C7A42A365D5E0095788D /* String+Bonjour.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7962A365D5E0095788D /* String+Bonjour.swift */; };
+		B5C8C7A52A365D5E0095788D /* String+Bonjour.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7962A365D5E0095788D /* String+Bonjour.swift */; };
+		B5C8C7A62A365D5E0095788D /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7972A365D5E0095788D /* Logger.swift */; };
+		B5C8C7A72A365D5E0095788D /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7972A365D5E0095788D /* Logger.swift */; };
+		B5C8C7A82A365D5E0095788D /* NearbyScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7982A365D5E0095788D /* NearbyScanner.swift */; };
+		B5C8C7A92A365D5E0095788D /* NearbyScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7982A365D5E0095788D /* NearbyScanner.swift */; };
+		B5C8C7AA2A365D5E0095788D /* NearbyDevice+Checks.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7992A365D5E0095788D /* NearbyDevice+Checks.swift */; };
+		B5C8C7AB2A365D5E0095788D /* NearbyDevice+Checks.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7992A365D5E0095788D /* NearbyDevice+Checks.swift */; };
+		B5C8C7AC2A365D5E0095788D /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C79A2A365D5E0095788D /* Notifications.swift */; };
+		B5C8C7AD2A365D5E0095788D /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C79A2A365D5E0095788D /* Notifications.swift */; };
+		B5C8C7AE2A365D5E0095788D /* NearbyMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C79B2A365D5E0095788D /* NearbyMessage.swift */; };
+		B5C8C7AF2A365D5E0095788D /* NearbyMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C79B2A365D5E0095788D /* NearbyMessage.swift */; };
+		B5C8C7B02A365D5E0095788D /* NearbyStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C79C2A365D5E0095788D /* NearbyStatusView.swift */; };
+		B5C8C7B12A365D5E0095788D /* NearbyStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C79C2A365D5E0095788D /* NearbyStatusView.swift */; };
+		B5C8C7B22A365D5E0095788D /* NearbyDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C79D2A365D5E0095788D /* NearbyDevice.swift */; };
+		B5C8C7B32A365D5E0095788D /* NearbyDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C79D2A365D5E0095788D /* NearbyDevice.swift */; };
+		B5C8C7B42A365D5E0095788D /* NearbySession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C79E2A365D5E0095788D /* NearbySession.swift */; };
+		B5C8C7B52A365D5E0095788D /* NearbySession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C79E2A365D5E0095788D /* NearbySession.swift */; };
+		B5C8C7B62A365D5E0095788D /* NearbyDevice+MCSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C79F2A365D5E0095788D /* NearbyDevice+MCSessionDelegate.swift */; };
+		B5C8C7B72A365D5E0095788D /* NearbyDevice+MCSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C79F2A365D5E0095788D /* NearbyDevice+MCSessionDelegate.swift */; };
+		B5C8C7BA2A365D770095788D /* CrossPlatformKit in Frameworks */ = {isa = PBXBuildFile; productRef = B5C8C7B92A365D770095788D /* CrossPlatformKit */; };
+		B5C8C7BD2A365DA90095788D /* Suite in Frameworks */ = {isa = PBXBuildFile; productRef = B5C8C7BC2A365DA90095788D /* Suite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,17 +106,6 @@
 		B504E6461A8968DC001B414B /* Nearby.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Nearby.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B504E66A1A896980001B414B /* BuildFramework.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = BuildFramework.sh; path = Nearby/BuildFramework.sh; sourceTree = "<group>"; };
 		B504E6AF1A898110001B414B /* Nearby.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Nearby.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B5253E80242D7B3800BCA814 /* MCPeerID+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MCPeerID+Additions.swift"; sourceTree = "<group>"; };
-		B5253E81242D7B3800BCA814 /* NearbyMessageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMessageRouter.swift; sourceTree = "<group>"; };
-		B5253E82242D7B3800BCA814 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		B5253E83242D7B3800BCA814 /* NearbyScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyScanner.swift; sourceTree = "<group>"; };
-		B5253E84242D7B3800BCA814 /* NearbyDevice+Checks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NearbyDevice+Checks.swift"; sourceTree = "<group>"; };
-		B5253E85242D7B3800BCA814 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
-		B5253E86242D7B3800BCA814 /* NearbyMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMessage.swift; sourceTree = "<group>"; };
-		B5253E87242D7B3800BCA814 /* NearbyStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyStatusView.swift; sourceTree = "<group>"; };
-		B5253E88242D7B3800BCA814 /* NearbyDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyDevice.swift; sourceTree = "<group>"; };
-		B5253E89242D7B3800BCA814 /* NearbySession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbySession.swift; sourceTree = "<group>"; };
-		B5253E8A242D7B3800BCA814 /* NearbyDevice+MCSessionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NearbyDevice+MCSessionDelegate.swift"; sourceTree = "<group>"; };
 		B54A9B4A2125B417008E646E /* iOSTestingHarness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSTestingHarness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B54A9B4C2125B417008E646E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B54A9B4E2125B417008E646E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +123,18 @@
 		B58D64681A898F81005A0002 /* Nearby.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Nearby.h; sourceTree = "<group>"; };
 		B58D646A1A898F81005A0002 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B58D646B1A898F81005A0002 /* Nearby.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Nearby.h; sourceTree = "<group>"; };
+		B5C8C7942A365D5E0095788D /* MCPeerID+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MCPeerID+Additions.swift"; sourceTree = "<group>"; };
+		B5C8C7952A365D5E0095788D /* NearbyMessageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMessageRouter.swift; sourceTree = "<group>"; };
+		B5C8C7962A365D5E0095788D /* String+Bonjour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Bonjour.swift"; sourceTree = "<group>"; };
+		B5C8C7972A365D5E0095788D /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		B5C8C7982A365D5E0095788D /* NearbyScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyScanner.swift; sourceTree = "<group>"; };
+		B5C8C7992A365D5E0095788D /* NearbyDevice+Checks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NearbyDevice+Checks.swift"; sourceTree = "<group>"; };
+		B5C8C79A2A365D5E0095788D /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		B5C8C79B2A365D5E0095788D /* NearbyMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMessage.swift; sourceTree = "<group>"; };
+		B5C8C79C2A365D5E0095788D /* NearbyStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyStatusView.swift; sourceTree = "<group>"; };
+		B5C8C79D2A365D5E0095788D /* NearbyDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyDevice.swift; sourceTree = "<group>"; };
+		B5C8C79E2A365D5E0095788D /* NearbySession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbySession.swift; sourceTree = "<group>"; };
+		B5C8C79F2A365D5E0095788D /* NearbyDevice+MCSessionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NearbyDevice+MCSessionDelegate.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +142,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5C8C7BA2A365D770095788D /* CrossPlatformKit in Frameworks */,
+				B5C8C7BD2A365DA90095788D /* Suite in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,7 +182,7 @@
 		B504E60A1A89230F001B414B = {
 			isa = PBXGroup;
 			children = (
-				B5253E7E242D7B3800BCA814 /* Source */,
+				B5C8C7922A365D5E0095788D /* Sources */,
 				B5C047821E7C2D9E00A2BE64 /* iOS */,
 				B504E66A1A896980001B414B /* BuildFramework.sh */,
 				B5C047831E7C2DA500A2BE64 /* Mac */,
@@ -198,32 +205,6 @@
 				B54A9B682125B418008E646E /* iOSTestingHarnessUITests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		B5253E7E242D7B3800BCA814 /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				B5253E7F242D7B3800BCA814 /* Nearby */,
-			);
-			path = Source;
-			sourceTree = "<group>";
-		};
-		B5253E7F242D7B3800BCA814 /* Nearby */ = {
-			isa = PBXGroup;
-			children = (
-				B5253E80242D7B3800BCA814 /* MCPeerID+Additions.swift */,
-				B5253E81242D7B3800BCA814 /* NearbyMessageRouter.swift */,
-				B5253E82242D7B3800BCA814 /* Logger.swift */,
-				B5253E83242D7B3800BCA814 /* NearbyScanner.swift */,
-				B5253E84242D7B3800BCA814 /* NearbyDevice+Checks.swift */,
-				B5253E85242D7B3800BCA814 /* Notifications.swift */,
-				B5253E86242D7B3800BCA814 /* NearbyMessage.swift */,
-				B5253E87242D7B3800BCA814 /* NearbyStatusView.swift */,
-				B5253E88242D7B3800BCA814 /* NearbyDevice.swift */,
-				B5253E89242D7B3800BCA814 /* NearbySession.swift */,
-				B5253E8A242D7B3800BCA814 /* NearbyDevice+MCSessionDelegate.swift */,
-			);
-			path = Nearby;
 			sourceTree = "<group>";
 		};
 		B54A9B4B2125B417008E646E /* iOSTestingHarness */ = {
@@ -295,6 +276,33 @@
 			name = Mac;
 			sourceTree = "<group>";
 		};
+		B5C8C7922A365D5E0095788D /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				B5C8C7932A365D5E0095788D /* Nearby */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		B5C8C7932A365D5E0095788D /* Nearby */ = {
+			isa = PBXGroup;
+			children = (
+				B5C8C7942A365D5E0095788D /* MCPeerID+Additions.swift */,
+				B5C8C7952A365D5E0095788D /* NearbyMessageRouter.swift */,
+				B5C8C7962A365D5E0095788D /* String+Bonjour.swift */,
+				B5C8C7972A365D5E0095788D /* Logger.swift */,
+				B5C8C7982A365D5E0095788D /* NearbyScanner.swift */,
+				B5C8C7992A365D5E0095788D /* NearbyDevice+Checks.swift */,
+				B5C8C79A2A365D5E0095788D /* Notifications.swift */,
+				B5C8C79B2A365D5E0095788D /* NearbyMessage.swift */,
+				B5C8C79C2A365D5E0095788D /* NearbyStatusView.swift */,
+				B5C8C79D2A365D5E0095788D /* NearbyDevice.swift */,
+				B5C8C79E2A365D5E0095788D /* NearbySession.swift */,
+				B5C8C79F2A365D5E0095788D /* NearbyDevice+MCSessionDelegate.swift */,
+			);
+			path = Nearby;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -331,6 +339,10 @@
 			dependencies = (
 			);
 			name = Nearby_iOS;
+			packageProductDependencies = (
+				B5C8C7B92A365D770095788D /* CrossPlatformKit */,
+				B5C8C7BC2A365DA90095788D /* Suite */,
+			);
 			productName = Nearby;
 			productReference = B504E6461A8968DC001B414B /* Nearby.framework */;
 			productType = "com.apple.product-type.framework";
@@ -460,6 +472,10 @@
 				Base,
 			);
 			mainGroup = B504E60A1A89230F001B414B;
+			packageReferences = (
+				B5C8C7B82A365D770095788D /* XCRemoteSwiftPackageReference "crossplatformkit" */,
+				B5C8C7BB2A365DA90095788D /* XCRemoteSwiftPackageReference "suite" */,
+			);
 			productRefGroup = B504E6141A89230F001B414B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -536,17 +552,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5253E95242D7B3800BCA814 /* Notifications.swift in Sources */,
-				B5253E9F242D7B3800BCA814 /* NearbyDevice+MCSessionDelegate.swift in Sources */,
-				B5253E99242D7B3800BCA814 /* NearbyStatusView.swift in Sources */,
-				B5253E8B242D7B3800BCA814 /* MCPeerID+Additions.swift in Sources */,
-				B5253E91242D7B3800BCA814 /* NearbyScanner.swift in Sources */,
-				B5253E8F242D7B3800BCA814 /* Logger.swift in Sources */,
-				B5253E8D242D7B3800BCA814 /* NearbyMessageRouter.swift in Sources */,
-				B5253E97242D7B3800BCA814 /* NearbyMessage.swift in Sources */,
-				B5253E93242D7B3800BCA814 /* NearbyDevice+Checks.swift in Sources */,
-				B5253E9B242D7B3800BCA814 /* NearbyDevice.swift in Sources */,
-				B5253E9D242D7B3800BCA814 /* NearbySession.swift in Sources */,
+				B5C8C7A42A365D5E0095788D /* String+Bonjour.swift in Sources */,
+				B5C8C7AC2A365D5E0095788D /* Notifications.swift in Sources */,
+				B5C8C7B22A365D5E0095788D /* NearbyDevice.swift in Sources */,
+				B5C8C7B02A365D5E0095788D /* NearbyStatusView.swift in Sources */,
+				B5C8C7AA2A365D5E0095788D /* NearbyDevice+Checks.swift in Sources */,
+				B5C8C7A02A365D5E0095788D /* MCPeerID+Additions.swift in Sources */,
+				B5C8C7B42A365D5E0095788D /* NearbySession.swift in Sources */,
+				B5C8C7AE2A365D5E0095788D /* NearbyMessage.swift in Sources */,
+				B5C8C7A82A365D5E0095788D /* NearbyScanner.swift in Sources */,
+				B5C8C7A22A365D5E0095788D /* NearbyMessageRouter.swift in Sources */,
+				B5C8C7B62A365D5E0095788D /* NearbyDevice+MCSessionDelegate.swift in Sources */,
+				B5C8C7A62A365D5E0095788D /* Logger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -554,17 +571,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5253E96242D7B3800BCA814 /* Notifications.swift in Sources */,
-				B5253EA0242D7B3800BCA814 /* NearbyDevice+MCSessionDelegate.swift in Sources */,
-				B5253E9A242D7B3800BCA814 /* NearbyStatusView.swift in Sources */,
-				B5253E8C242D7B3800BCA814 /* MCPeerID+Additions.swift in Sources */,
-				B5253E92242D7B3800BCA814 /* NearbyScanner.swift in Sources */,
-				B5253E90242D7B3800BCA814 /* Logger.swift in Sources */,
-				B5253E8E242D7B3800BCA814 /* NearbyMessageRouter.swift in Sources */,
-				B5253E98242D7B3800BCA814 /* NearbyMessage.swift in Sources */,
-				B5253E94242D7B3800BCA814 /* NearbyDevice+Checks.swift in Sources */,
-				B5253E9C242D7B3800BCA814 /* NearbyDevice.swift in Sources */,
-				B5253E9E242D7B3800BCA814 /* NearbySession.swift in Sources */,
+				B5C8C7A52A365D5E0095788D /* String+Bonjour.swift in Sources */,
+				B5C8C7AD2A365D5E0095788D /* Notifications.swift in Sources */,
+				B5C8C7B32A365D5E0095788D /* NearbyDevice.swift in Sources */,
+				B5C8C7B12A365D5E0095788D /* NearbyStatusView.swift in Sources */,
+				B5C8C7AB2A365D5E0095788D /* NearbyDevice+Checks.swift in Sources */,
+				B5C8C7A12A365D5E0095788D /* MCPeerID+Additions.swift in Sources */,
+				B5C8C7B52A365D5E0095788D /* NearbySession.swift in Sources */,
+				B5C8C7AF2A365D5E0095788D /* NearbyMessage.swift in Sources */,
+				B5C8C7A92A365D5E0095788D /* NearbyScanner.swift in Sources */,
+				B5C8C7A32A365D5E0095788D /* NearbyMessageRouter.swift in Sources */,
+				B5C8C7B72A365D5E0095788D /* NearbyDevice+MCSessionDelegate.swift in Sources */,
+				B5C8C7A72A365D5E0095788D /* Logger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -736,7 +754,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -761,8 +780,12 @@
 				);
 				INFOPLIST_FILE = Nearby/iOS/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.standalone.nearby;
 				PRODUCT_NAME = Nearby;
 				SKIP_INSTALL = YES;
@@ -788,12 +811,17 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Nearby/iOS/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.standalone.nearby;
 				PRODUCT_NAME = Nearby;
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -838,7 +866,11 @@
 				);
 				INFOPLIST_FILE = Nearby/Mac/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.standalone.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Nearby;
@@ -872,7 +904,11 @@
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = Nearby/Mac/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.standalone.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Nearby;
@@ -900,8 +936,11 @@
 				DEVELOPMENT_TEAM = YY6CWUX533;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = iOSTestingHarness/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.standalone.iOSTestingHarness;
@@ -928,8 +967,11 @@
 				DEVELOPMENT_TEAM = YY6CWUX533;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = iOSTestingHarness/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.standalone.iOSTestingHarness;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -954,7 +996,11 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = iOSTestingHarnessTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.standalone.iOSTestingHarnessTests;
@@ -983,7 +1029,11 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = iOSTestingHarnessTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.standalone.iOSTestingHarnessTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1008,7 +1058,11 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = iOSTestingHarnessUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.standalone.iOSTestingHarnessUITests;
@@ -1036,7 +1090,11 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = iOSTestingHarnessUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.standalone.iOSTestingHarnessUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1112,6 +1170,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B5C8C7B82A365D770095788D /* XCRemoteSwiftPackageReference "crossplatformkit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/bengottlieb/crossplatformkit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.9;
+			};
+		};
+		B5C8C7BB2A365DA90095788D /* XCRemoteSwiftPackageReference "suite" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/bengottlieb/suite";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.87;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B5C8C7B92A365D770095788D /* CrossPlatformKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B5C8C7B82A365D770095788D /* XCRemoteSwiftPackageReference "crossplatformkit" */;
+			productName = CrossPlatformKit;
+		};
+		B5C8C7BC2A365DA90095788D /* Suite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B5C8C7BB2A365DA90095788D /* XCRemoteSwiftPackageReference "suite" */;
+			productName = Suite;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B504E60B1A89230F001B414B /* Project object */;
 }
