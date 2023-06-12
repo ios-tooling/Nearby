@@ -43,11 +43,7 @@ public class NearbySession: NSObject {
 
 extension NearbySession {
 	func sendChanges() {
-		if #available(OSX 10.15, iOS 13.0, *) {
-			#if canImport(Combine)
-				self.objectWillChange.send()
-			#endif
-		}
+		self.objectWillChange.send()
 	}
 	
 	public struct Notifications {
@@ -77,7 +73,8 @@ extension NearbySession {
 		}
 	}
 
-	public func startup(withRouter: NearbyMessageRouter? = nil, application: UXApplication? = nil) {
+	public func
+	startup(withRouter: NearbyMessageRouter? = nil, application: UXApplication? = nil) {
 		try! serviceType.validateBonjourServiceType()
 		
 		if let router = withRouter { self.messageRouter = router }
@@ -113,7 +110,7 @@ extension NearbySession {
 	}
 	
 	@objc func willEnterForeground() {
-		if let app = self.application { self.startup(withRouter: self.messageRouter, application: app) }
+		self.startup(withRouter: self.messageRouter, application: application)
 	}
 	
 	public func locateDevice() {
@@ -145,7 +142,8 @@ extension NearbySession {
 
 extension NearbySession: DeviceLocatorDelegate {
 	func didLocate(device: NearbyDevice) {
-		self.devices[device.peerID.hashValue] = device
+		devices[device.peerID.hashValue] = device
+		messageRouter?.didDiscover(device: device)
 	}
 	
 	func didFailToLocateDevice() {
