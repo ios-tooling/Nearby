@@ -40,6 +40,7 @@
 		B5C8C7E62A3872DE0095788D /* NearbyDevice+MCSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7DA2A3872DE0095788D /* NearbyDevice+MCSessionDelegate.swift */; };
 		B5C8C7E92A3873020095788D /* CrossPlatformKit in Frameworks */ = {isa = PBXBuildFile; productRef = B5C8C7E82A3873020095788D /* CrossPlatformKit */; };
 		B5C8C7EB2A38730E0095788D /* Suite in Frameworks */ = {isa = PBXBuildFile; productRef = B5C8C7EA2A38730E0095788D /* Suite */; };
+		B5C8C7ED2A3873510095788D /* NearbyDevicesHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7EC2A3873510095788D /* NearbyDevicesHUD.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		B5C8C7D82A3872DE0095788D /* NearbyDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyDevice.swift; sourceTree = "<group>"; };
 		B5C8C7D92A3872DE0095788D /* NearbySession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbySession.swift; sourceTree = "<group>"; };
 		B5C8C7DA2A3872DE0095788D /* NearbyDevice+MCSessionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NearbyDevice+MCSessionDelegate.swift"; sourceTree = "<group>"; };
+		B5C8C7EC2A3873510095788D /* NearbyDevicesHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyDevicesHUD.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +180,7 @@
 				B5C8C7D72A3872DE0095788D /* NearbyStatusView.swift */,
 				B5C8C7D82A3872DE0095788D /* NearbyDevice.swift */,
 				B5C8C7D92A3872DE0095788D /* NearbySession.swift */,
+				B5C8C7EC2A3873510095788D /* NearbyDevicesHUD.swift */,
 				B5C8C7DA2A3872DE0095788D /* NearbyDevice+MCSessionDelegate.swift */,
 			);
 			path = Nearby;
@@ -368,6 +371,7 @@
 				B54A9B4F2125B417008E646E /* ViewController.swift in Sources */,
 				B54A9B4D2125B417008E646E /* AppDelegate.swift in Sources */,
 				B5C8C7E32A3872DE0095788D /* NearbyStatusView.swift in Sources */,
+				B5C8C7ED2A3873510095788D /* NearbyDevicesHUD.swift in Sources */,
 				B5C8C7DF2A3872DE0095788D /* NearbyScanner.swift in Sources */,
 				B5C8C7DC2A3872DE0095788D /* MCPeerID+Additions.swift in Sources */,
 				B5C8C7E22A3872DE0095788D /* NearbyMessage.swift in Sources */,

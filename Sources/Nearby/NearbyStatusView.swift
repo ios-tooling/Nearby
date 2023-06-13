@@ -29,7 +29,6 @@ public class NearbyStatusView: UIView {
 		self.reloadButton.frame = CGRect(x: self.bounds.width - size, y: self.bounds.height - size, width: size, height: size)
 		self.addSubview(self.reloadButton)
 		self.reloadButton.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin]
-		self.reloadButton.showsTouchWhenHighlighted = true
 		self.reloadButton.addTarget(self, action: #selector(reloadTapped), for: .touchUpInside)
 		
 		self.configured = true
@@ -94,7 +93,6 @@ extension NearbyStatusView {
 			self.init(type: .custom)
 			self.device = device
 			self.update()
-			self.showsTouchWhenHighlighted = true
 			self.addTarget(self, action: #selector(tapped), for: .touchUpInside)
 			self.layer.borderColor = UIColor.black.cgColor
 			self.layer.cornerRadius = 15
