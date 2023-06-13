@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import CrossPlatformKit
 
 public struct NearbyDevicesHUD: View {
 	@ObservedObject var session = NearbySession.instance
@@ -16,12 +17,21 @@ public struct NearbyDevicesHUD: View {
 	public var body: some View {
 		VStack {
 			ForEach(session.devices.values.sorted()) { device in
-				HStack {
-					Image(systemName: device.imageName)
-					
-					Text(device.idiom)
-					Text(device.displayName)
-				}
+				DeviceRow(device: device)
+			}
+		}
+	}
+	
+	struct DeviceRow: View {
+		@ObservedObject var device: NearbyDevice
+		
+		var body: some View {
+			HStack {
+				Image(systemName: device.imageName)
+					.foregroundColor(Color(uxColor: device.state.color))
+				
+				Text(device.idiom)
+				Text(device.displayName)
 			}
 		}
 	}

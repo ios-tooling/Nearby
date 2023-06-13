@@ -34,6 +34,7 @@ final public class NearbyDevice: NSObject, Comparable {
 		if state == oldValue { return }
 		delegate?.didChangeState(for: self)
 		checkForRSVP(state == .invited)
+		sendChanges()
 	}}
 	
 	var idiom: String = "unknown"
@@ -94,7 +95,7 @@ final public class NearbyDevice: NSObject, Comparable {
 		self.disconnectFromPeers(completion: nil)
 	}
 	
-	func sendChanges() { objectWillChange.send() }
+	func sendChanges() { Task { await MainActor.run { objectWillChange.send() } } }
 	
 	func updateDeviceInfo(from oldValue: [String: String]?) {
 		if isLocalDevice {
