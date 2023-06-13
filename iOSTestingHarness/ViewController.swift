@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Nearby
 
 class ViewController: UIViewController {
 	@IBOutlet var tableView: UITableView!

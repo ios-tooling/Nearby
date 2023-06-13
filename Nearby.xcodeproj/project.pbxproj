@@ -26,38 +26,20 @@
 		B54A9B522125B417008E646E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B54A9B502125B417008E646E /* Main.storyboard */; };
 		B54A9B542125B418008E646E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B54A9B532125B418008E646E /* Assets.xcassets */; };
 		B54A9B572125B418008E646E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B54A9B552125B418008E646E /* LaunchScreen.storyboard */; };
-		B54A9B622125B418008E646E /* iOSTestingHarnessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54A9B612125B418008E646E /* iOSTestingHarnessTests.swift */; };
-		B54A9B6D2125B418008E646E /* iOSTestingHarnessUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54A9B6C2125B418008E646E /* iOSTestingHarnessUITests.swift */; };
-		B54A9B782125B444008E646E /* Nearby.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B504E6461A8968DC001B414B /* Nearby.framework */; };
-		B54A9B7C2125B45B008E646E /* Nearby.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = B504E6461A8968DC001B414B /* Nearby.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B58D64791A898F89005A0002 /* Nearby.h in Headers */ = {isa = PBXBuildFile; fileRef = B58D64681A898F81005A0002 /* Nearby.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B58D64961A899285005A0002 /* Nearby.h in Headers */ = {isa = PBXBuildFile; fileRef = B58D646B1A898F81005A0002 /* Nearby.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B5C8C7A02A365D5E0095788D /* MCPeerID+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7942A365D5E0095788D /* MCPeerID+Additions.swift */; };
-		B5C8C7A12A365D5E0095788D /* MCPeerID+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7942A365D5E0095788D /* MCPeerID+Additions.swift */; };
-		B5C8C7A22A365D5E0095788D /* NearbyMessageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7952A365D5E0095788D /* NearbyMessageRouter.swift */; };
-		B5C8C7A32A365D5E0095788D /* NearbyMessageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7952A365D5E0095788D /* NearbyMessageRouter.swift */; };
-		B5C8C7A42A365D5E0095788D /* String+Bonjour.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7962A365D5E0095788D /* String+Bonjour.swift */; };
-		B5C8C7A52A365D5E0095788D /* String+Bonjour.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7962A365D5E0095788D /* String+Bonjour.swift */; };
-		B5C8C7A62A365D5E0095788D /* NearbyLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7972A365D5E0095788D /* NearbyLogger.swift */; };
-		B5C8C7A72A365D5E0095788D /* NearbyLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7972A365D5E0095788D /* NearbyLogger.swift */; };
-		B5C8C7A82A365D5E0095788D /* NearbyScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7982A365D5E0095788D /* NearbyScanner.swift */; };
-		B5C8C7A92A365D5E0095788D /* NearbyScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7982A365D5E0095788D /* NearbyScanner.swift */; };
-		B5C8C7AA2A365D5E0095788D /* NearbyDevice+Checks.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7992A365D5E0095788D /* NearbyDevice+Checks.swift */; };
-		B5C8C7AB2A365D5E0095788D /* NearbyDevice+Checks.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7992A365D5E0095788D /* NearbyDevice+Checks.swift */; };
-		B5C8C7AC2A365D5E0095788D /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C79A2A365D5E0095788D /* Notifications.swift */; };
-		B5C8C7AD2A365D5E0095788D /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C79A2A365D5E0095788D /* Notifications.swift */; };
-		B5C8C7AE2A365D5E0095788D /* NearbyMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C79B2A365D5E0095788D /* NearbyMessage.swift */; };
-		B5C8C7AF2A365D5E0095788D /* NearbyMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C79B2A365D5E0095788D /* NearbyMessage.swift */; };
-		B5C8C7B02A365D5E0095788D /* NearbyStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C79C2A365D5E0095788D /* NearbyStatusView.swift */; };
-		B5C8C7B12A365D5E0095788D /* NearbyStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C79C2A365D5E0095788D /* NearbyStatusView.swift */; };
-		B5C8C7B22A365D5E0095788D /* NearbyDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C79D2A365D5E0095788D /* NearbyDevice.swift */; };
-		B5C8C7B32A365D5E0095788D /* NearbyDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C79D2A365D5E0095788D /* NearbyDevice.swift */; };
-		B5C8C7B42A365D5E0095788D /* NearbySession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C79E2A365D5E0095788D /* NearbySession.swift */; };
-		B5C8C7B52A365D5E0095788D /* NearbySession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C79E2A365D5E0095788D /* NearbySession.swift */; };
-		B5C8C7B62A365D5E0095788D /* NearbyDevice+MCSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C79F2A365D5E0095788D /* NearbyDevice+MCSessionDelegate.swift */; };
-		B5C8C7B72A365D5E0095788D /* NearbyDevice+MCSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C79F2A365D5E0095788D /* NearbyDevice+MCSessionDelegate.swift */; };
-		B5C8C7BA2A365D770095788D /* CrossPlatformKit in Frameworks */ = {isa = PBXBuildFile; productRef = B5C8C7B92A365D770095788D /* CrossPlatformKit */; };
-		B5C8C7BD2A365DA90095788D /* Suite in Frameworks */ = {isa = PBXBuildFile; productRef = B5C8C7BC2A365DA90095788D /* Suite */; };
+		B5C8C7DB2A3872DE0095788D /* NearbyLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7CF2A3872DE0095788D /* NearbyLogger.swift */; };
+		B5C8C7DC2A3872DE0095788D /* MCPeerID+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7D02A3872DE0095788D /* MCPeerID+Additions.swift */; };
+		B5C8C7DD2A3872DE0095788D /* NearbyMessageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7D12A3872DE0095788D /* NearbyMessageRouter.swift */; };
+		B5C8C7DE2A3872DE0095788D /* String+Bonjour.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7D22A3872DE0095788D /* String+Bonjour.swift */; };
+		B5C8C7DF2A3872DE0095788D /* NearbyScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7D32A3872DE0095788D /* NearbyScanner.swift */; };
+		B5C8C7E02A3872DE0095788D /* NearbyDevice+Checks.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7D42A3872DE0095788D /* NearbyDevice+Checks.swift */; };
+		B5C8C7E12A3872DE0095788D /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7D52A3872DE0095788D /* Notifications.swift */; };
+		B5C8C7E22A3872DE0095788D /* NearbyMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7D62A3872DE0095788D /* NearbyMessage.swift */; };
+		B5C8C7E32A3872DE0095788D /* NearbyStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7D72A3872DE0095788D /* NearbyStatusView.swift */; };
+		B5C8C7E42A3872DE0095788D /* NearbyDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7D82A3872DE0095788D /* NearbyDevice.swift */; };
+		B5C8C7E52A3872DE0095788D /* NearbySession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7D92A3872DE0095788D /* NearbySession.swift */; };
+		B5C8C7E62A3872DE0095788D /* NearbyDevice+MCSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8C7DA2A3872DE0095788D /* NearbyDevice+MCSessionDelegate.swift */; };
+		B5C8C7E92A3873020095788D /* CrossPlatformKit in Frameworks */ = {isa = PBXBuildFile; productRef = B5C8C7E82A3873020095788D /* CrossPlatformKit */; };
+		B5C8C7EB2A38730E0095788D /* Suite in Frameworks */ = {isa = PBXBuildFile; productRef = B5C8C7EA2A38730E0095788D /* Suite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,13 +57,6 @@
 			remoteGlobalIDString = B54A9B492125B417008E646E;
 			remoteInfo = iOSTestingHarness;
 		};
-		B54A9B792125B44E008E646E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B504E60B1A89230F001B414B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B504E6451A8968DC001B414B;
-			remoteInfo = Nearby_iOS;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -91,7 +66,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				B54A9B7C2125B45B008E646E /* Nearby.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -99,13 +73,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		B5026C8621169714009763F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Nearby/iOS/Info.plist; sourceTree = "<group>"; };
-		B5026C8721169714009763F0 /* Nearby.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Nearby.h; path = Nearby/iOS/Nearby.h; sourceTree = "<group>"; };
-		B5026C8821169720009763F0 /* Nearby.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Nearby.h; path = Nearby/Mac/Nearby.h; sourceTree = "<group>"; };
-		B5026C8921169720009763F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Nearby/Mac/Info.plist; sourceTree = "<group>"; };
-		B504E6461A8968DC001B414B /* Nearby.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Nearby.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B504E66A1A896980001B414B /* BuildFramework.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = BuildFramework.sh; path = Nearby/BuildFramework.sh; sourceTree = "<group>"; };
-		B504E6AF1A898110001B414B /* Nearby.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Nearby.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B54A9B4A2125B417008E646E /* iOSTestingHarness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSTestingHarness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B54A9B4C2125B417008E646E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B54A9B4E2125B417008E646E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -114,51 +81,28 @@
 		B54A9B562125B418008E646E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B54A9B582125B418008E646E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B54A9B5D2125B418008E646E /* iOSTestingHarnessTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSTestingHarnessTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B54A9B612125B418008E646E /* iOSTestingHarnessTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSTestingHarnessTests.swift; sourceTree = "<group>"; };
-		B54A9B632125B418008E646E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B54A9B682125B418008E646E /* iOSTestingHarnessUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSTestingHarnessUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B54A9B6C2125B418008E646E /* iOSTestingHarnessUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSTestingHarnessUITests.swift; sourceTree = "<group>"; };
-		B54A9B6E2125B418008E646E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B58D64671A898F81005A0002 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B58D64681A898F81005A0002 /* Nearby.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Nearby.h; sourceTree = "<group>"; };
-		B58D646A1A898F81005A0002 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B58D646B1A898F81005A0002 /* Nearby.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Nearby.h; sourceTree = "<group>"; };
-		B5C8C7942A365D5E0095788D /* MCPeerID+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MCPeerID+Additions.swift"; sourceTree = "<group>"; };
-		B5C8C7952A365D5E0095788D /* NearbyMessageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMessageRouter.swift; sourceTree = "<group>"; };
-		B5C8C7962A365D5E0095788D /* String+Bonjour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Bonjour.swift"; sourceTree = "<group>"; };
-		B5C8C7972A365D5E0095788D /* NearbyLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyLogger.swift; sourceTree = "<group>"; };
-		B5C8C7982A365D5E0095788D /* NearbyScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyScanner.swift; sourceTree = "<group>"; };
-		B5C8C7992A365D5E0095788D /* NearbyDevice+Checks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NearbyDevice+Checks.swift"; sourceTree = "<group>"; };
-		B5C8C79A2A365D5E0095788D /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
-		B5C8C79B2A365D5E0095788D /* NearbyMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMessage.swift; sourceTree = "<group>"; };
-		B5C8C79C2A365D5E0095788D /* NearbyStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyStatusView.swift; sourceTree = "<group>"; };
-		B5C8C79D2A365D5E0095788D /* NearbyDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyDevice.swift; sourceTree = "<group>"; };
-		B5C8C79E2A365D5E0095788D /* NearbySession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbySession.swift; sourceTree = "<group>"; };
-		B5C8C79F2A365D5E0095788D /* NearbyDevice+MCSessionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NearbyDevice+MCSessionDelegate.swift"; sourceTree = "<group>"; };
+		B5C8C7CF2A3872DE0095788D /* NearbyLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyLogger.swift; sourceTree = "<group>"; };
+		B5C8C7D02A3872DE0095788D /* MCPeerID+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MCPeerID+Additions.swift"; sourceTree = "<group>"; };
+		B5C8C7D12A3872DE0095788D /* NearbyMessageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMessageRouter.swift; sourceTree = "<group>"; };
+		B5C8C7D22A3872DE0095788D /* String+Bonjour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Bonjour.swift"; sourceTree = "<group>"; };
+		B5C8C7D32A3872DE0095788D /* NearbyScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyScanner.swift; sourceTree = "<group>"; };
+		B5C8C7D42A3872DE0095788D /* NearbyDevice+Checks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NearbyDevice+Checks.swift"; sourceTree = "<group>"; };
+		B5C8C7D52A3872DE0095788D /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		B5C8C7D62A3872DE0095788D /* NearbyMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMessage.swift; sourceTree = "<group>"; };
+		B5C8C7D72A3872DE0095788D /* NearbyStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyStatusView.swift; sourceTree = "<group>"; };
+		B5C8C7D82A3872DE0095788D /* NearbyDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyDevice.swift; sourceTree = "<group>"; };
+		B5C8C7D92A3872DE0095788D /* NearbySession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbySession.swift; sourceTree = "<group>"; };
+		B5C8C7DA2A3872DE0095788D /* NearbyDevice+MCSessionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NearbyDevice+MCSessionDelegate.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		B504E6421A8968DC001B414B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B5C8C7BA2A365D770095788D /* CrossPlatformKit in Frameworks */,
-				B5C8C7BD2A365DA90095788D /* Suite in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B504E6AB1A898110001B414B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		B54A9B472125B417008E646E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B54A9B782125B444008E646E /* Nearby.framework in Frameworks */,
+				B5C8C7E92A3873020095788D /* CrossPlatformKit in Frameworks */,
+				B5C8C7EB2A38730E0095788D /* Suite in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,23 +127,15 @@
 			isa = PBXGroup;
 			children = (
 				B5C8C7922A365D5E0095788D /* Sources */,
-				B5C047821E7C2D9E00A2BE64 /* iOS */,
-				B504E66A1A896980001B414B /* BuildFramework.sh */,
-				B5C047831E7C2DA500A2BE64 /* Mac */,
-				B58D64661A898F81005A0002 /* Nearby_Mac */,
-				B58D64691A898F81005A0002 /* Nearby_iOS */,
 				B54A9B4B2125B417008E646E /* iOSTestingHarness */,
-				B54A9B602125B418008E646E /* iOSTestingHarnessTests */,
-				B54A9B6B2125B418008E646E /* iOSTestingHarnessUITests */,
 				B504E6141A89230F001B414B /* Products */,
+				B5C8C7E72A3873020095788D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		B504E6141A89230F001B414B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B504E6461A8968DC001B414B /* Nearby.framework */,
-				B504E6AF1A898110001B414B /* Nearby.framework */,
 				B54A9B4A2125B417008E646E /* iOSTestingHarness.app */,
 				B54A9B5D2125B418008E646E /* iOSTestingHarnessTests.xctest */,
 				B54A9B682125B418008E646E /* iOSTestingHarnessUITests.xctest */,
@@ -220,151 +156,43 @@
 			path = iOSTestingHarness;
 			sourceTree = "<group>";
 		};
-		B54A9B602125B418008E646E /* iOSTestingHarnessTests */ = {
-			isa = PBXGroup;
-			children = (
-				B54A9B612125B418008E646E /* iOSTestingHarnessTests.swift */,
-				B54A9B632125B418008E646E /* Info.plist */,
-			);
-			path = iOSTestingHarnessTests;
-			sourceTree = "<group>";
-		};
-		B54A9B6B2125B418008E646E /* iOSTestingHarnessUITests */ = {
-			isa = PBXGroup;
-			children = (
-				B54A9B6C2125B418008E646E /* iOSTestingHarnessUITests.swift */,
-				B54A9B6E2125B418008E646E /* Info.plist */,
-			);
-			path = iOSTestingHarnessUITests;
-			sourceTree = "<group>";
-		};
-		B58D64661A898F81005A0002 /* Nearby_Mac */ = {
-			isa = PBXGroup;
-			children = (
-				B58D64671A898F81005A0002 /* Info.plist */,
-				B58D64681A898F81005A0002 /* Nearby.h */,
-			);
-			name = Nearby_Mac;
-			path = Nearby/Mac;
-			sourceTree = "<group>";
-		};
-		B58D64691A898F81005A0002 /* Nearby_iOS */ = {
-			isa = PBXGroup;
-			children = (
-				B58D646A1A898F81005A0002 /* Info.plist */,
-				B58D646B1A898F81005A0002 /* Nearby.h */,
-			);
-			name = Nearby_iOS;
-			path = Nearby/iOS;
-			sourceTree = "<group>";
-		};
-		B5C047821E7C2D9E00A2BE64 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				B5026C8621169714009763F0 /* Info.plist */,
-				B5026C8721169714009763F0 /* Nearby.h */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		B5C047831E7C2DA500A2BE64 /* Mac */ = {
-			isa = PBXGroup;
-			children = (
-				B5026C8921169720009763F0 /* Info.plist */,
-				B5026C8821169720009763F0 /* Nearby.h */,
-			);
-			name = Mac;
-			sourceTree = "<group>";
-		};
 		B5C8C7922A365D5E0095788D /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				B5C8C7932A365D5E0095788D /* Nearby */,
+				B5C8C7CE2A3872DE0095788D /* Nearby */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
 		};
-		B5C8C7932A365D5E0095788D /* Nearby */ = {
+		B5C8C7CE2A3872DE0095788D /* Nearby */ = {
 			isa = PBXGroup;
 			children = (
-				B5C8C7942A365D5E0095788D /* MCPeerID+Additions.swift */,
-				B5C8C7952A365D5E0095788D /* NearbyMessageRouter.swift */,
-				B5C8C7962A365D5E0095788D /* String+Bonjour.swift */,
-				B5C8C7972A365D5E0095788D /* NearbyLogger.swift */,
-				B5C8C7982A365D5E0095788D /* NearbyScanner.swift */,
-				B5C8C7992A365D5E0095788D /* NearbyDevice+Checks.swift */,
-				B5C8C79A2A365D5E0095788D /* Notifications.swift */,
-				B5C8C79B2A365D5E0095788D /* NearbyMessage.swift */,
-				B5C8C79C2A365D5E0095788D /* NearbyStatusView.swift */,
-				B5C8C79D2A365D5E0095788D /* NearbyDevice.swift */,
-				B5C8C79E2A365D5E0095788D /* NearbySession.swift */,
-				B5C8C79F2A365D5E0095788D /* NearbyDevice+MCSessionDelegate.swift */,
+				B5C8C7CF2A3872DE0095788D /* NearbyLogger.swift */,
+				B5C8C7D02A3872DE0095788D /* MCPeerID+Additions.swift */,
+				B5C8C7D12A3872DE0095788D /* NearbyMessageRouter.swift */,
+				B5C8C7D22A3872DE0095788D /* String+Bonjour.swift */,
+				B5C8C7D32A3872DE0095788D /* NearbyScanner.swift */,
+				B5C8C7D42A3872DE0095788D /* NearbyDevice+Checks.swift */,
+				B5C8C7D52A3872DE0095788D /* Notifications.swift */,
+				B5C8C7D62A3872DE0095788D /* NearbyMessage.swift */,
+				B5C8C7D72A3872DE0095788D /* NearbyStatusView.swift */,
+				B5C8C7D82A3872DE0095788D /* NearbyDevice.swift */,
+				B5C8C7D92A3872DE0095788D /* NearbySession.swift */,
+				B5C8C7DA2A3872DE0095788D /* NearbyDevice+MCSessionDelegate.swift */,
 			);
 			path = Nearby;
 			sourceTree = "<group>";
 		};
+		B5C8C7E72A3873020095788D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		B504E6431A8968DC001B414B /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B58D64961A899285005A0002 /* Nearby.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B504E6AC1A898110001B414B /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B58D64791A898F89005A0002 /* Nearby.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
-		B504E6451A8968DC001B414B /* Nearby_iOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B504E65F1A8968DC001B414B /* Build configuration list for PBXNativeTarget "Nearby_iOS" */;
-			buildPhases = (
-				B504E6411A8968DC001B414B /* Sources */,
-				B504E6421A8968DC001B414B /* Frameworks */,
-				B504E6431A8968DC001B414B /* Headers */,
-				B504E6441A8968DC001B414B /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Nearby_iOS;
-			packageProductDependencies = (
-				B5C8C7B92A365D770095788D /* CrossPlatformKit */,
-				B5C8C7BC2A365DA90095788D /* Suite */,
-			);
-			productName = Nearby;
-			productReference = B504E6461A8968DC001B414B /* Nearby.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		B504E6AE1A898110001B414B /* Nearby_Mac */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B504E6C21A898111001B414B /* Build configuration list for PBXNativeTarget "Nearby_Mac" */;
-			buildPhases = (
-				B504E6AA1A898110001B414B /* Sources */,
-				B504E6AB1A898110001B414B /* Frameworks */,
-				B504E6AC1A898110001B414B /* Headers */,
-				B504E6AD1A898110001B414B /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Nearby_Mac;
-			productName = Nearby_Mac;
-			productReference = B504E6AF1A898110001B414B /* Nearby.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		B54A9B492125B417008E646E /* iOSTestingHarness */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B54A9B6F2125B418008E646E /* Build configuration list for PBXNativeTarget "iOSTestingHarness" */;
@@ -377,9 +205,12 @@
 			buildRules = (
 			);
 			dependencies = (
-				B54A9B7A2125B44E008E646E /* PBXTargetDependency */,
 			);
 			name = iOSTestingHarness;
+			packageProductDependencies = (
+				B5C8C7E82A3873020095788D /* CrossPlatformKit */,
+				B5C8C7EA2A38730E0095788D /* Suite */,
+			);
 			productName = iOSTestingHarness;
 			productReference = B54A9B4A2125B417008E646E /* iOSTestingHarness.app */;
 			productType = "com.apple.product-type.application";
@@ -431,19 +262,9 @@
 				LastUpgradeCheck = 1500;
 				ORGANIZATIONNAME = "Stand Alone, inc.";
 				TargetAttributes = {
-					B504E6451A8968DC001B414B = {
-						CreatedOnToolsVersion = 6.1.1;
-						LastSwiftMigration = 1000;
-					};
 					B504E6661A89690C001B414B = {
 						CreatedOnToolsVersion = 6.1.1;
 						LastSwiftMigration = 0800;
-					};
-					B504E6AE1A898110001B414B = {
-						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = YY6CWUX533;
-						LastSwiftMigration = 0820;
-						ProvisioningStyle = Automatic;
 					};
 					B54A9B492125B417008E646E = {
 						CreatedOnToolsVersion = 10.0;
@@ -481,8 +302,6 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B504E6451A8968DC001B414B /* Nearby_iOS */,
-				B504E6AE1A898110001B414B /* Nearby_Mac */,
 				B504E6661A89690C001B414B /* Combined Framework */,
 				B54A9B492125B417008E646E /* iOSTestingHarness */,
 				B54A9B5C2125B418008E646E /* iOSTestingHarnessTests */,
@@ -492,20 +311,6 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		B504E6441A8968DC001B414B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B504E6AD1A898110001B414B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		B54A9B482125B417008E646E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -549,50 +354,24 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		B504E6411A8968DC001B414B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B5C8C7A42A365D5E0095788D /* String+Bonjour.swift in Sources */,
-				B5C8C7AC2A365D5E0095788D /* Notifications.swift in Sources */,
-				B5C8C7B22A365D5E0095788D /* NearbyDevice.swift in Sources */,
-				B5C8C7B02A365D5E0095788D /* NearbyStatusView.swift in Sources */,
-				B5C8C7AA2A365D5E0095788D /* NearbyDevice+Checks.swift in Sources */,
-				B5C8C7A02A365D5E0095788D /* MCPeerID+Additions.swift in Sources */,
-				B5C8C7B42A365D5E0095788D /* NearbySession.swift in Sources */,
-				B5C8C7AE2A365D5E0095788D /* NearbyMessage.swift in Sources */,
-				B5C8C7A82A365D5E0095788D /* NearbyScanner.swift in Sources */,
-				B5C8C7A22A365D5E0095788D /* NearbyMessageRouter.swift in Sources */,
-				B5C8C7B62A365D5E0095788D /* NearbyDevice+MCSessionDelegate.swift in Sources */,
-				B5C8C7A62A365D5E0095788D /* NearbyLogger.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B504E6AA1A898110001B414B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B5C8C7A52A365D5E0095788D /* String+Bonjour.swift in Sources */,
-				B5C8C7AD2A365D5E0095788D /* Notifications.swift in Sources */,
-				B5C8C7B32A365D5E0095788D /* NearbyDevice.swift in Sources */,
-				B5C8C7B12A365D5E0095788D /* NearbyStatusView.swift in Sources */,
-				B5C8C7AB2A365D5E0095788D /* NearbyDevice+Checks.swift in Sources */,
-				B5C8C7A12A365D5E0095788D /* MCPeerID+Additions.swift in Sources */,
-				B5C8C7B52A365D5E0095788D /* NearbySession.swift in Sources */,
-				B5C8C7AF2A365D5E0095788D /* NearbyMessage.swift in Sources */,
-				B5C8C7A92A365D5E0095788D /* NearbyScanner.swift in Sources */,
-				B5C8C7A32A365D5E0095788D /* NearbyMessageRouter.swift in Sources */,
-				B5C8C7B72A365D5E0095788D /* NearbyDevice+MCSessionDelegate.swift in Sources */,
-				B5C8C7A72A365D5E0095788D /* NearbyLogger.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		B54A9B462125B417008E646E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5C8C7E62A3872DE0095788D /* NearbyDevice+MCSessionDelegate.swift in Sources */,
+				B5C8C7DE2A3872DE0095788D /* String+Bonjour.swift in Sources */,
+				B5C8C7E02A3872DE0095788D /* NearbyDevice+Checks.swift in Sources */,
+				B5C8C7E42A3872DE0095788D /* NearbyDevice.swift in Sources */,
+				B5C8C7DD2A3872DE0095788D /* NearbyMessageRouter.swift in Sources */,
+				B5C8C7E12A3872DE0095788D /* Notifications.swift in Sources */,
+				B5C8C7E52A3872DE0095788D /* NearbySession.swift in Sources */,
 				B54A9B4F2125B417008E646E /* ViewController.swift in Sources */,
 				B54A9B4D2125B417008E646E /* AppDelegate.swift in Sources */,
+				B5C8C7E32A3872DE0095788D /* NearbyStatusView.swift in Sources */,
+				B5C8C7DF2A3872DE0095788D /* NearbyScanner.swift in Sources */,
+				B5C8C7DC2A3872DE0095788D /* MCPeerID+Additions.swift in Sources */,
+				B5C8C7E22A3872DE0095788D /* NearbyMessage.swift in Sources */,
+				B5C8C7DB2A3872DE0095788D /* NearbyLogger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -600,7 +379,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B54A9B622125B418008E646E /* iOSTestingHarnessTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -608,7 +386,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B54A9B6D2125B418008E646E /* iOSTestingHarnessUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -624,11 +401,6 @@
 			isa = PBXTargetDependency;
 			target = B54A9B492125B417008E646E /* iOSTestingHarness */;
 			targetProxy = B54A9B692125B418008E646E /* PBXContainerItemProxy */;
-		};
-		B54A9B7A2125B44E008E646E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B504E6451A8968DC001B414B /* Nearby_iOS */;
-			targetProxy = B54A9B792125B44E008E646E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -766,79 +538,6 @@
 			};
 			name = Release;
 		};
-		B504E6601A8968DC001B414B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_BITCODE = YES;
-				ENABLE_MODULE_VERIFIER = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = Nearby/iOS/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
-				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
-				PRODUCT_BUNDLE_IDENTIFIER = com.standalone.nearby;
-				PRODUCT_NAME = Nearby;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		B504E6611A8968DC001B414B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_BITCODE = YES;
-				ENABLE_MODULE_VERIFIER = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = Nearby/iOS/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
-				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
-				PRODUCT_BUNDLE_IDENTIFIER = com.standalone.nearby;
-				PRODUCT_NAME = Nearby;
-				SKIP_INSTALL = YES;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		B504E6681A89690C001B414B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -850,92 +549,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		B504E6C31A898111001B414B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEAD_CODE_STRIPPING = YES;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = YY6CWUX533;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Frameworks/MacFrameworks",
-				);
-				FRAMEWORK_VERSION = A;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = Nearby/Mac/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
-				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
-				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.standalone.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = Nearby;
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		B504E6C41A898111001B414B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEAD_CODE_STRIPPING = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = YY6CWUX533;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Frameworks/MacFrameworks",
-				);
-				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = Nearby/Mac/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
-				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
-				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.standalone.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = Nearby;
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -1134,29 +747,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B504E65F1A8968DC001B414B /* Build configuration list for PBXNativeTarget "Nearby_iOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B504E6601A8968DC001B414B /* Debug */,
-				B504E6611A8968DC001B414B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		B504E6671A89690C001B414B /* Build configuration list for PBXAggregateTarget "Combined Framework" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B504E6681A89690C001B414B /* Debug */,
 				B504E6691A89690C001B414B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B504E6C21A898111001B414B /* Build configuration list for PBXNativeTarget "Nearby_Mac" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B504E6C31A898111001B414B /* Debug */,
-				B504E6C41A898111001B414B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1210,12 +805,12 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		B5C8C7B92A365D770095788D /* CrossPlatformKit */ = {
+		B5C8C7E82A3873020095788D /* CrossPlatformKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B5C8C7B82A365D770095788D /* XCRemoteSwiftPackageReference "crossplatformkit" */;
 			productName = CrossPlatformKit;
 		};
-		B5C8C7BC2A365DA90095788D /* Suite */ = {
+		B5C8C7EA2A38730E0095788D /* Suite */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B5C8C7BB2A365DA90095788D /* XCRemoteSwiftPackageReference "suite" */;
 			productName = Suite;
