@@ -32,9 +32,9 @@ public extension NearbyDevice {
 
 	var imageName: String {
 		if idiom == "pad" { return "ipad" }
-		if idiom == "watch" { return "watch" }
-		if idiom == "mac" { return "mac" }
-		return "phone"
+		if idiom == "watch" { return "applewatch" }
+		if idiom == "mac" { return "desktopcomputer" }
+		return "iphone"
 	}
 	
 	static func <(lhs: NearbyDevice, rhs: NearbyDevice) -> Bool {
