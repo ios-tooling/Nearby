@@ -11,15 +11,20 @@ import CrossPlatformKit
 
 public struct NearbyDevicesHUD: View {
 	@ObservedObject var session = NearbySession.instance
+	@State var selectedDevice: NearbyDevice?
 	
 	public init() { }
 	
 	public var body: some View {
 		VStack {
 			ForEach(session.devices.values.sorted()) { device in
-				DeviceRow(device: device)
+				Button(action: { selectedDevice = device }) {
+					DeviceRow(device: device)
+				}
+				.buttonStyle(.plain)
 			}
 		}
+		.sheet(item: $selectedDevice) { device in NearbyDeviceDetailsView(device: device) }
 	}
 	
 	struct DeviceRow: View {

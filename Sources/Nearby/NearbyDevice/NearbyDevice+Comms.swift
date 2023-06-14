@@ -22,7 +22,17 @@ extension NearbyDevice {
 	func session(didFinishReceivingResourceWithName resourceName: String, at localURL: URL?, withError error: Error?) {
 	}
 	
-	func disconnectFromPeers(completion: (() -> Void)?) {
+	func connect() {
+		NearbySession.instance.deviceLocator?.reinvite(device: self)
+	}
+	
+	func disconnectFromPeers() async {
+		await withCheckedContinuation { continuation in
+			disconnectFromPeers { continuation.resume() }
+		}
+	}
+	
+	func disconnectFromPeers(completion: (() -> Void)? = nil) {
 		NearbyLogger.instance.log("Disconnecting from peers")
 		#if os(iOS)
 			let taskID = NearbySession.instance.application.beginBackgroundTask {
