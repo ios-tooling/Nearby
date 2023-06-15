@@ -31,6 +31,7 @@ class InternalRouter: NearbyMessageRouter {
 	func route(_ payload: NearbyMessagePayload, from device: NearbyDevice) -> NearbyMessage? {
 		guard let kind = NearbySystemMessage.Kind(rawValue: payload.command) else { return nil }
 		
+		NearbyLogger.instance.log("Handling Internal: \(kind.rawValue)", onlyWhenDebugging: true)
 		do {
 			switch kind {
 			case .ping: NearbyLogger.instance.log("PING")
@@ -51,7 +52,7 @@ class InternalRouter: NearbyMessageRouter {
 
 			return try payload.reconstitute(NearbySystemMessage.self)
 		} catch {
-			NearbyLogger.instance.log("Failed to reconstitute a \(payload.command) message")
+			NearbyLogger.instance.log("Failed to reconstitute a \(payload.command) message: \(error)")
 		}
 		
 		return nil

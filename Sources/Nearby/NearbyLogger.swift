@@ -7,6 +7,7 @@
 
 import Foundation
 import OSLog
+import Suite
 
 public class NearbyLogger {
 	public struct Notifications {
@@ -21,7 +22,8 @@ public class NearbyLogger {
 	public var echo = false
 	
 	
-	public func log(_ string: String) {
+	public func log(_ string: String, onlyWhenDebugging: Bool = false) {
+		if onlyWhenDebugging, !Gestalt.isAttachedToDebugger { return }
 		self.semaphore.wait()
 		logs.append(string)
 		self.semaphore.signal()

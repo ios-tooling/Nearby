@@ -18,6 +18,7 @@ public struct NearbyDeviceDetailsView: View {
 		VStack(alignment: .leading) {
 			Text("State: \(device.state.description)")
 			Text("MCState: \(device.lastReceivedSessionState.description)")
+			Text("PeerID: \(device.session?.myPeerID.description ?? "--")")
 			Divider()
 			
 			if let info = device.discoveryInfo, !info.isEmpty {
@@ -42,16 +43,15 @@ public struct NearbyDeviceDetailsView: View {
 				Divider()
 			}
 				
-			if let connected = device.session?.connectedPeers {
-				Text("Connected Peers").font(.caption)
-				ForEach(connected.indices, id: \.self) { index in
-					Text("\(connected[index].displayName)")
-				}
-				Divider()
-			}
-			
+			Spacer()
 			if device.state == .connected {
 				Button("Disconnect", role: .destructive) { device.disconnectFromPeers() }
+			} else if device.state == .connecting {
+				HStack {
+					Text("Connecting…")
+						.opacity(0.5)
+					ProgressView()
+				}
 			} else {
 				Button("Connect") { device.connect() }
 			}

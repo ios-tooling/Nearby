@@ -23,7 +23,9 @@ extension NearbyDevice {
 	}
 	
 	func connect() {
-		NearbySession.instance.deviceLocator?.reinvite(device: self)
+		if state != .connecting {
+			NearbySession.instance.deviceLocator?.reinvite(device: self)
+		}
 	}
 	
 	func disconnectFromPeers() async {
@@ -33,7 +35,7 @@ extension NearbyDevice {
 	}
 	
 	func disconnectFromPeers(completion: (() -> Void)? = nil) {
-		NearbyLogger.instance.log("Disconnecting from peers")
+		NearbyLogger.instance.log("Disconnecting from peers", onlyWhenDebugging: true)
 		#if os(iOS)
 			let taskID = NearbySession.instance.application.beginBackgroundTask {
 				completion?()
@@ -125,16 +127,17 @@ extension NearbyDevice {
 			return
 		}
 
-		NearbyLogger.instance.log("Sending \(message.command) as a \(type(of: message)) to \(displayName)")
+		NearbyLogger.instance.log("Sending \(message.command) as a \(type(of: message)) to \(displayName)", onlyWhenDebugging: true)
 		let payload = NearbyMessagePayload(message: message)
 		send(payload: payload)
 		completion?()
 	}
 	
 	func send(payload: NearbyMessagePayload?) {
-		guard let data = payload?.payloadData else { return }
+		guard let payload else { return }
+		NearbyLogger.instance.log("Sending \(payload.command) as a \(type(of: payload)) to \(displayName)", onlyWhenDebugging: true)
 		do {
-			try session?.send(data, toPeers: [peerID], with: .reliable)
+			try session?.send(payload.payloadData, toPeers: [peerID], with: .reliable)
 		} catch {
 			NearbyLogger.instance.log("Error \(error) when sending to \(displayName)")
 		}

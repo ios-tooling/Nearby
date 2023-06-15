@@ -91,7 +91,7 @@ extension NearbyScanner: MCNearbyServiceBrowserDelegate {
 			NearbyLogger.instance.log("No discovery info found for \(peerID.displayName)")
 			return
 		}
-		NearbyLogger.instance.log("Found peer: \(peerID.displayName)")
+		NearbyLogger.instance.log("Found peer: \(peerID.displayName)", onlyWhenDebugging: true)
 		let device = NearbySession.instance.device(for: peerID) ?? NearbySession.deviceClass.init(peerID: peerID, info: info)
 		self.delegate.didLocate(device: device)
 		if device.state != .connected && device.state != .invited {
@@ -102,7 +102,7 @@ extension NearbyScanner: MCNearbyServiceBrowserDelegate {
 	}
 	
 	func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
-		NearbyLogger.instance.log("Lost peer: \(peerID.displayName)")
+		NearbyLogger.instance.log("Lost peer: \(peerID.displayName)", onlyWhenDebugging: true)
 		if let device = NearbySession.instance.device(for: peerID) {
 			device.disconnect()
 		}
