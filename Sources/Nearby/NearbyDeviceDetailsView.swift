@@ -29,20 +29,31 @@ public struct NearbyDeviceDetailsView: View {
 					Text("\(key): \(info[key] ?? "--")")
 				}
 				Divider()
+			}
 				
-				if let connected = device.session?.connectedPeers {
-					Text("Connected Peers").font(.caption)
-					ForEach(connected.indices, id: \.self) { index in
-						Text("\(connected[index].displayName)")
-					}
-					Divider()
-				}
+			if let info = device.deviceInfo, !info.isEmpty {
+				Text("Device Info").font(.caption)
 				
-				if device.state == .connected {
-					Button("Disconnect", role: .destructive) { device.disconnectFromPeers() }
-				} else {
-					Button("Connect") { device.connect() }
+				let keys = Array(info.keys)
+				ForEach(keys.indices, id: \.self) { index in
+					let key = keys[index]
+					Text("\(key): \(info[key] ?? "--")")
 				}
+				Divider()
+			}
+				
+			if let connected = device.session?.connectedPeers {
+				Text("Connected Peers").font(.caption)
+				ForEach(connected.indices, id: \.self) { index in
+					Text("\(connected[index].displayName)")
+				}
+				Divider()
+			}
+			
+			if device.state == .connected {
+				Button("Disconnect", role: .destructive) { device.disconnectFromPeers() }
+			} else {
+				Button("Connect") { device.connect() }
 			}
 		}
 		.padding()

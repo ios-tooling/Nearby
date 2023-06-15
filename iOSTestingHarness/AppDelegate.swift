@@ -25,7 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		NotificationCenter.default.addObserver(self, selector: #selector(discoveredDevice), name: NearbyDevice.Notifications.deviceConnectedWithInfo, object: nil)
 		
-		NearbySession.instance.localDeviceInfo = ["Hello": "There"]
 		NearbySession.instance.serviceType = "Nearby-test"
 		NearbySession.instance.startup(application: application)
 		
