@@ -31,11 +31,13 @@ public struct NearbyDevicesHUD: View {
 		@ObservedObject var device: NearbyDevice
 		
 		var body: some View {
-			HStack {
+			HStack(spacing: 2) {
 				Image(systemName: device.imageName)
 					.foregroundColor(Color(uxColor: device.state.color))
+					.padding(.horizontal, 4)
 				
 				Text(device.displayName)
+				if device.isSimulator { Text("[sim]") }
 			}
 		}
 	}

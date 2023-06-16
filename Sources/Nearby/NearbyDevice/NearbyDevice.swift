@@ -37,10 +37,11 @@ final public class NearbyDevice: NSObject, Comparable {
 		sendChanges()
 	}}
 	
-	var idiom: String = "unknown"
-	var isIPad: Bool { return idiom == "pad" }
-	var isIPhone: Bool { return idiom == "phone" }
-	var isMac: Bool { return idiom == "mac" }
+	public var idiom: String = "unknown"
+	public var isIPad: Bool { return idiom == "pad" }
+	public var isIPhone: Bool { return idiom == "phone" }
+	public var isMac: Bool { return idiom == "mac" }
+	public var isSimulator = false
 
 	func updateDiscoveryInfo() {
 		if discoveryInfo == nil {
@@ -55,6 +56,9 @@ final public class NearbyDevice: NSObject, Comparable {
 		if isLocalDevice {
 			discoveryInfo?[Keys.idiom] = idiomString
 		}
+		#if targetEnvironment(simulator)
+			discoveryInfo?[Keys.simulator] = "1"
+		#endif
 	}
 
 	public required init(asLocalDevice: Bool) {
@@ -86,9 +90,8 @@ final public class NearbyDevice: NSObject, Comparable {
 		displayName = NearbySession.instance.uniqueDisplayName(from: peerID.displayName)
 		discoveryInfo = info
 		uniqueID = info[Keys.unique] ?? peerID.displayName
-		if let idiom = info[Keys.idiom] {
-			self.idiom = idiom
-		}
+		if let idiom = info[Keys.idiom] { self.idiom = idiom }
+		if info[Keys.simulator] != nil { self.isSimulator = true }
 		super.init()
 		#if os(iOS)
 			NotificationCenter.default.addObserver(self, selector: #selector(enteredBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
