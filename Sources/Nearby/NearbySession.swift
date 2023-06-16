@@ -33,6 +33,7 @@ public class NearbySession: NSObject {
 	public var application: UXApplication!
 	public var serviceType: String! { didSet { try! serviceType.validateBonjourServiceType() }}
 	public var alwaysRequestInfo = true
+	public var localDeviceName = UIDevice.current.name { didSet { NearbyDevice.localDevice.updateDiscoveryInfo() }}
 	static public var deviceClass = NearbyDevice.self
 
 	public var peerID: MCPeerID { return NearbyDevice.localDevice.peerID }

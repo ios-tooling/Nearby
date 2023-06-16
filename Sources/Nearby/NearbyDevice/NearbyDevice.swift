@@ -19,7 +19,7 @@ final public class NearbyDevice: NSObject, Comparable {
 	public var discoveryInfo: [String: String]?
 	public var deviceInfo: [String: String]? { didSet { updateDeviceInfo(from: oldValue) } }
 
-	public var displayName: String { didSet { sendChanges() }}
+	public var displayName = "" { didSet { sendChanges() }}
 	public weak var delegate: NearbyDeviceDelegate?
 	public let peerID: MCPeerID
 	public let isLocalDevice: Bool
@@ -42,33 +42,42 @@ final public class NearbyDevice: NSObject, Comparable {
 	var isIPhone: Bool { return idiom == "phone" }
 	var isMac: Bool { return idiom == "mac" }
 
+	func updateDiscoveryInfo() {
+		if discoveryInfo == nil {
+			discoveryInfo = [
+				Keys.name: NearbySession.instance.localDeviceName,
+				Keys.unique: uniqueID
+			]
+		} else {
+			discoveryInfo?[Keys.name] = NearbySession.instance.localDeviceName
+		}
+		displayName = NearbySession.instance.localDeviceName
+		if isLocalDevice {
+			discoveryInfo?[Keys.idiom] = idiomString
+		}
+	}
+
 	public required init(asLocalDevice: Bool) {
 		isLocalDevice = asLocalDevice
 		uniqueID = MCPeerID.deviceSerialNumber
-		discoveryInfo = [
-			Keys.name: MCPeerID.deviceName,
-			Keys.unique: uniqueID
-		]
-		
-		if asLocalDevice {
-			#if os(macOS)
-				idiom = "mac"
-				discoveryInfo?[Keys.idiom] = "mac"
-			#endif
-			#if os(iOS)
-				switch UIDevice.current.userInterfaceIdiom {
-				case .phone: idiom = "phone"
-				case .pad: idiom = "pad"
-				case .mac: idiom = "mac"
-				default: idiom = "unknown"
-				}
-				discoveryInfo?[Keys.idiom] = idiom
-			#endif
-		}
 		
 		peerID = MCPeerID.localPeerID
-		displayName = MCPeerID.deviceName
 		super.init()
+		updateDiscoveryInfo()
+	}
+	
+	var idiomString: String {
+		#if os(macOS)
+			return "mac"
+		#endif
+		#if os(iOS)
+			switch UIDevice.current.userInterfaceIdiom {
+			case .phone: return "phone"
+			case .pad: return "pad"
+			case .mac: return "mac"
+			default: return "unknown"
+			}
+		#endif
 	}
 	
 	public required init(peerID: MCPeerID, info: [String: String]) {

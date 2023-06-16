@@ -36,7 +36,7 @@ extension MCPeerID {
 			return id
 		}
 		
-		let peerID = MCPeerID(displayName: Self.deviceName)
+		let peerID = MCPeerID(displayName: NearbySession.instance.localDeviceName)
 		UserDefaults.standard.set(peerID.data, forKey: key)
 		self.cachedLocalPeerID = peerID
 		return peerID

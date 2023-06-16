@@ -35,7 +35,6 @@ public struct NearbyDevicesHUD: View {
 				Image(systemName: device.imageName)
 					.foregroundColor(Color(uxColor: device.state.color))
 				
-				Text(device.idiom)
 				Text(device.displayName)
 			}
 		}
