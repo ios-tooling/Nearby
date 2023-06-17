@@ -49,6 +49,9 @@ public struct NearbyDevicesHUD: View {
 					.padding(.horizontal, 4)
 				
 				Text(device.displayName)
+				if let info = device.deviceInfo, !info.isEmpty {
+					Text("{\(info.count)}")
+				}
 				if device.isSimulator { Text("[sim]") }
 			}
 		}
