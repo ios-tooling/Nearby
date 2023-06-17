@@ -94,9 +94,12 @@ extension NearbyScanner: MCNearbyServiceBrowserDelegate {
 		NearbyLogger.instance.log("Found peer: \(peerID.displayName)", onlyWhenDebugging: true)
 		let device = NearbySession.instance.device(for: peerID) ?? NearbySession.deviceClass.init(peerID: peerID, info: info)
 		self.delegate.didLocate(device: device)
-		if device.state != .connected && device.state != .invited {
+		if device.state != .connected && device.state != .invited && device.state != .connecting {
+			if device.state != .none {
+				device.stopSession()
+			}
+
 			device.state = .found
-			device.stopSession()
 		}
 		device.invite(with: self.browser)
 	}
