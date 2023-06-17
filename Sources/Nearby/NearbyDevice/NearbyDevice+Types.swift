@@ -41,6 +41,11 @@ extension NearbyDevice {
 	
 	public static let localDevice = NearbySession.deviceClass.init(asLocalDevice: true)
 	
+	public var stateColor: UXColor {
+		if state == .connected, deviceInfo.isEmpty { return .green.alpha(0.5) }
+		return state.color
+	}
+	
 	public enum State: Int, Comparable, CustomStringConvertible, Codable { case none, found, invited, connecting, connected, disconnected
 		public var description: String {
 			switch self {

@@ -94,8 +94,6 @@ extension NearbyDevice {
 		defer { Notifications.deviceChangedState.post(with: self) }
 		
 		if self.state == .connected {
-			NearbyDevice.Notifications.deviceConnected.post(with: self)
-			if self.deviceInfo != nil { NearbyDevice.Notifications.deviceConnectedWithInfo.post(with: self) }
 			if NearbySession.instance.alwaysRequestInfo {
 				self.send(message: NearbySystemMessage.DeviceInfo())
 			}

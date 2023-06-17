@@ -45,7 +45,7 @@ public struct NearbyDevicesHUD: View {
 		var body: some View {
 			HStack(spacing: 2) {
 				Image(systemName: device.imageName)
-					.foregroundColor(Color(uxColor: device.state.color))
+					.foregroundColor(Color(uxColor: device.stateColor))
 					.padding(.horizontal, 4)
 				
 				Text(device.displayName)

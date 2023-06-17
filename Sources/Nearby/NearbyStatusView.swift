@@ -133,7 +133,7 @@ extension NearbyStatusView {
 			self.alpha = 1.0
 			self.setTitle("   \(device.displayName)   ", for: .normal)
 			self.setTitleColor(device.state.contrastingColor, for: .normal)
-			self.backgroundColor = device.state.color
+			self.backgroundColor = device.stateColor
 		}
 	}
 }

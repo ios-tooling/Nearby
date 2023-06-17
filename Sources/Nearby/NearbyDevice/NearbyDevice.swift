@@ -26,10 +26,14 @@ final public class NearbyDevice: NSObject, Comparable {
 	public var uniqueID: String
 	
 	public var state: State = .none { didSet {
+		if state == oldValue { return }
+		
 		defer { sendChanges() }
 		if state == .connected {
-			if deviceInfo != nil { NearbyDevice.Notifications.deviceConnectedWithInfo.post(with: self) }
 			NearbyDevice.Notifications.deviceConnected.post(with: self)
+			if deviceInfo != nil { NearbyDevice.Notifications.deviceConnectedWithInfo.post(with: self) }
+		} else if state == .disconnected {
+			NearbyDevice.Notifications.deviceDisconnected.post(with: self)
 		}
 		if state == oldValue { return }
 		delegate?.didChangeState(for: self)

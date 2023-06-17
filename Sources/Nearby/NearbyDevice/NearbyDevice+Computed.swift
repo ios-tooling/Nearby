@@ -19,7 +19,7 @@ extension NearbyDevice: ObservableObject, Identifiable {
 public extension NearbyDevice {
 	var attributedDescription: NSAttributedString {
 		if isLocalDevice { return NSAttributedString(string: "Local Device", attributes: [.foregroundColor: UXColor.black]) }
-		return NSAttributedString(string: displayName, attributes: [.foregroundColor: state.color, .font: UXFont.boldSystemFont(ofSize: 14)])
+		return NSAttributedString(string: displayName, attributes: [.foregroundColor: stateColor, .font: UXFont.boldSystemFont(ofSize: 14)])
 	}
 	
 	override var description: String {
