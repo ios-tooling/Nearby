@@ -39,7 +39,7 @@ public class NearbySession: NSObject {
 	public var peerID: MCPeerID { return NearbyDevice.localDevice.peerID }
 	public var devices: [Int: NearbyDevice] = [:] { didSet { self.sendChanges() }}
 	
-	public var connectedDevices: [NearbyDevice] { return self.devices.values.filter { $0.state == .connected }}
+	public var connectedDevices: [NearbyDevice] { return self.devices.values.filter { $0.state.isConnected }}
 }
 
 extension NearbySession {

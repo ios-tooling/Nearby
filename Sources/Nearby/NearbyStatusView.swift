@@ -118,8 +118,8 @@ extension NearbyStatusView {
 			alert.addAction(UIAlertAction(title: "Send Connected", style: .default, handler: { _ in
 				NearbyDevice.Notifications.deviceConnected.post(with: device)
 			}))
-			alert.addAction(UIAlertAction(title: "Send Connected With Info", style: .default, handler: { _ in
-				NearbyDevice.Notifications.deviceConnectedWithInfo.post(with: device)
+			alert.addAction(UIAlertAction(title: "Send Provisioned", style: .default, handler: { _ in
+				NearbyDevice.Notifications.deviceProvisioned.post(with: device)
 			}))
 
 			(self.superview as? NearbyStatusView)?.parentViewController?.present(alert, animated: true, completion: nil)

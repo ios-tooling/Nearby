@@ -44,7 +44,7 @@ public struct NearbyDeviceDetailsView: View {
 			}
 				
 			Spacer()
-			if device.state == .connected {
+			if device.state.isConnected {
 				Button("Disconnect", role: .destructive) { device.disconnectFromPeers() }
 			} else if device.state == .connecting {
 				HStack {

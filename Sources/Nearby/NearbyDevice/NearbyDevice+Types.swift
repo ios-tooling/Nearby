@@ -15,6 +15,7 @@ extension NearbyDevice {
 		static let name = "name"
 		static let idiom = "idiom"
 		static let unique = "unique"
+		static let device = "device"
 		static let simulator = "sim"
 	}
 }
@@ -34,7 +35,7 @@ extension NearbyDevice {
 	public struct Notifications {
 		public static let deviceChangedState = Notification.Name("device-state-changed")
 		public static let deviceConnected = Notification.Name("device-connected")
-		public static let deviceConnectedWithInfo = Notification.Name("device-connected-with-info")
+		public static let deviceProvisioned = Notification.Name("device-provisioned")
 		public static let deviceDisconnected = Notification.Name("device-disconnected")
 		public static let deviceChangedInfo = Notification.Name("device-changed-info")
 	}
@@ -42,17 +43,17 @@ extension NearbyDevice {
 	public static let localDevice = NearbySession.deviceClass.init(asLocalDevice: true)
 	
 	public var stateColor: UXColor {
-		if state == .connected, deviceInfo.isEmpty { return .green.alpha(0.5) }
-		return state.color
+		state.color
 	}
 	
-	public enum State: Int, Comparable, CustomStringConvertible, Codable { case none, found, invited, connecting, connected, disconnected
+	public enum State: Int, Comparable, CustomStringConvertible, Codable { case none, found, invited, connecting, connected, provisioned, disconnected
 		public var description: String {
 			switch self {
 			case .none: return "None"
 			case .found: return "Found"
 			case .invited: return "Invited"
 			case .connected: return "Connected"
+			case .provisioned: return "Provisioned"
 			case .connecting: return "Connecting"
 			case .disconnected: return "Disconnected"
 			}
@@ -63,15 +64,23 @@ extension NearbyDevice {
 			case .none: return .gray
 			case .found: return .yellow
 			case .invited: return .orange
-			case .connected: return .green
+			case .connected: return .green.alpha(0.25)
+			case .provisioned: return .green
 			case .connecting: return .blue
 			case .disconnected: return .gray
 			}
 		}
 		
+		public var isConnected: Bool {
+			switch self {
+			case .connected, .provisioned: return true
+			default: return false
+			}
+		}
+		
 		public var contrastingColor: UXColor {
 			switch self {
-			case .found, .invited, .connected: return .black
+			case .found, .invited, .connected, .provisioned: return .black
 			default: return .white
 			}
 		}

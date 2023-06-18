@@ -45,7 +45,6 @@ class InternalRouter: NearbyMessageRouter {
 			case .deviceInfo:
 				if let message = try payload.reconstitute(NearbySystemMessage.DeviceInfo.self) {
 					device.deviceInfo = message.deviceInfo
-					DispatchQueue.main.async { device.objectWillChange.send() }
 					return message
 				}
 			}

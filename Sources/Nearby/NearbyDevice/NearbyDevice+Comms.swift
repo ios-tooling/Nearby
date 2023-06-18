@@ -63,7 +63,7 @@ extension NearbyDevice {
 	}
 		
 	func receivedInvitation(from: MCPeerID, withContext context: Data?, handler: @escaping (Bool, MCSession?) -> Void) {
-		self.state = .connected
+		if !self.state.isConnected { self.state = .connected }
 		self.startSession()
 		handler(true, self.session)
 	}
@@ -93,7 +93,7 @@ extension NearbyDevice {
 		self.state = newState
 		defer { Notifications.deviceChangedState.post(with: self) }
 		
-		if self.state == .connected {
+		if self.state.isConnected {
 			if NearbySession.instance.alwaysRequestInfo {
 				self.send(message: NearbySystemMessage.DeviceInfo())
 			}

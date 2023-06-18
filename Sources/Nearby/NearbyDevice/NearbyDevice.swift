@@ -27,15 +27,19 @@ final public class NearbyDevice: NSObject, Comparable {
 	
 	public var state: State = .none { didSet {
 		if state == oldValue { return }
-		
-		defer { sendChanges() }
-		if state == .connected {
+		switch state {
+		case .connected:
 			NearbyDevice.Notifications.deviceConnected.post(with: self)
-			if deviceInfo != nil { NearbyDevice.Notifications.deviceConnectedWithInfo.post(with: self) }
-		} else if state == .disconnected {
+
+		case .provisioned:
+			NearbyDevice.Notifications.deviceProvisioned.post(with: self)
+
+		case .disconnected:
 			NearbyDevice.Notifications.deviceDisconnected.post(with: self)
+
+		default: break
 		}
-		if state == oldValue { return }
+		
 		delegate?.didChangeState(for: self)
 		checkForRSVP(state == .invited)
 		sendChanges()
@@ -50,6 +54,7 @@ final public class NearbyDevice: NSObject, Comparable {
 	func updateDiscoveryInfo() {
 		if discoveryInfo == nil {
 			discoveryInfo = [
+				Keys.device: Gestalt.rawDeviceType,
 				Keys.name: NearbySession.instance.localDeviceName,
 				Keys.unique: uniqueID
 			]
@@ -114,14 +119,14 @@ final public class NearbyDevice: NSObject, Comparable {
 	func sendChanges() { Task { await MainActor.run { objectWillChange.send() } } }
 	
 	func updateDeviceInfo(from oldValue: [String: String]?) {
-		if isLocalDevice {
+		guard !isLocalDevice else {
 			NearbySession.instance.localDeviceInfo = deviceInfo ?? [:]
 			return
 		}
+		
+		self.state = .provisioned
 		if oldValue == nil {
 			delegate?.didReceiveFirstInfo(from: self)
-			NearbyDevice.Notifications.deviceConnectedWithInfo.post(with: self)
-			NearbyDevice.Notifications.deviceChangedInfo.post(with: self)
 		} else if deviceInfo != oldValue {
 			delegate?.didChangeInfo(from: self)
 			NearbyDevice.Notifications.deviceChangedInfo.post(with: self)
