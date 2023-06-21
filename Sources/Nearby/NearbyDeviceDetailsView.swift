@@ -19,6 +19,10 @@ public struct NearbyDeviceDetailsView: View {
 			Text("State: \(device.state.description)")
 			Text("MCState: \(device.lastReceivedSessionState.description)")
 			Text("PeerID: \(device.session?.myPeerID.description ?? "--")")
+			Text("Last seen at: \(device.lastSeenAt.localTimeString(date: .none))")
+			if let lastConnectedAt = device.lastConnectedAt {
+				Text("Last connected at: \(lastConnectedAt.localTimeString(date: .none))")
+			}
 			Divider()
 			
 			if let info = device.discoveryInfo, !info.isEmpty {
