@@ -11,19 +11,19 @@ import MultipeerConnectivity
 extension NearbyDevice {
 	func checkForRSVP(_ start: Bool) {
 		if !start {
-			self.rsvpCheckTimer?.invalidate()
+			rsvpCheckTimer?.invalidate()
 			return
 		}
 		
-		if self.rsvpCheckTimer != nil { return }
+		if rsvpCheckTimer != nil { return }
 		DispatchQueue.main.async {
 			self.rsvpCheckTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(NearbyDevice.checkRSVPStatus), userInfo: nil, repeats: true)
 		}
 	}
 	
 	@objc func checkRSVPStatus() {
-		if self.session?.connectedPeers.contains(self.peerID) == true {
-			self.state = .connected
+		if session?.connectedPeers.contains(peerID) == true {
+			state = .connected
 		}
 	}
 }

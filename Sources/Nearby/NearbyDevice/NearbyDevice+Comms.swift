@@ -65,6 +65,7 @@ extension NearbyDevice {
 	func receivedInvitation(from: MCPeerID, withContext context: Data?, handler: @escaping (Bool, MCSession?) -> Void) {
 		if !self.state.isConnected { self.state = .connected }
 		self.startSession()
+		lastSeenAt = Date()
 		handler(true, self.session)
 	}
 	
@@ -75,8 +76,10 @@ extension NearbyDevice {
 		
 		switch state {
 		case .connected:
+			lastSeenAt = Date()
 			newState = .connected
 		case .connecting:
+			lastSeenAt = Date()
 			newState = .connecting
 			self.startSession()
 		case .notConnected:

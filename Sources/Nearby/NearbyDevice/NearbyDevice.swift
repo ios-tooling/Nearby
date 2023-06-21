@@ -24,11 +24,15 @@ final public class NearbyDevice: NSObject, Comparable {
 	public let peerID: MCPeerID
 	public let isLocalDevice: Bool
 	public var uniqueID: String
+	public var lastSeenAt = Date()
+	public var lastConnectedAt: Date?
 	
 	public var state: State = .none { didSet {
 		if state == oldValue { return }
+		
 		switch state {
 		case .connected:
+			lastConnectedAt = Date()
 			NearbyDevice.Notifications.deviceConnected.post(with: self)
 
 		case .provisioned:
