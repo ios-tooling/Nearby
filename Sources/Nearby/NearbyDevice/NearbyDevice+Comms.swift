@@ -22,12 +22,6 @@ extension NearbyDevice {
 	func session(didFinishReceivingResourceWithName resourceName: String, at localURL: URL?, withError error: Error?) {
 	}
 	
-	func connect() {
-		if state != .connecting {
-			NearbySession.instance.deviceLocator?.reinvite(device: self)
-		}
-	}
-	
 	func disconnectFromPeers() async {
 		await withCheckedContinuation { continuation in
 			disconnectFromPeers { continuation.resume() }
@@ -63,10 +57,10 @@ extension NearbyDevice {
 	}
 		
 	func receivedInvitation(from: MCPeerID, withContext context: Data?, handler: @escaping (Bool, MCSession?) -> Void) {
-		if !self.state.isConnected { self.state = .connected }
-		self.startSession()
+		if !state.isConnected, state != .provisioned { state = .connected }
+		startSession()
 		lastSeenAt = Date()
-		handler(true, self.session)
+		handler(true, session)
 	}
 	
 	func session(didChange state: MCSessionState) {
@@ -97,9 +91,7 @@ extension NearbyDevice {
 		defer { Notifications.deviceChangedState.post(with: self) }
 		
 		if self.state.isConnected {
-			if NearbySession.instance.alwaysRequestInfo {
-				self.send(message: NearbySystemMessage.DeviceInfo())
-			}
+			if NearbySession.instance.alwaysRequestInfo { sendInfo() }
 			return
 		} else if self.state == .connecting {
 			self.startSession()
@@ -161,6 +153,12 @@ extension NearbyDevice {
 		}
 	}
 	
+	func connect() {
+		if state != .connecting {
+			NearbySession.instance.deviceLocator?.reinvite(device: self)
+		}
+	}
+	
 	public func disconnect() {
 		self.state = .none
 		Notifications.deviceDisconnected.post(with: self)
@@ -171,6 +169,7 @@ extension NearbyDevice {
 		NearbyLogger.instance.log("Stopping: \(self.session == nil ? "nothing" : "session")")
 		self.session?.disconnect()
 		self.session = nil
+		self.state = .disconnected
 	}
 	
 	func startSession() {

@@ -13,9 +13,10 @@ public protocol NearbyMessage: AnyObject, Codable {
 }
 
 public class NearbySystemMessage: NearbyMessage {
-	public enum Kind: String, Codable { case ping = "*system-ping*", disconnect = "*system-disconnect*", deviceInfo = "*device-info*", dictionary = "*dictionary*" }
+	public enum Kind: String, Codable { case ping = "*system-ping*", disconnect = "*system-disconnect*", requestDeviceInfo = "*request-device-info*", deviceInfo = "*device-info*", dictionary = "*dictionary*" }
 	
 	public static var ping: NearbySystemMessage = NearbySystemMessage(kind: Kind.ping)
+	public static var requestDeviceInfo: NearbySystemMessage = NearbySystemMessage(kind: Kind.requestDeviceInfo)
 	public static var disconnect: NearbySystemMessage = NearbySystemMessage(kind: Kind.disconnect)
 
 	public var kind: Kind

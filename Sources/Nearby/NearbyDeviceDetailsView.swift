@@ -48,16 +48,28 @@ public struct NearbyDeviceDetailsView: View {
 			}
 				
 			Spacer()
-			if device.state.isConnected {
-				Button("Disconnect", role: .destructive) { device.disconnectFromPeers() }
-			} else if device.state == .connecting {
-				HStack {
-					Text("Connecting…")
-						.opacity(0.5)
-					ProgressView()
+			HStack {
+				if device.state.isConnected {
+					Button("Disconnect", role: .destructive) { device.disconnectFromPeers() }
+						.padding()
+				} else if device.state == .connecting {
+					HStack {
+						Text("Connecting…")
+							.opacity(0.5)
+						ProgressView()
+					}
+				} else {
+					Button("Connect") { device.connect() }
+						.padding()
 				}
-			} else {
-				Button("Connect") { device.connect() }
+			
+				Spacer()
+				
+				if device.state.isConnected {
+					Button("Refresh Info") { device.requestInfo() }
+						.padding()
+				}
+				
 			}
 		}
 		.padding()

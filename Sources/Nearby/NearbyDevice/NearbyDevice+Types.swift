@@ -48,6 +48,13 @@ extension NearbyDevice {
 	
 	public enum State: Int, Comparable, CustomStringConvertible, Codable { case none, found, invited, connecting, connected, provisioned, disconnected
 		
+		public var canConnect: Bool {
+			switch self {
+			case .none, .found, .disconnected: return true
+			default: return false
+			}
+		}
+		
 		public var description: String {
 			switch self {
 			case .none: return "None"

@@ -13,7 +13,8 @@ import SwiftUI
 
 final public class NearbyDevice: NSObject, Comparable {
 	public var session: MCSession?
-	public let invitationTimeout: TimeInterval = 30.0
+	public var invitationTimeout: TimeInterval = 30.0
+	public var infoReRequestDelay: TimeInterval = 5.0
 	weak var rsvpCheckTimer: Timer?
 	public var lastReceivedSessionState = MCSessionState.connected
 	public var discoveryInfo: [String: String]?
@@ -26,19 +27,20 @@ final public class NearbyDevice: NSObject, Comparable {
 	public var uniqueID: String
 	public var lastSeenAt = Date()
 	public var lastConnectedAt: Date?
+	public weak var infoRequestTimer: Timer?
 	
 	public var state: State = .none { didSet {
 		if state == oldValue { return }
 		
 		switch state {
 		case .connected:
-			lastConnectedAt = Date()
-			NearbyDevice.Notifications.deviceConnected.post(with: self)
+			didConnect()
 
 		case .provisioned:
 			NearbyDevice.Notifications.deviceProvisioned.post(with: self)
 
 		case .disconnected:
+			clearInfoRequestTimer()
 			NearbyDevice.Notifications.deviceDisconnected.post(with: self)
 
 		default: break
@@ -115,12 +117,36 @@ final public class NearbyDevice: NSObject, Comparable {
 	static func ==(lhs: NearbyDevice, rhs: NearbyDevice) -> Bool {
 		return lhs.peerID == rhs.peerID
 	}
+	
+	public func sendInfo() { send(message: NearbySystemMessage.DeviceInfo()) }
+	public func requestInfo() { send(message: NearbySystemMessage.requestDeviceInfo) }
 
 	@objc func enteredBackground() {
 		self.disconnectFromPeers(completion: nil)
 	}
 	
 	func sendChanges() { Task { await MainActor.run { objectWillChange.send() } } }
+	
+	func didConnect() {
+		lastConnectedAt = Date()
+		NearbyDevice.Notifications.deviceConnected.post(with: self)
+		if NearbySession.instance.alwaysRequestInfo { setupInfoRequestTimer() }
+	}
+	
+	func clearInfoRequestTimer() {
+		infoRequestTimer?.invalidate()
+		infoRequestTimer = nil
+	}
+	
+	func setupInfoRequestTimer() {
+		clearInfoRequestTimer()
+		if state != .connected { return }
+		
+		infoRequestTimer = Timer.scheduledTimer(withTimeInterval: infoReRequestDelay, repeats: false) { _ in
+			self.requestInfo()
+			self.setupInfoRequestTimer()
+		}
+	}
 	
 	func updateDeviceInfo(from oldValue: [String: String]?) {
 		guard !isLocalDevice else {

@@ -41,7 +41,10 @@ class InternalRouter: NearbyMessageRouter {
 					NearbySession.instance.messageRouter?.received(dictionary: message.info, from: device)
 					return message
 				}
-				
+			
+			case .requestDeviceInfo:
+				device.sendInfo()
+
 			case .deviceInfo:
 				if let message = try payload.reconstitute(NearbySystemMessage.DeviceInfo.self) {
 					device.deviceInfo = message.deviceInfo

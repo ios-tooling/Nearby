@@ -22,7 +22,7 @@ extension NearbyDevice {
 	}
 	
 	@objc func checkRSVPStatus() {
-		if session?.connectedPeers.contains(peerID) == true {
+		if session?.connectedPeers.contains(peerID) == true, state != .provisioned {
 			state = .connected
 		}
 	}

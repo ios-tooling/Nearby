@@ -61,7 +61,7 @@ extension NearbyScanner {
 	}
 	
 	func reinvite(device: NearbyDevice) {
-		if device.state < .invited {
+		if device.state.canConnect {
 			device.invite(with: self.browser)
 		}
 	}
@@ -69,6 +69,7 @@ extension NearbyScanner {
 
 extension NearbyScanner: MCNearbyServiceAdvertiserDelegate {
 	func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+		print("Received invitation from \(peerID)")
 		if let device = NearbySession.instance.device(for: peerID) {
 			device.receivedInvitation(from: peerID, withContext: context, handler: invitationHandler)
 		} else if let data = context, let info = try? JSONDecoder().decode([String: String].self, from: data) {
