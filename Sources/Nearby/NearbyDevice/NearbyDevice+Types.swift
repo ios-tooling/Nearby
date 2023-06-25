@@ -15,7 +15,7 @@ extension NearbyDevice {
 		static let name = "name"
 		static let idiom = "idiom"
 		static let unique = "unique"
-		static let device = "device"
+		static let deviceRawType = "device"
 		static let simulator = "sim"
 	}
 }

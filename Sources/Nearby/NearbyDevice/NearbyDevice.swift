@@ -56,11 +56,12 @@ final public class NearbyDevice: NSObject, Comparable {
 	public var isIPhone: Bool { return idiom == "phone" }
 	public var isMac: Bool { return idiom == "mac" }
 	public var isSimulator = false
+	public var deviceRawType: String? { discoveryInfo?[Keys.deviceRawType] }
 
 	func updateDiscoveryInfo() {
 		if discoveryInfo == nil {
 			discoveryInfo = [
-				Keys.device: Gestalt.rawDeviceType,
+				Keys.deviceRawType: Gestalt.simulatedRawDeviceType ?? Gestalt.rawDeviceType,
 				Keys.name: NearbySession.instance.localDeviceName,
 				Keys.unique: uniqueID
 			]

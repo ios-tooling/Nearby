@@ -18,7 +18,7 @@ let package = Package(
     ],
     dependencies: [
 		.package(url: "https://github.com/bengottlieb/crossplatformkit.git", from: "1.0.3"),
-	   .package(url: "https://github.com/bengottlieb/suite.git", from: "1.0.8")
+	   .package(url: "https://github.com/bengottlieb/suite.git", from: "1.0.90")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
