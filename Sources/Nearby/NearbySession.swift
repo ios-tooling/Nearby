@@ -76,6 +76,7 @@ extension NearbySession {
 
 	public func
 	startup(withRouter: NearbyMessageRouter? = nil, application: UXApplication? = nil) {
+		assert(serviceType != nil, "You must set a serviceType first.")
 		try! serviceType.validateBonjourServiceType()
 		
 		if let router = withRouter { self.messageRouter = router }
