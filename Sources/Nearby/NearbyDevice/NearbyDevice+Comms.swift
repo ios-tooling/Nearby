@@ -31,14 +31,15 @@ extension NearbyDevice {
 	func disconnectFromPeers(completion: (() -> Void)? = nil) {
 		NearbyLogger.instance.log("Disconnecting from peers", onlyWhenDebugging: true)
 		#if os(iOS)
-			let taskID = NearbySession.instance.application.beginBackgroundTask {
+			guard let application = NearbySession.instance.application else { return }
+			let taskID = application.beginBackgroundTask {
 				completion?()
 			}
 			self.send(message: NearbySystemMessage.disconnect, completion: {
 				self.stopSession()
 				DispatchQueue.main.asyncAfter(wallDeadline: .now() + 1) {
 					completion?()
-					NearbySession.instance.application.endBackgroundTask(taskID)
+					application.endBackgroundTask(taskID)
 				}
 			})
 		#else

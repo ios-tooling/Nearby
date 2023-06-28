@@ -30,7 +30,7 @@ public class NearbySession: NSObject {
 	public var isActive = false { didSet { self.sendChanges() }}
 	public var useEncryption = false
 	public var messageRouter: NearbyMessageRouter?
-	public var application: UXApplication!
+	public var application: UXApplication?
 	public var serviceType: String! { didSet { try! serviceType.validateBonjourServiceType() }}
 	public var alwaysRequestInfo = true
 	public var localDeviceName = Gestalt.deviceName { didSet { NearbyDevice.localDevice.updateDiscoveryInfo() }}
@@ -83,7 +83,7 @@ extension NearbySession {
 		if let app = application { self.application = app }
 
 		
-		assert(self.application != nil, "You must set a UXApplication before starting a NearbySession.")
+	//	assert(self.application != nil, "You must set a UXApplication before starting a NearbySession.")
 		assert(self.serviceType != nil, "You must set a serviceType before starting a NearbySession.")
 
 		if self.isActive { return }
