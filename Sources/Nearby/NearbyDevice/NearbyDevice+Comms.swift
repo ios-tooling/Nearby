@@ -58,7 +58,9 @@ extension NearbyDevice {
 	}
 		
 	func receivedInvitation(from: MCPeerID, withContext context: Data?, handler: @escaping (Bool, MCSession?) -> Void) {
-		if !state.isConnected, state != .provisioned { state = .connected }
+		if !state.isConnected, state != .provisioned {
+			state = deviceInfo == nil ? .connected : .provisioned
+		}
 		startSession()
 		lastSeenAt = Date()
 		handler(true, session)
@@ -72,15 +74,16 @@ extension NearbyDevice {
 		switch state {
 		case .connected:
 			lastSeenAt = Date()
-			newState = .connected
+			newState = deviceInfo == nil ? .connected : .provisioned
 		case .connecting:
 			lastSeenAt = Date()
 			newState = .connecting
 			self.startSession()
 		case .notConnected:
 			newState = .found
-			self.disconnect()
-			Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in NearbySession.instance.deviceLocator?.reinvite(device: self) }
+			// no longer disconnect if we get a session(:peer:didChangeState:) message
+//			self.disconnect()
+//			Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in NearbySession.instance.deviceLocator?.reinvite(device: self) }
 
 		@unknown default: break
 		}
@@ -154,7 +157,7 @@ extension NearbyDevice {
 		}
 	}
 	
-	func connect() {
+	public func connect() {
 		if state != .connecting {
 			NearbySession.instance.deviceLocator?.reinvite(device: self)
 		}

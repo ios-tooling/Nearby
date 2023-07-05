@@ -70,12 +70,12 @@ extension NearbyDevice {
 		public var color: UXColor {
 			switch self {
 			case .none: return .gray
-			case .found: return .yellow
-			case .invited: return .orange
-			case .connected: return .green.alpha(0.25)
-			case .provisioned: return .green
-			case .connecting: return .blue
-			case .disconnected: return .gray
+			case .disconnected: return .red
+			case .found: return .orange
+			case .invited: return .yellow
+			case .connecting: return .green
+			case .connected: return .blue
+			case .provisioned: return .purple
 			}
 		}
 		

@@ -12,6 +12,7 @@ import Studio
 import SwiftUI
 
 final public class NearbyDevice: NSObject, Comparable {
+	public static var autoReconnect = true
 	public var session: MCSession?
 	public var invitationTimeout: TimeInterval = 30.0
 	public var infoReRequestDelay: TimeInterval = 5.0
@@ -28,10 +29,12 @@ final public class NearbyDevice: NSObject, Comparable {
 	public var lastSeenAt = Date()
 	public var lastConnectedAt: Date?
 	public weak var infoRequestTimer: Timer?
-	
+	var reconnectionTask: Task<Void, Never>?
+	var reconnectionDelay: TimeInterval = 0.5
+
 	public var state: State = .none { didSet {
 		if state == oldValue { return }
-		
+		if state < oldValue, Self.autoReconnect { attemptReconnection() }
 		switch state {
 		case .connected:
 			didConnect()
