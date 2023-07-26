@@ -9,7 +9,7 @@ import Foundation
 
 extension NearbyDevice {
 	func attemptReconnection() {
-		reconnectionDelay *= 1.5
+		reconnectionDelay = min(reconnectionDelay * 1.5, 20)
 		
 		reconnectionTask?.cancel()
 		
