@@ -60,6 +60,7 @@ public struct NearbyDeviceDetailsView: View {
 				}
 				.padding()
 			}
+			
 			HStack {
 				if device.state.isConnected {
 					Button("Disconnect", role: .destructive) { device.disconnectFromPeers() }
@@ -78,9 +79,13 @@ public struct NearbyDeviceDetailsView: View {
 				Spacer()
 				
 				if device.state.isConnected {
-					Button("Refresh Info") { device.requestInfo() }
-						.padding()
+					Button("Refresh Info") {
+						device.requestInfo()
+						device.requestAvatar()
+					}
+					.padding()
 				}
-			}		}
+			}
+		}
 	}
 }

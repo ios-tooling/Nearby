@@ -7,16 +7,18 @@
 //
 
 import Foundation
+import CrossPlatformKit
 
 public protocol NearbyMessage: AnyObject, Codable {
 	var command: String { get }
 }
 
 public class NearbySystemMessage: NearbyMessage {
-	public enum Kind: String, Codable { case ping = "*system-ping*", disconnect = "*system-disconnect*", requestDeviceInfo = "*request-device-info*", deviceInfo = "*device-info*", dictionary = "*dictionary*" }
+	public enum Kind: String, Codable { case ping = "*system-ping*", disconnect = "*system-disconnect*", requestDeviceInfo = "*request-device-info*", deviceInfo = "*device-info*", dictionary = "*dictionary*", requestAvatar = "*request-avatar*", avatar = "*avatar*" }
 	
 	public static var ping: NearbySystemMessage = NearbySystemMessage(kind: Kind.ping)
 	public static var requestDeviceInfo: NearbySystemMessage = NearbySystemMessage(kind: Kind.requestDeviceInfo)
+	public static var requestAvatar: NearbySystemMessage = NearbySystemMessage(kind: Kind.requestAvatar)
 	public static var disconnect: NearbySystemMessage = NearbySystemMessage(kind: Kind.disconnect)
 
 	public var kind: Kind
@@ -50,6 +52,40 @@ extension NearbySystemMessage {
 		}
 	}
 	
+	class Avatar: NearbyMessage {
+		var command: String { return self.kind.rawValue }
+		
+		enum CodableKeys: String, CodingKey { case imageData, name }
+		var image: UXImage?
+		var name: String?
+		
+		func encode(to encoder: Encoder) throws {
+			var container = encoder.container(keyedBy: CodableKeys.self)
+			if let data = image?.pngData() {
+				try container.encode(data, forKey: .imageData)
+			}
+			
+			if let name {
+				try container.encode(name, forKey: .name)
+			}
+		}
+		public var kind = NearbySystemMessage.Kind.avatar
+
+		required init(from decoder: Decoder) throws {
+			let container = try decoder.container(keyedBy: CodableKeys.self)
+			name = try container.decode(String.self, forKey: .name)
+			
+			if let data = try container.decodeIfPresent(Data.self, forKey: .imageData) {
+				image = UXImage(data: data)
+			}
+		}
+		
+		init(name: String?, image: UXImage?) {
+			self.name = name
+			self.image = image
+		}
+	}
+	
 	class DictionaryMessage: NearbyMessage {
 		var command: String { return self.kind.rawValue }
 		public var kind = NearbySystemMessage.Kind.dictionary
@@ -68,7 +104,7 @@ extension NearbySystemMessage {
 	}
 }
 
-public struct NearbyMessagePayload {
+public struct NearbyMessagePayload: CustomStringConvertible {
 	public let identifier: String
 	public let command: String
 	public let className: String
@@ -84,6 +120,14 @@ public struct NearbyMessagePayload {
 			return nil
 		}
 		self.data = data
+	}
+	
+	public var description: String {
+		var result = "\(command): \(identifier) -> \(modulelessClassName)"
+		if let json = data.jsonDictionary {
+			result += "\n\(json.prettyPrinted)"
+		}
+		return result
 	}
 	
 //	public static func reconstitutedClassName() -> String {

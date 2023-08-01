@@ -27,7 +27,7 @@ class InternalRouter: NearbyMessageRouter {
 	func didDiscover(device: NearbyDevice) { }
 	
 	func received(dictionary: [String: String], from device: NearbyDevice) { }
-
+	
 	func route(_ payload: NearbyMessagePayload, from device: NearbyDevice) -> NearbyMessage? {
 		guard let kind = NearbySystemMessage.Kind(rawValue: payload.command) else { return nil }
 		
@@ -44,6 +44,16 @@ class InternalRouter: NearbyMessageRouter {
 			
 			case .requestDeviceInfo:
 				device.sendInfo()
+				
+			case .avatar:
+				if let message = try payload.reconstitute(NearbySystemMessage.Avatar.self) {
+					device.updateAvatar(to: message)
+					return message
+				}
+
+			case .requestAvatar:
+				print("avatar requested")
+				device.sendAvatar()
 
 			case .deviceInfo:
 				if let message = try payload.reconstitute(NearbySystemMessage.DeviceInfo.self) {

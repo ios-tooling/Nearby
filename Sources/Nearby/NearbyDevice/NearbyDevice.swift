@@ -16,6 +16,7 @@ final public class NearbyDevice: NSObject, Comparable {
 	public var session: MCSession?
 	public var invitationTimeout: TimeInterval = 30.0
 	public var infoReRequestDelay: TimeInterval = 5.0
+	public var avatarReRequestDelay: TimeInterval = 10.0
 	weak var rsvpCheckTimer: Timer?
 	public var lastReceivedSessionState = MCSessionState.connected
 	public var discoveryInfo: [String: String]?
@@ -29,6 +30,11 @@ final public class NearbyDevice: NSObject, Comparable {
 	public var lastSeenAt = Date()
 	public var lastConnectedAt: Date?
 	public weak var infoRequestTimer: Timer?
+	public weak var avatarRequestTimer: Timer?
+	public var avatarImage: UXImage?
+	public var avatarName: String?
+	public var lastReceivedAvatarAt: Date?
+	
 	var reconnectionTask: Task<Void, Never>?
 	var reconnectionDelay: TimeInterval = 0.5
 
@@ -44,6 +50,7 @@ final public class NearbyDevice: NSObject, Comparable {
 
 		case .disconnected:
 			clearInfoRequestTimer()
+			clearAvatarRequestTimer()
 			NearbyDevice.Notifications.deviceDisconnected.post(with: self)
 
 		default: break
@@ -124,7 +131,14 @@ final public class NearbyDevice: NSObject, Comparable {
 	
 	public func sendInfo() { send(message: NearbySystemMessage.DeviceInfo()) }
 	public func requestInfo() { send(message: NearbySystemMessage.requestDeviceInfo) }
+	public func requestAvatar() { send(message: NearbySystemMessage.requestAvatar) }
 
+	func sendAvatar() {
+		let message = NearbySystemMessage.Avatar(name: NearbyDevice.localDevice.avatarName, image: NearbyDevice.localDevice.avatarImage)
+		
+		send(message: message)
+	}
+	
 	@objc func enteredBackground() {
 		self.disconnectFromPeers(completion: nil)
 	}
@@ -134,7 +148,12 @@ final public class NearbyDevice: NSObject, Comparable {
 	func didConnect() {
 		lastConnectedAt = Date()
 		NearbyDevice.Notifications.deviceConnected.post(with: self)
-		if NearbySession.instance.alwaysRequestInfo { setupInfoRequestTimer() }
+		if NearbySession.instance.alwaysRequestInfo {
+			DispatchQueue.main.async {
+				self.setupInfoRequestTimer(delay: 0)
+				self.setupAvatarRequestTimer(delay: 0)
+			}
+		}
 	}
 	
 	func clearInfoRequestTimer() {
@@ -142,17 +161,44 @@ final public class NearbyDevice: NSObject, Comparable {
 		infoRequestTimer = nil
 	}
 	
-	func setupInfoRequestTimer() {
+	func clearAvatarRequestTimer() {
+		avatarRequestTimer?.invalidate()
+		avatarRequestTimer = nil
+	}
+	
+	func setupInfoRequestTimer(delay: TimeInterval? = nil) {
 		clearInfoRequestTimer()
 		if state != .connected { return }
 		
-		infoRequestTimer = Timer.scheduledTimer(withTimeInterval: infoReRequestDelay, repeats: false) { _ in
+		infoRequestTimer = Timer.scheduledTimer(withTimeInterval: delay ?? infoReRequestDelay, repeats: false) { _ in
 			self.requestInfo()
 			self.setupInfoRequestTimer()
 		}
 	}
 	
+	func setupAvatarRequestTimer(delay: TimeInterval? = nil) {
+		print("Requesting. delay: \(delay)")
+		clearAvatarRequestTimer()
+		if state != .connected { return }
+		print("Part 2 Requesting. delay: \(delay)")
+
+		avatarRequestTimer = Timer.scheduledTimer(withTimeInterval: max(delay ?? avatarReRequestDelay, 0.001), repeats: false) { _ in
+			self.requestAvatar()
+			self.setupAvatarRequestTimer()
+		}
+	}
+	
+	func updateAvatar(to message: NearbySystemMessage.Avatar) {
+		print("Received avatar image \(message.image?.size ?? .zero) and name \(message.name ?? "--")")
+		avatarImage = message.image
+		avatarName = message.name
+		lastReceivedAvatarAt = Date()
+		sendChanges()
+	}
+	
 	func updateDeviceInfo(from oldValue: [String: String]?) {
+		clearInfoRequestTimer()
+		
 		guard !isLocalDevice else {
 			NearbySession.instance.localDeviceInfo = deviceInfo ?? [:]
 			return
