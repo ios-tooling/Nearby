@@ -58,6 +58,7 @@ extension NearbySystemMessage {
 		enum CodableKeys: String, CodingKey { case imageData, name }
 		var image: UXImage?
 		var name: String?
+		var hash: String? { [name, image?.pngData()].md5 }
 		
 		func encode(to encoder: Encoder) throws {
 			var container = encoder.container(keyedBy: CodableKeys.self)

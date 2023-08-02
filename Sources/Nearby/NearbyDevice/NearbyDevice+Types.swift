@@ -17,6 +17,7 @@ extension NearbyDevice {
 		static let unique = "unique"
 		static let deviceRawType = "device"
 		static let simulator = "sim"
+		static let avatarHash = "avatar"
 	}
 }
 

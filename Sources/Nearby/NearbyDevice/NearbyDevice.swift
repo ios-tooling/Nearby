@@ -86,6 +86,8 @@ final public class NearbyDevice: NSObject, Comparable {
 		} else {
 			discoveryInfo?[Keys.name] = NearbySession.instance.localDeviceName
 		}
+		
+		if let md5 = [avatarName, avatarImage?.pngData()].md5 { discoveryInfo?[Keys.avatarHash] = md5 }
 		displayName = NearbySession.instance.localDeviceName
 		if isLocalDevice {
 			discoveryInfo?[Keys.idiom] = idiomString
@@ -159,7 +161,6 @@ final public class NearbyDevice: NSObject, Comparable {
 		if NearbySession.instance.alwaysRequestInfo {
 			DispatchQueue.main.async {
 				self.setupInfoRequestTimer()
-				if self.lastReceivedAvatarAt == nil { self.setupAvatarRequestTimer() }
 			}
 		}
 	}
@@ -179,25 +180,29 @@ final public class NearbyDevice: NSObject, Comparable {
 		if let date = infoRequestedAt, abs(date.timeIntervalSinceNow) < infoReRequestDelay { return }
 		
 		clearInfoRequestTimer()
-		if state != .connected { return }
-		
+		if !state.isConnected { return }
+
 		infoRequestedAt = Date()
-		infoRequestTimer = Timer.scheduledTimer(withTimeInterval: delay ?? infoReRequestDelay, repeats: false) { _ in
-			self.requestInfo()
-			self.infoRequestedAt = nil
-			self.setupInfoRequestTimer()
+		DispatchQueue.main.async {
+			self.infoRequestTimer = Timer.scheduledTimer(withTimeInterval: delay ?? self.infoReRequestDelay, repeats: false) { _ in
+				self.requestInfo()
+				self.infoRequestedAt = nil
+				self.setupInfoRequestTimer()
+			}
 		}
 	}
 	
 	func setupAvatarRequestTimer(delay: TimeInterval? = nil) {
 		if let date = avatarRequestedAt, abs(date.timeIntervalSinceNow) < avatarReRequestDelay { return }
 		clearAvatarRequestTimer()
-		if state != .connected { return }
-
+		if !state.isConnected { return }
+	
 		avatarRequestedAt = Date()
-		avatarRequestTimer = Timer.scheduledTimer(withTimeInterval: delay ?? avatarReRequestDelay, repeats: false) { _ in
-			self.requestAvatar()
-			self.setupAvatarRequestTimer()
+		DispatchQueue.main.async {
+			self.avatarRequestTimer = Timer.scheduledTimer(withTimeInterval: delay ?? self.avatarReRequestDelay, repeats: false) { _ in
+				self.requestAvatar()
+				self.setupAvatarRequestTimer()
+			}
 		}
 	}
 	
@@ -206,6 +211,7 @@ final public class NearbyDevice: NSObject, Comparable {
 		clearAvatarRequestTimer()
 		avatarImage = message.image
 		avatarName = message.name
+		AvatarCache.instance.store(message)
 		lastReceivedAvatarAt = Date()
 		sendChanges()
 	}
@@ -219,6 +225,12 @@ final public class NearbyDevice: NSObject, Comparable {
 		}
 		
 		self.state = .provisioned
+		if let avatar = AvatarCache.instance.avatarInfo(forHash: deviceInfo?[Keys.avatarHash]) {
+			avatarImage = avatar.image
+			avatarName = avatar.name
+		} else {
+			setupAvatarRequestTimer(delay: 0)
+		}
 		if oldValue == nil {
 			delegate?.didReceiveFirstInfo(from: self)
 		} else if deviceInfo != oldValue {
