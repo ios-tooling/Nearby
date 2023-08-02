@@ -15,8 +15,8 @@ final public class NearbyDevice: NSObject, Comparable {
 	public static var autoReconnect = true
 	public var session: MCSession?
 	public var invitationTimeout: TimeInterval = 30.0
-	public var infoReRequestDelay: TimeInterval = 5.0
-	public var avatarReRequestDelay: TimeInterval = 5.0
+	public var infoReRequestDelay: TimeInterval = 2.0
+	public var avatarReRequestDelay: TimeInterval = 2.0
 	weak var rsvpCheckTimer: Timer?
 	public var lastReceivedSessionState = MCSessionState.connected
 	public var discoveryInfo: [String: String]?
