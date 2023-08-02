@@ -54,6 +54,7 @@ public struct NearbyDevicesHUD: View {
 				.font(.body)
 			}
 			Button("Clear Log") { history.clearHistory() }
+				.font(.body)
 		}
 		.sheet(item: $selectedDevice) { device in NearbyDeviceDetailsView(device: device) }
 	}
