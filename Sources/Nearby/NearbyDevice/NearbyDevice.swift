@@ -190,7 +190,7 @@ final public class NearbyDevice: NSObject, Comparable {
 		if state != .connected { return }
 
 		avatarRequestedAt = Date()
-		avatarRequestTimer = Timer.scheduledTimer(withTimeInterval: max(delay ?? avatarReRequestDelay, 0.001), repeats: false) { _ in
+		avatarRequestTimer = Timer.scheduledTimer(withTimeInterval: max(delay ?? avatarReRequestDelay, 1), repeats: false) { _ in
 			self.requestAvatar()
 			self.setupAvatarRequestTimer()
 		}

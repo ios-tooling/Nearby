@@ -132,7 +132,8 @@ extension NearbyDevice {
 	
 	func send(payload: NearbyMessagePayload?) {
 		guard let payload else { return }
-		NearbyLogger.instance.log("Sending \(payload.command) as a \(type(of: payload)) to \(displayName)", onlyWhenDebugging: true)
+		
+		MessageHistory.instance.record(payload: payload, to: self)
 		do {
 			try session?.send(payload.payloadData, toPeers: [peerID], with: .reliable)
 		} catch {

@@ -31,6 +31,7 @@ class InternalRouter: NearbyMessageRouter {
 	func route(_ payload: NearbyMessagePayload, from device: NearbyDevice) -> NearbyMessage? {
 		guard let kind = NearbySystemMessage.Kind(rawValue: payload.command) else { return nil }
 		
+		MessageHistory.instance.record(payload: payload, from: device)
 		NearbyLogger.instance.log("Handling Internal: \(kind.rawValue)", onlyWhenDebugging: true)
 		do {
 			switch kind {

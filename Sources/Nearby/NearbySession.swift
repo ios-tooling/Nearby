@@ -38,6 +38,9 @@ public class NearbySession: NSObject {
 
 	public var peerID: MCPeerID { return NearbyDevice.localDevice.peerID }
 	public var devices: [Int: NearbyDevice] = [:] { didSet { self.sendChanges() }}
+	public func enableLogging(on: Bool) {
+		MessageHistory.instance.limit = on ? 100 : 0
+	}
 	
 	public var connectedDevices: [NearbyDevice] { return self.devices.values.filter { $0.state.isConnected }}
 }

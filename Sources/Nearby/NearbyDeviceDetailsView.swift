@@ -29,6 +29,7 @@ public struct NearbyDeviceDetailsView: View {
 					Text("MCState: \(device.lastReceivedSessionState.description)")
 					Text("PeerID: \(device.session?.myPeerID.description ?? "--")")
 					Text("Last seen at: \(device.lastSeenAt.localTimeString(date: .none))")
+					Text("Avatar name: \(device.avatarName ?? "--")")
 					Text("Avatar requested at: \(device.avatarRequestedAt?.localTimeString(date: .none) ?? "--")")
 					Text("Avatar received at: \(device.lastReceivedAvatarAt?.localTimeString(date: .none) ?? "--")")
 					if let lastConnectedAt = device.lastConnectedAt {

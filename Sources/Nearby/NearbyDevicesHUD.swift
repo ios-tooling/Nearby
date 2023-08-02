@@ -12,6 +12,7 @@ import CrossPlatformKit
 public struct NearbyDevicesHUD: View {
 	@ObservedObject var session = NearbySession.instance
 	@State var selectedDevice: NearbyDevice?
+	@ObservedObject var history = MessageHistory.instance
 	@AppStorage("show_simulators_in_nearby_hud") var showSimulators = true
 	
 	public init() { }
@@ -34,6 +35,19 @@ public struct NearbyDevicesHUD: View {
 			if areSimulatorsPresent {
 				Toggle("Show Simulators", isOn: $showSimulators.animation())
 					.padding(.horizontal)
+			}
+			
+			ScrollView {
+				VStack {
+					ForEach(history.history) { item in
+						HStack {
+							Text(item.sender.displayName)
+							Text(item.label)
+						}
+						.opacity(item.incoming ? 1 : 0.5)
+					}
+				}
+				.font(.body)
 			}
 		}
 		.sheet(item: $selectedDevice) { device in NearbyDeviceDetailsView(device: device) }
