@@ -55,10 +55,10 @@ extension NearbySystemMessage {
 	class Avatar: NearbyMessage {
 		var command: String { return self.kind.rawValue }
 		
-		enum CodableKeys: String, CodingKey { case imageData, name }
+		enum CodableKeys: String, CodingKey { case imageData, name, hash }
 		var image: UXImage?
 		var name: String?
-		var hash: String? { [name, image?.pngData()].md5 }
+		var hash: String
 		
 		func encode(to encoder: Encoder) throws {
 			var container = encoder.container(keyedBy: CodableKeys.self)
@@ -69,6 +69,8 @@ extension NearbySystemMessage {
 			if let name {
 				try container.encode(name, forKey: .name)
 			}
+			
+			try container.encode(hash, forKey: .hash)
 		}
 		public var kind = NearbySystemMessage.Kind.avatar
 
@@ -79,11 +81,14 @@ extension NearbySystemMessage {
 			if let data = try container.decodeIfPresent(Data.self, forKey: .imageData) {
 				image = UXImage(data: data)
 			}
+			hash = try container.decode(String.self, forKey: .hash)
 		}
 		
-		init(name: String?, image: UXImage?) {
+		init?(name: String?, image: UXImage?) {
 			self.name = name
 			self.image = image
+			guard let hash = [name, image?.pngData()].md5 else { return nil }
+			self.hash = hash
 		}
 	}
 	

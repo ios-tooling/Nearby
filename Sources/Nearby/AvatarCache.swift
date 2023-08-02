@@ -37,14 +37,14 @@ class AvatarCache {
 	}
 	
 	func store(_ message: NearbySystemMessage.Avatar) {
-		guard let hash = message.hash else { return }
+		print("Storing avatar for \(message.hash)")
 		
-		let cache = CachedAvatar(image: message.image, name: message.name, hash: hash)
-		cachedAvatars[hash] = cache
+		let cache = CachedAvatar(image: message.image, name: message.name, hash: message.hash)
+		cachedAvatars[message.hash] = cache
 		
 		do {
 			let data = try JSONEncoder().encode(cache)
-			let url = directory.appendingPathComponent(hash)
+			let url = directory.appendingPathComponent(message.hash)
 			try data.write(to: url)
 		} catch {
 			print("Failed to store avatar info: \(error)")

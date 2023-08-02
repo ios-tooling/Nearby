@@ -39,8 +39,9 @@ final public class NearbyDevice: NSObject, Comparable {
 		if self.isLocalDevice, let avatarImage, (avatarImage.size.height > maxAvatarSize || avatarImage.size.width > maxAvatarSize) {
 			self.avatarImage = avatarImage.resized(to: CGSize(width: maxAvatarSize, height: maxAvatarSize))
 		}
+		if isLocalDevice { updateDiscoveryInfo() }
 	}}
-	public var avatarName: String?
+	public var avatarName: String? { didSet { if isLocalDevice { updateDiscoveryInfo() } }}
 	public var lastReceivedAvatarAt: Date?
 	
 	var reconnectionTask: Task<Void, Never>?
@@ -133,6 +134,11 @@ final public class NearbyDevice: NSObject, Comparable {
 			NotificationCenter.default.addObserver(self, selector: #selector(enteredBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
 		#endif
 		startSession()
+		print("Received discovery info: \(info)")
+		if let avatar = AvatarCache.instance.avatarInfo(forHash: info[Keys.avatarHash]) {
+			avatarImage = avatar.image
+			avatarName = avatar.name
+		}
 	}
 	
 	static func ==(lhs: NearbyDevice, rhs: NearbyDevice) -> Bool {
@@ -144,7 +150,7 @@ final public class NearbyDevice: NSObject, Comparable {
 	public func requestAvatar() { send(message: NearbySystemMessage.requestAvatar) }
 
 	func sendAvatar() {
-		let message = NearbySystemMessage.Avatar(name: NearbyDevice.localDevice.avatarName, image: NearbyDevice.localDevice.avatarImage)
+		guard let message = NearbySystemMessage.Avatar(name: NearbyDevice.localDevice.avatarName, image: NearbyDevice.localDevice.avatarImage) else { return }
 		
 		send(message: message)
 	}
@@ -224,13 +230,8 @@ final public class NearbyDevice: NSObject, Comparable {
 			return
 		}
 		
+		if avatarImage == nil, avatarName == nil { setupAvatarRequestTimer(delay: 0) }
 		self.state = .provisioned
-		if let avatar = AvatarCache.instance.avatarInfo(forHash: deviceInfo?[Keys.avatarHash]) {
-			avatarImage = avatar.image
-			avatarName = avatar.name
-		} else {
-			setupAvatarRequestTimer(delay: 0)
-		}
 		if oldValue == nil {
 			delegate?.didReceiveFirstInfo(from: self)
 		} else if deviceInfo != oldValue {

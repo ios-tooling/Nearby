@@ -40,6 +40,7 @@ public struct NearbyDeviceDetailsView: View {
 					} else {
 						Text("Avatar: \(device.avatarName ?? "--")")
 					}
+					Text("Avatar Hash: \(device.discoveryInfo?[NearbyDevice.Keys.avatarHash] ?? "--")")
 					Text("State: \(device.state.description)")
 					Text("MCState: \(device.lastReceivedSessionState.description)")
 					Text("PeerID: \(device.session?.myPeerID.description ?? "--")")
