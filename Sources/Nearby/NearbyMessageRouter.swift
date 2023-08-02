@@ -31,8 +31,6 @@ class InternalRouter: NearbyMessageRouter {
 	func route(_ payload: NearbyMessagePayload, from device: NearbyDevice) -> NearbyMessage? {
 		guard let kind = NearbySystemMessage.Kind(rawValue: payload.command) else { return nil }
 		
-		MessageHistory.instance.record(payload: payload, from: device)
-		NearbyLogger.instance.log("Handling Internal: \(kind.rawValue)", onlyWhenDebugging: true)
 		do {
 			switch kind {
 			case .ping: NearbyLogger.instance.log("PING")
@@ -44,16 +42,15 @@ class InternalRouter: NearbyMessageRouter {
 				}
 			
 			case .requestDeviceInfo:
-				device.sendInfo()
+				device.sendDeviceInfo()
 				
 			case .avatar:
 				if let message = try payload.reconstitute(NearbySystemMessage.Avatar.self) {
-					device.updateAvatar(to: message)
+					device.avatarReceived(via: message)
 					return message
 				}
 
 			case .requestAvatar:
-				print("avatar requested")
 				device.sendAvatar()
 
 			case .deviceInfo:

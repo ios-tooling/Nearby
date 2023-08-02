@@ -95,7 +95,7 @@ extension NearbyDevice {
 		defer { Notifications.deviceChangedState.post(with: self) }
 		
 		if self.state.isConnected {
-			if NearbySession.instance.alwaysRequestInfo { sendInfo() }
+			if NearbySession.instance.alwaysRequestInfo, self.state == .connected { sendDeviceInfo() }
 			return
 		} else if self.state == .connecting {
 			self.startSession()
@@ -119,7 +119,14 @@ extension NearbyDevice {
 	}
 	
 	public func send<MessageType: NearbyMessage>(message: MessageType, completion: (() -> Void)? = nil) {
-		if isLocalDevice || session == nil {
+		if isLocalDevice {
+			print("Not sending \(message) to local device.")
+			completion?()
+			return
+		}
+		
+		if session == nil {
+			print("Not sending \(message), no session.")
 			completion?()
 			return
 		}
@@ -151,6 +158,8 @@ extension NearbyDevice {
 			return
 		}
 		
+		MessageHistory.instance.record(payload: payload, from: self)
+
 		if let message = InternalRouter.instance.route(payload, from: self) {
 			delegate?.didReceive(message: message, from: self)
 		} else if let message = NearbySession.instance.messageRouter?.route(payload, from: self) {

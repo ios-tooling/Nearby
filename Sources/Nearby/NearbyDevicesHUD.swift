@@ -9,6 +9,14 @@
 import SwiftUI
 import CrossPlatformKit
 
+extension Date {
+	var secondAndNanosecond: String {
+		let components = Calendar.current.dateComponents([.second, .nanosecond], from: self)
+		
+		return String(format: "%02d.%03d", components.second ?? 0, (components.nanosecond ?? 0) / 10_000)
+	}
+}
+
 public struct NearbyDevicesHUD: View {
 	@ObservedObject var session = NearbySession.instance
 	@State var selectedDevice: NearbyDevice?
@@ -40,17 +48,33 @@ public struct NearbyDevicesHUD: View {
 			ScrollView {
 				VStack {
 					ForEach(history.history) { item in
-						HStack {
-							Text(item.sender.displayName)
-							Text(item.label)
-						}
-						.opacity(item.incoming ? 1 : 0.5)
+						HistoryCell(item: item)
 					}
 				}
 				.font(.body)
 			}
+			Button("Clear Log") { history.clearHistory() }
 		}
 		.sheet(item: $selectedDevice) { device in NearbyDeviceDetailsView(device: device) }
+	}
+	
+	struct HistoryCell: View {
+		let item: MessageHistory.RecordedMessage
+		
+		var body: some View {
+			HStack {
+				HStack(spacing: 1) {
+					Image(systemName: item.incoming ? "arrow.down" : "arrow.up")
+					Text(item.date.secondAndNanosecond)
+				}
+				.font(.caption)
+				
+				Text(item.sender.displayName)
+				Text(item.label)
+				Spacer()
+			}
+			.opacity(item.incoming ? 1 : 0.5)
+		}
 	}
 	
 	struct DeviceRow: View {

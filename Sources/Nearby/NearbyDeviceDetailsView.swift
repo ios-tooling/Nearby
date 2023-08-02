@@ -25,6 +25,21 @@ public struct NearbyDeviceDetailsView: View {
 			}
 			ScrollView {
 				VStack {
+					if let avatar = device.avatarImage {
+						HStack {
+							Image(uxImage: avatar)
+								.resizable()
+								.aspectRatio(contentMode: .fit)
+								.frame(height: 120)
+							
+							VStack {
+								Text("\(Int(avatar.size.width)) x \(Int(avatar.size.height))")
+								Text("\(device.avatarName ?? "--")")
+							}
+						}
+					} else {
+						Text("Avatar: \(device.avatarName ?? "--")")
+					}
 					Text("State: \(device.state.description)")
 					Text("MCState: \(device.lastReceivedSessionState.description)")
 					Text("PeerID: \(device.session?.myPeerID.description ?? "--")")
@@ -47,7 +62,7 @@ public struct NearbyDeviceDetailsView: View {
 						}
 						Divider()
 					}
-					
+					Text("Info requested at: \(device.infoRequestedAt?.localTimeString(date: .none) ?? "--")")
 					if let info = device.deviceInfo, !info.isEmpty {
 						Text("Device Info").font(.caption)
 						

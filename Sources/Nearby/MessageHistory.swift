@@ -12,6 +12,7 @@ class MessageHistory: ObservableObject {
 	
 	struct RecordedMessage: Identifiable {
 		let id = UUID()
+		let date = Date()
 		let payload: NearbyMessagePayload
 		let sender: NearbyDevice
 		let incoming: Bool
@@ -22,7 +23,14 @@ class MessageHistory: ObservableObject {
 	var limit = 0
 	var history: [RecordedMessage] = []
 	
+	@MainActor func clearHistory() {
+		history = []
+		objectWillChange.send()
+	}
+	
 	func record(payload: NearbyMessagePayload, from device: NearbyDevice) {
+		NearbyLogger.instance.log("Handling Internal: \(payload.command)", onlyWhenDebugging: true)
+
 		if limit == 0 { return }
 		
 		while history.count >= limit { history.removeFirst() }

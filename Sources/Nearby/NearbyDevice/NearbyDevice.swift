@@ -16,7 +16,7 @@ final public class NearbyDevice: NSObject, Comparable {
 	public var session: MCSession?
 	public var invitationTimeout: TimeInterval = 30.0
 	public var infoReRequestDelay: TimeInterval = 5.0
-	public var avatarReRequestDelay: TimeInterval = 10.0
+	public var avatarReRequestDelay: TimeInterval = 5.0
 	weak var rsvpCheckTimer: Timer?
 	public var lastReceivedSessionState = MCSessionState.connected
 	public var discoveryInfo: [String: String]?
@@ -32,8 +32,9 @@ final public class NearbyDevice: NSObject, Comparable {
 	public weak var infoRequestTimer: Timer?
 	public weak var avatarRequestTimer: Timer?
 	public var avatarRequestedAt: Date?
-	
-	let maxAvatarSize = 400.0
+	public var infoRequestedAt: Date?
+
+	let maxAvatarSize = 200.0
 	public var avatarImage: UXImage? { didSet {
 		if self.isLocalDevice, let avatarImage, (avatarImage.size.height > maxAvatarSize || avatarImage.size.width > maxAvatarSize) {
 			self.avatarImage = avatarImage.resized(to: CGSize(width: maxAvatarSize, height: maxAvatarSize))
@@ -136,7 +137,7 @@ final public class NearbyDevice: NSObject, Comparable {
 		return lhs.peerID == rhs.peerID
 	}
 	
-	public func sendInfo() { send(message: NearbySystemMessage.DeviceInfo()) }
+	public func sendDeviceInfo() { send(message: NearbySystemMessage.DeviceInfo()) }
 	public func requestInfo() { send(message: NearbySystemMessage.requestDeviceInfo) }
 	public func requestAvatar() { send(message: NearbySystemMessage.requestAvatar) }
 
@@ -157,50 +158,54 @@ final public class NearbyDevice: NSObject, Comparable {
 		NearbyDevice.Notifications.deviceConnected.post(with: self)
 		if NearbySession.instance.alwaysRequestInfo {
 			DispatchQueue.main.async {
-				self.setupInfoRequestTimer(delay: 0)
-				self.setupAvatarRequestTimer(delay: 0)
+				self.setupInfoRequestTimer()
+				if self.lastReceivedAvatarAt == nil { self.setupAvatarRequestTimer() }
 			}
 		}
 	}
 	
 	func clearInfoRequestTimer() {
+		infoRequestedAt = nil
 		infoRequestTimer?.invalidate()
 		infoRequestTimer = nil
 	}
 	
 	func clearAvatarRequestTimer() {
-		avatarRequestedAt = nil
 		avatarRequestTimer?.invalidate()
 		avatarRequestTimer = nil
 	}
 	
 	func setupInfoRequestTimer(delay: TimeInterval? = nil) {
+		if let date = infoRequestedAt, abs(date.timeIntervalSinceNow) < infoReRequestDelay { return }
+		
 		clearInfoRequestTimer()
 		if state != .connected { return }
 		
+		infoRequestedAt = Date()
 		infoRequestTimer = Timer.scheduledTimer(withTimeInterval: delay ?? infoReRequestDelay, repeats: false) { _ in
 			self.requestInfo()
+			self.infoRequestedAt = nil
 			self.setupInfoRequestTimer()
 		}
 	}
 	
 	func setupAvatarRequestTimer(delay: TimeInterval? = nil) {
-		if avatarRequestedAt != nil { return }			// pending request
+		if let date = avatarRequestedAt, abs(date.timeIntervalSinceNow) < avatarReRequestDelay { return }
 		clearAvatarRequestTimer()
 		if state != .connected { return }
 
 		avatarRequestedAt = Date()
-		avatarRequestTimer = Timer.scheduledTimer(withTimeInterval: max(delay ?? avatarReRequestDelay, 1), repeats: false) { _ in
+		avatarRequestTimer = Timer.scheduledTimer(withTimeInterval: delay ?? avatarReRequestDelay, repeats: false) { _ in
 			self.requestAvatar()
 			self.setupAvatarRequestTimer()
 		}
 	}
 	
-	func updateAvatar(to message: NearbySystemMessage.Avatar) {
+	func avatarReceived(via message: NearbySystemMessage.Avatar) {
 		print("Received avatar image \(message.image?.size ?? .zero) and name \(message.name ?? "--")")
+		clearAvatarRequestTimer()
 		avatarImage = message.image
 		avatarName = message.name
-		avatarRequestedAt = nil
 		lastReceivedAvatarAt = Date()
 		sendChanges()
 	}
