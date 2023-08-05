@@ -49,9 +49,9 @@ public class NearbySession: NSObject {
 	public var provisionedDevices = NearbyDeviceCollection(filter: .provisioned)
 	
 	func updateCollections(for device: NearbyDevice) {
-		connectedDevices.objectWillChange.send()
-		visibleDevices.objectWillChange.send()
-		provisionedDevices.objectWillChange.send()
+		connectedDevices.update()
+		visibleDevices.update()
+		provisionedDevices.update()
 	}
 }
 
