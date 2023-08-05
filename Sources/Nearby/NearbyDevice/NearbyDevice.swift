@@ -42,7 +42,10 @@ final public class NearbyDevice: NSObject, Comparable {
 		if self.isLocalDevice, let avatarImage, (avatarImage.size.height > maxAvatarSize || avatarImage.size.width > maxAvatarSize) {
 			self.avatarImage = avatarImage.resized(to: CGSize(width: maxAvatarSize, height: maxAvatarSize))
 		}
-		if isLocalDevice { updateDiscoveryInfo() }
+		if isLocalDevice, avatarImage != oldValue {
+			updateDiscoveryInfo()
+			NearbySession.instance.sendToAll(message: NearbySystemMessage.Avatar(name: avatarName, image: avatarImage))
+		}
 	}}
 	public var avatarName: String? { didSet { if isLocalDevice { updateDiscoveryInfo() } }}
 	public var lastReceivedAvatarAt: Date?
