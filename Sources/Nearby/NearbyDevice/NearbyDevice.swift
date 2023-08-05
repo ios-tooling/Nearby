@@ -39,7 +39,7 @@ final public class NearbyDevice: NSObject, Comparable {
 	public var isVisible: Bool {
 		if state == .hidden { return false }
 		guard let disconnectedAt else { return true }
-		return abs(disconnectedAt.timeIntervalSinceNow) < NearbySession.instance.disconnectDisappearInterval 
+		return abs(disconnectedAt.timeIntervalSinceNow) < NearbySession.instance.disconnectDisappearInterval
 	}
 
 	let maxAvatarSize = 200.0
@@ -71,10 +71,12 @@ final public class NearbyDevice: NSObject, Comparable {
 			NearbyDevice.Notifications.deviceProvisioned.post(with: self)
 
 		case .disconnected:
-			disconnectedAt = Date()
-			clearInfoRequestTimer()
-			clearAvatarRequestTimer()
-			NearbyDevice.Notifications.deviceDisconnected.post(with: self)
+			if disconnectedAt == nil {
+				disconnectedAt = Date()
+				clearInfoRequestTimer()
+				clearAvatarRequestTimer()
+				NearbyDevice.Notifications.deviceDisconnected.post(with: self)
+			}
 
 		default: break
 		}

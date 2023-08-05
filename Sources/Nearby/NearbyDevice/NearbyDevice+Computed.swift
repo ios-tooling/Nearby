@@ -23,7 +23,10 @@ public extension NearbyDevice {
 	}
 	
 	override var description: String {
-		var string = displayName
+		var string = "\(displayName) [\(state.description)] "
+		if let disconnectedAt {
+			string += "disconnected at \(disconnectedAt.formatted()) "
+		}
 		if isIPad { string += ", iPad" }
 		if isIPhone { string += ", iPhone" }
 		if isMac { string += ", Mac" }
