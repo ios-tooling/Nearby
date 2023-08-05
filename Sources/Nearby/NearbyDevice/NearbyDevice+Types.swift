@@ -47,11 +47,11 @@ extension NearbyDevice {
 		state.color
 	}
 	
-	public enum State: Int, Comparable, CustomStringConvertible, Codable { case none, found, invited, connecting, connected, provisioned, disconnected
+	public enum State: Int, Comparable, CustomStringConvertible, Codable { case none, found, invited, connecting, connected, provisioned, disconnected, hidden
 		
 		public var canConnect: Bool {
 			switch self {
-			case .none, .found, .disconnected: return true
+			case .none, .found, .disconnected, .hidden: return true
 			default: return false
 			}
 		}
@@ -65,6 +65,7 @@ extension NearbyDevice {
 			case .provisioned: return "Provisioned"
 			case .connecting: return "Connecting"
 			case .disconnected: return "Disconnected"
+			case .hidden: return "Hidden"
 			}
 		}
 		
@@ -77,6 +78,7 @@ extension NearbyDevice {
 			case .connecting: return .green
 			case .connected: return .blue
 			case .provisioned: return .purple
+			case .hidden: return .black
 			}
 		}
 		

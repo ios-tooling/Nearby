@@ -34,14 +34,16 @@ public class NearbySession: NSObject {
 	public var serviceType: String! { didSet { try! serviceType.validateBonjourServiceType() }}
 	public var alwaysRequestInfo = true
 	public var localDeviceName = Gestalt.deviceName { didSet { NearbyDevice.localDevice.updateDiscoveryInfo() }}
+	public var disconnectDisappearInterval: TimeInterval? = 5
 	static public var deviceClass = NearbyDevice.self
 
 	public var peerID: MCPeerID { return NearbyDevice.localDevice.peerID }
-	public var devices: [Int: NearbyDevice] = [:] { didSet { self.sendChanges() }}
+	public private(set) var devices: [Int: NearbyDevice] = [:]
 	public func enableLogging(on: Bool) {
 		MessageHistory.instance.limit = on ? 100 : 0
 	}
 	
+	public var disconnectTimer: Timer?
 	public var connectedDevices: [NearbyDevice] { return self.devices.values.filter { $0.state.isConnected }}
 }
 
@@ -74,6 +76,35 @@ extension NearbySession {
 		shutdown()
 		DispatchQueue.main.async(after: 1.0) {
 			self.startup()
+		}
+	}
+	
+	@MainActor func updateDisconnectTimer() {
+		guard let disconnectDisappearInterval else { return }
+		var minTime = disconnectDisappearInterval + 1
+		
+		for device in devices.values {
+			if device.state != .hidden, let time = device.disconnectedAt?.timeIntervalSinceNow, abs(time) < disconnectDisappearInterval, abs(time) < minTime { minTime = abs(time) }
+		}
+		
+		if minTime < disconnectDisappearInterval {
+			disconnectTimer = Timer.scheduledTimer(withTimeInterval: (disconnectDisappearInterval - minTime) + 1, repeats: false) { _ in
+				self.hideDisconnectedDevices()
+			}
+		}
+	}
+	
+	func hideDisconnectedDevices() {
+		guard let disconnectDisappearInterval else { return }
+
+		for device in devices.values {
+			if device.state != .hidden, let time = device.disconnectedAt?.timeIntervalSinceNow, abs(time) >= disconnectDisappearInterval {
+				device.state = .hidden
+			}
+		}
+		
+		withAnimation {
+			objectWillChange.send()
 		}
 	}
 
@@ -147,8 +178,14 @@ extension NearbySession {
 
 extension NearbySession: DeviceLocatorDelegate {
 	func didLocate(device: NearbyDevice) {
-		devices[device.peerID.hashValue] = device
-		messageRouter?.didDiscover(device: device)
+		DispatchQueue.main.async {
+			self.devices[device.peerID.hashValue] = device
+			self.messageRouter?.didDiscover(device: device)
+
+			withAnimation {
+				self.objectWillChange.send()
+			}
+		}
 	}
 	
 	func didFailToLocateDevice() {

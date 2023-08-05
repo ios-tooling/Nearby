@@ -33,6 +33,9 @@ final public class NearbyDevice: NSObject, Comparable {
 	public weak var avatarRequestTimer: Timer?
 	public var avatarRequestedAt: Date?
 	public var infoRequestedAt: Date?
+	public var disconnectedAt: Date? { didSet {
+		if disconnectedAt != oldValue { Task { @MainActor in NearbySession.instance.updateDisconnectTimer() }} 
+	}}
 
 	let maxAvatarSize = 200.0
 	public var avatarImage: UXImage? { didSet {
@@ -52,12 +55,15 @@ final public class NearbyDevice: NSObject, Comparable {
 		if state < oldValue, Self.autoReconnect { attemptReconnection() }
 		switch state {
 		case .connected:
+			disconnectedAt = nil
 			didConnect()
 
 		case .provisioned:
+			disconnectedAt = nil
 			NearbyDevice.Notifications.deviceProvisioned.post(with: self)
 
 		case .disconnected:
+			disconnectedAt = Date()
 			clearInfoRequestTimer()
 			clearAvatarRequestTimer()
 			NearbyDevice.Notifications.deviceDisconnected.post(with: self)
