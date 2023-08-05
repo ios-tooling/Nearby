@@ -36,6 +36,11 @@ final public class NearbyDevice: NSObject, Comparable {
 	public var disconnectedAt: Date? { didSet {
 		if disconnectedAt != oldValue { Task { @MainActor in NearbySession.instance.updateDisconnectTimer() }} 
 	}}
+	public var isVisible: Bool {
+		if state == .hidden { return false }
+		guard let disconnectedAt else { return true }
+		return abs(disconnectedAt.timeIntervalSinceNow) < NearbySession.instance.disconnectDisappearInterval 
+	}
 
 	let maxAvatarSize = 200.0
 	public var avatarImage: UXImage? { didSet {
@@ -168,7 +173,10 @@ final public class NearbyDevice: NSObject, Comparable {
 		self.disconnectFromPeers(completion: nil)
 	}
 	
-	func sendChanges() { Task { await MainActor.run { objectWillChange.send() } } }
+	func sendChanges() {
+		NearbySession.instance.updateCollections(for: self)
+		Task { await MainActor.run { objectWillChange.send() } }
+	}
 	
 	func didConnect() {
 		lastConnectedAt = Date()

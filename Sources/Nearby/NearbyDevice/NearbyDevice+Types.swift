@@ -47,7 +47,7 @@ extension NearbyDevice {
 		state.color
 	}
 	
-	public enum State: Int, Comparable, CustomStringConvertible, Codable { case none, found, invited, connecting, connected, provisioned, disconnected, hidden
+	public enum State: Int, Comparable, CustomStringConvertible, Codable { case none, hidden, found, invited, connecting, connected, provisioned, disconnected
 		
 		public var canConnect: Bool {
 			switch self {

@@ -44,7 +44,15 @@ public class NearbySession: NSObject {
 	}
 	
 	public var disconnectTimer: Timer?
-	public var connectedDevices: [NearbyDevice] { return self.devices.values.filter { $0.state.isConnected }}
+	public var connectedDevices = NearbyDeviceCollection(filter: .connected)
+	public var visibleDevices = NearbyDeviceCollection { device in device.isVisible }
+	public var provisionedDevices = NearbyDeviceCollection(filter: .provisioned)
+	
+	func updateCollections(for device: NearbyDevice) {
+		connectedDevices.objectWillChange.send()
+		visibleDevices.objectWillChange.send()
+		provisionedDevices.objectWillChange.send()
+	}
 }
 
 extension NearbySession {
@@ -65,7 +73,7 @@ extension NearbySession {
 		guard let message else { return }
 		NearbyLogger.instance.log("Sending \(message.command) as a \(type(of: message)) to all", onlyWhenDebugging: true)
 		let payload = NearbyMessagePayload(message: message)
-		for device in self.connectedDevices {
+		for device in self.connectedDevices.devices {
 			device.send(payload: payload)
 		}
 	}
