@@ -113,7 +113,7 @@ extension NearbyStatusView {
 			message += "State: \(device.state.description)\n"
 			message += "MCState: \(device.lastReceivedSessionState.description)";
 			
-			let alert = UIAlertController(title: device.displayName, message: message, preferredStyle: .alert)
+			let alert = UIAlertController(title: device.name, message: message, preferredStyle: .alert)
 			alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
 			alert.addAction(UIAlertAction(title: "Send Connected", style: .default, handler: { _ in
 				NearbyDevice.Notifications.deviceConnected.post(with: device)
@@ -131,7 +131,7 @@ extension NearbyStatusView {
 				return
 			}
 			self.alpha = 1.0
-			self.setTitle("   \(device.displayName)   ", for: .normal)
+			self.setTitle("   \(device.name)   ", for: .normal)
 			self.setTitleColor(device.state.contrastingColor, for: .normal)
 			self.backgroundColor = device.stateColor
 		}

@@ -39,7 +39,7 @@ class MessageHistory: ObservableObject {
 	}
 	
 	func record(payload: NearbyMessagePayload, to device: NearbyDevice) {
-		NearbyLogger.instance.log("Sending \(payload.command) as a \(type(of: payload)) to \(device.displayName)", onlyWhenDebugging: true)
+		NearbyLogger.instance.log("Sending \(payload.command) as a \(type(of: payload)) to \(device.name)", onlyWhenDebugging: true)
 
 		if limit == 0 { return }
 		

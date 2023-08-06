@@ -112,7 +112,7 @@ extension NearbyDevice {
 			return
 		}
 
-		NearbyLogger.instance.log("Sending dictionary \(dictionary) to \(displayName)")
+		NearbyLogger.instance.log("Sending dictionary \(dictionary) to \(name)")
 		let payload = NearbyMessagePayload(message: NearbySystemMessage.DictionaryMessage(dictionary: dictionary))
 		send(payload: payload)
 		completion?()
@@ -131,7 +131,7 @@ extension NearbyDevice {
 			return
 		}
 
-		NearbyLogger.instance.log("Sending \(message.command) as a \(type(of: message)) to \(displayName)", onlyWhenDebugging: true)
+		NearbyLogger.instance.log("Sending \(message.command) as a \(type(of: message)) to \(name)", onlyWhenDebugging: true)
 		let payload = NearbyMessagePayload(message: message)
 		send(payload: payload)
 		completion?()
@@ -144,7 +144,7 @@ extension NearbyDevice {
 		do {
 			try session?.send(payload.payloadData, toPeers: [peerID], with: .reliable)
 		} catch {
-			NearbyLogger.instance.log("Error \(error) when sending to \(displayName)")
+			NearbyLogger.instance.log("Error \(error) when sending to \(name)")
 		}
 	}
 	 

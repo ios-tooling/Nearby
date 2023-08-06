@@ -22,7 +22,8 @@ final public class NearbyDevice: NSObject, Comparable {
 	public var discoveryInfo: [String: String]?
 	public var deviceInfo: [String: String]? { didSet { updateDeviceInfo(from: oldValue) } }
 
-	public var displayName = "" { didSet { sendChanges() }}
+	public var name = "" { didSet { sendChanges() }}
+	public var displayName: String { avatarName ?? name }
 	public weak var delegate: NearbyDeviceDelegate?
 	public let peerID: MCPeerID
 	public let isLocalDevice: Bool
@@ -47,12 +48,13 @@ final public class NearbyDevice: NSObject, Comparable {
 		if self.isLocalDevice, let avatarImage, (avatarImage.size.height > maxAvatarSize || avatarImage.size.width > maxAvatarSize) {
 			self.avatarImage = avatarImage.resized(to: CGSize(width: maxAvatarSize, height: maxAvatarSize))
 		}
-		if isLocalDevice, avatarImage != oldValue {
+		if isLocalDevice, NearbySession.instance.isActive, avatarImage != oldValue {
 			updateDiscoveryInfo()
 			NearbySession.instance.sendToAll(message: NearbySystemMessage.Avatar(name: avatarName, image: avatarImage))
 		}
 	}}
-	public var avatarName: String? { didSet { if isLocalDevice { updateDiscoveryInfo() } }}
+	public var avatarName: String? { didSet {
+		if NearbySession.instance.isActive, isLocalDevice, oldValue != avatarName { updateDiscoveryInfo() } }}
 	public var lastReceivedAvatarAt: Date?
 	
 	var reconnectionTask: Task<Void, Never>?
@@ -105,7 +107,7 @@ final public class NearbyDevice: NSObject, Comparable {
 		}
 		
 		if let md5 = [avatarName, avatarImage?.pngData()].md5 { discoveryInfo?[Keys.avatarHash] = md5 }
-		displayName = NearbySession.instance.localDeviceName
+		name = NearbySession.instance.localDeviceName
 		if isLocalDevice {
 			discoveryInfo?[Keys.idiom] = idiomString
 		}
@@ -140,7 +142,7 @@ final public class NearbyDevice: NSObject, Comparable {
 	public required init(peerID: MCPeerID, info: [String: String]) {
 		isLocalDevice = false
 		self.peerID = peerID
-		displayName = NearbySession.instance.uniqueDisplayName(from: peerID.displayName)
+		name = NearbySession.instance.uniqueDisplayName(from: peerID.displayName)
 		discoveryInfo = info
 		uniqueID = info[Keys.unique] ?? peerID.displayName
 		if let idiom = info[Keys.idiom] { self.idiom = idiom }
@@ -150,7 +152,7 @@ final public class NearbyDevice: NSObject, Comparable {
 			NotificationCenter.default.addObserver(self, selector: #selector(enteredBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
 		#endif
 		startSession()
-		print("Received discovery info: \(info)")
+		//print("Received discovery info: \(info)")
 		if let avatar = AvatarCache.instance.avatarInfo(forHash: info[Keys.avatarHash]) {
 			avatarImage = avatar.image
 			avatarName = avatar.name

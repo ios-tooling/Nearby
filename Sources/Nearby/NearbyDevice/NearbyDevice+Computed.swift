@@ -19,11 +19,11 @@ extension NearbyDevice: ObservableObject, Identifiable {
 public extension NearbyDevice {
 	var attributedDescription: NSAttributedString {
 		if isLocalDevice { return NSAttributedString(string: "Local Device", attributes: [.foregroundColor: UXColor.black]) }
-		return NSAttributedString(string: displayName, attributes: [.foregroundColor: stateColor, .font: UXFont.boldSystemFont(ofSize: 14)])
+		return NSAttributedString(string: name, attributes: [.foregroundColor: stateColor, .font: UXFont.boldSystemFont(ofSize: 14)])
 	}
 	
 	override var description: String {
-		var string = "\(displayName) [\(state.description)] "
+		var string = "\(name) [\(state.description)] "
 		if let disconnectedAt {
 			string += "disconnected at \(disconnectedAt.formatted()) "
 		}
@@ -40,7 +40,7 @@ public extension NearbyDevice {
 	}
 	
 	static func <(lhs: NearbyDevice, rhs: NearbyDevice) -> Bool {
-		if lhs.displayName != rhs.displayName { return lhs.displayName < rhs.displayName }
+		if lhs.name != rhs.name { return lhs.name < rhs.name }
 		if lhs.idiom != rhs.idiom { return lhs.idiom < rhs.idiom }
 		return lhs.peerID.id < rhs.peerID.id
 	}

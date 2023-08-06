@@ -173,7 +173,7 @@ extension NearbySession {
 		repeat {
 			nameExists = false
 			for device in self.devices.values {
-				if device.displayName == current {
+				if device.name == current {
 					count += 1
 					current = name + " - \(count)"
 					nameExists = true

@@ -70,7 +70,7 @@ public struct NearbyDevicesHUD: View {
 				}
 				.font(.caption)
 				
-				Text(item.sender.displayName)
+				Text(item.sender.name)
 				Text(item.label)
 				Spacer()
 			}
@@ -87,7 +87,7 @@ public struct NearbyDevicesHUD: View {
 					.foregroundColor(Color(uxColor: device.stateColor))
 					.padding(.horizontal, 4)
 				
-				Text(device.displayName)
+				Text(device.name)
 				if let info = device.deviceInfo, !info.isEmpty {
 					Text("{\(info.count)}")
 				}
