@@ -174,7 +174,7 @@ extension NearbyDevice {
 	}
 	
 	public func disconnect() {
-		self.state = .none
+		self.state = .disconnected
 		Notifications.deviceDisconnected.post(with: self)
 		self.stopSession()
 	}

@@ -28,7 +28,6 @@ public extension NearbyDevice {
 			string += "disconnected at \(disconnectedAt.formatted()) "
 		}
 		if isIPad { string += ", iPad" }
-		if isIPhone { string += ", iPhone" }
 		if isMac { string += ", Mac" }
 		return string
 	}

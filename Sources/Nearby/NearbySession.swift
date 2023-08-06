@@ -44,9 +44,9 @@ public class NearbySession: NSObject {
 	}
 	
 	public var disconnectTimer: Timer?
-	public var connectedDevices = NearbyDeviceCollection(filter: .connected)
-	public var visibleDevices = NearbyDeviceCollection { device in device.isVisible }
-	public var provisionedDevices = NearbyDeviceCollection(filter: .provisioned)
+	public var connectedDevices = NearbyDeviceCollection(label: "Connected", filter: .connected)
+	public var visibleDevices = NearbyDeviceCollection(label: "Visible") { device in device.isVisible }
+	public var provisionedDevices = NearbyDeviceCollection(label: "Provisioned", filter: .provisioned)
 	
 	func updateCollections(for device: NearbyDevice) {
 		connectedDevices.update()
