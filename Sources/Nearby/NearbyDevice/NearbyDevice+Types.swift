@@ -24,7 +24,7 @@ extension NearbyDevice {
 extension MCSessionState: CustomStringConvertible {
 	public var description: String {
 		switch self {
-		case .connected: return "*conected*"
+		case .connected: return "*connected*"
 		case .notConnected: return "*notConnected*"
 		case .connecting: return "*connecting*"
 		@unknown default: return "*unknown*"

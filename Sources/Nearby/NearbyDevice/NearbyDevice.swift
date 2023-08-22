@@ -259,5 +259,6 @@ final public class NearbyDevice: NSObject, Comparable {
 			delegate?.didChangeInfo(from: self)
 			NearbyDevice.Notifications.deviceChangedInfo.post(with: self)
 		}
+		objectWillChange.sendOnMain()
 	}
 }
