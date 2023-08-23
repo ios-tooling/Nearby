@@ -36,6 +36,7 @@ public class NearbySession: NSObject {
 	public var localDeviceName = Gestalt.deviceName { didSet { NearbyDevice.localDevice.updateDiscoveryInfo() }}
 	public var disconnectDisappearInterval: TimeInterval? = 5
 	static public var deviceClass = NearbyDevice.self
+	public var expectedStreamDataSize = 1024 * 20
 
 	public var peerID: MCPeerID { return NearbyDevice.localDevice.peerID }
 	public private(set) var devices: [Int: NearbyDevice] = [:]
