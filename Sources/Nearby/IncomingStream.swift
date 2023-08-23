@@ -9,21 +9,19 @@ import Foundation
 
 public class IncomingStream {
 	var stream: InputStream!
-	public var buffers: [[UInt8]]
+	var buffer: [UInt8]
+	var currentChunk: [UInt8]
+	var currentChunkSize = 0
+	var currentChunkRead = 0
 	var totalReceived = 0
 	var bufferReadOffset = 0
 	var bufferWriteOffset = 0
 	var received: (Data) -> Void
 	
-	var bufferIndex = 0
-	var buffer: [UInt8] {
-		get { buffers[bufferIndex] }
-		set { buffers[bufferIndex] = newValue }
-	}
-
 	init(stream: InputStream, size: Int = NearbySession.instance.expectedStreamDataSize, received: @escaping (Data) -> Void) {
 		self.stream = stream
-		buffers = [ [UInt8](repeating: 0, count: size), [UInt8](repeating: 0, count: size) ]
+		buffer = [UInt8](repeating: 0, count: size)
+		currentChunk = [UInt8](repeating: 0, count: size)
 		self.received = received
 	}
 	
@@ -51,35 +49,43 @@ public class IncomingStream {
 			bufferWriteOffset += batchCount
 			total += batchCount
 			
-			let currentChunkSize = buffer.withUnsafeBytes { bytes in
-				bytes.load(fromByteOffset: bufferReadOffset, as: UInt32.self)
+			while true {
+				if currentChunkSize == 0 {
+					currentChunkSize = Int(buffer.withUnsafeBytes { bytes in
+						bytes.load(fromByteOffset: bufferReadOffset, as: UInt32.self)
+					}.bigEndian)
+					currentChunkRead = 0
+					bufferReadOffset += 4
+				}
+				
+				let availableBytes = bufferWriteOffset - bufferReadOffset
+				while availableBytes > currentChunk.count - currentChunkRead {
+					currentChunk += [UInt8](repeating: 0, count: currentChunk.count)
+				}
+				
+				let bytesAvailable = bufferWriteOffset - bufferReadOffset
+				let bytesToCopy = min(bytesAvailable, currentChunkSize - currentChunkRead)
+				for i in 0..<bytesToCopy {
+					currentChunk[currentChunkRead + i] = buffer[bufferReadOffset + i]
+				}
+
+				bufferReadOffset += bytesToCopy
+				currentChunkRead += bytesToCopy
+				
+				if currentChunkRead == currentChunkSize {
+					let data = Data(bytesNoCopy: &currentChunk, count: currentChunkSize, deallocator: .none)
+
+					received(data)
+					currentChunkSize = 0
+					currentChunkRead = 0
+				} else { break }
 			}
 			
-			if bufferWriteOffset >= (currentChunkSize + 4) {			// we've gotten enough data to read a chunk in
-				let data = Data(bytesNoCopy: &buffer[bufferReadOffset + 4], count: Int(currentChunkSize), deallocator: .none)
-				received(data)
-				bufferReadOffset += Int(currentChunkSize + 4)
-				swapBuffers()
-			}
-		}
+			bufferReadOffset = 0
+			bufferWriteOffset = 0
 
+		}
 		totalReceived += total
 		return total
-	}
-	
-	func swapBuffers() {
-		if bufferIndex == 0 {		// move the rest of 0 into the beginning of 1
-			for i in bufferReadOffset..<bufferWriteOffset {
-				buffers[1][i - bufferReadOffset] = buffers[0][i]
-			}
-		} else {
-			for i in bufferReadOffset..<bufferWriteOffset {
-				buffers[0][i - bufferReadOffset] = buffers[1][i]
-			}
-		}
-		
-		bufferWriteOffset -= bufferReadOffset
-		bufferReadOffset = 0
-		bufferIndex = bufferIndex == 1 ? 0 : 1
 	}
 }
