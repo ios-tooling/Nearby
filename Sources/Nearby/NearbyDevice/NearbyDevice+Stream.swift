@@ -11,20 +11,10 @@ import CrossPlatformKit
 import Studio
 
 extension NearbyDevice: StreamDelegate {
-	func handleIncomingStreamedData() {
-		
-	}
-	
 	public func stream(_ aStream: Stream, handle eventCode: Stream.Event) {
 		switch eventCode {
 		case .hasBytesAvailable:
-			if let incomingStream {
-				if let total = incomingStream.read() {
-					if total > 0 { handleIncomingStreamedData() }
-				} else {
-					closeStream()
-				}
-			}
+				break
 			
 		case .endEncountered:
 			closeStream()
@@ -43,12 +33,16 @@ extension NearbyDevice {
 		if let outgoingStream { return outgoingStream }
 		guard let stream = try session?.startStream(withName: name, toPeer: peerID) else { throw NearbyDeviceError.failedToCreateStream }
 		stream.delegate = self
-		stream.schedule(in: RunLoop.main, forMode: .default)
+		stream.schedule(in: RunLoop.main, forMode: .common)
 		stream.open()
 		
 		outgoingStream = stream
 		
 		return stream
+	}
+	
+	func received(streamData data: Data) {
+		print("Got data: \(data.count) bytes")
 	}
 	
 	public func send(data: Data) throws {
@@ -65,20 +59,25 @@ extension NearbyDevice {
 			print("Already have a stream (\(incomingStream) for \(name)")
 			return
 		}
-		incomingStream = IncomingStream(stream: stream) { data in
-			print("Got data: \(data.count) bytes")
+		DispatchQueue.main.async {
+			self.incomingStream = IncomingStream(stream: stream, device: self)
+			self.objectWillChange.send()
 		}
-		stream.delegate = self
-		stream.schedule(in: RunLoop.main, forMode: .default)
-		stream.open()
-		objectWillChange.sendOnMain()
 	}
 	
 	public func closeStream() {
 		if outgoingStream == nil, incomingStream == nil { return }
-		print("Closing the streams for \(displayName)")
-		outgoingStream?.close()
-		incomingStream?.close()
+		
+		if let outgoingStream {
+			print("Closing outgoing stream: \(outgoingStream), \(outgoingStream.streamStatus)")
+			outgoingStream.remove(from: RunLoop.main, forMode: .default)
+			outgoingStream.close()
+		}
+
+		if let incomingStream {
+			print("Closing outgoing stream: \(incomingStream.stream?.description ?? ""), \(incomingStream.stream?.streamStatus) \(incomingStream.stream.hasBytesAvailable)")
+			incomingStream.close()
+		}
 		outgoingStream = nil
 		incomingStream = nil
 		objectWillChange.sendOnMain()
