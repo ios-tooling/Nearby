@@ -10,63 +10,7 @@ import MultipeerConnectivity
 import CrossPlatformKit
 import Studio
 
-extension NearbyDevice: StreamDelegate {
-	public func stream(_ aStream: Stream, handle eventCode: Stream.Event) {
-		switch eventCode {
-		case .hasBytesAvailable:
-			if let incomingStream {
-				if incomingStreamBuffer == nil {
-					incomingStreamBuffer = [UInt8](repeating: 0, count: NearbySession.instance.expectedStreamDataSize)
-				}
-				
-				var total = 0
-				while incomingStream.hasBytesAvailable {
-					let batch = incomingStream.read(&incomingStreamBuffer!, maxLength: NearbySession.instance.expectedStreamDataSize)
-					total += batch
-				}
-				totalBytesStreamed += total
-				print("Got \(total) bytes")
-			}
-			
-		case .hasSpaceAvailable:
-			break
-			
-		default:
-			print("Stream event: \(eventCode)")
-		}
-	}
-}
-
 extension NearbyDevice {
-	enum NearbyDeviceError: Error { case failedToCreateStream }
-	public func startStream(named name: String = "nearby-stream") throws -> OutputStream {
-		if let outgoingStream { return outgoingStream }
-		guard let stream = try session?.startStream(withName: name, toPeer: peerID) else { throw NearbyDeviceError.failedToCreateStream }
-		stream.delegate = self
-		stream.schedule(in: RunLoop.main, forMode: .default)
-		stream.open()
-		
-		outgoingStream = stream
-		
-		return stream
-	}
-	
-	public func send(data: Data) throws {
-		try outgoingStream?.writeCountedData(data: data)
-	}
-
-	func session(didReceive stream: InputStream, withName streamName: String) {
-		if let incomingStream {
-			print("Already have a stream (\(incomingStream) for \(name)")
-			return
-		}
-		incomingStream = stream
-		stream.delegate = self
-		stream.schedule(in: RunLoop.main, forMode: .default)
-		stream.open()
-		objectWillChange.sendOnMain()
-	}
-	
 	func session(didStartReceivingResourceWithName resourceName: String, with progress: Progress) {
 		
 	}
@@ -76,6 +20,7 @@ extension NearbyDevice {
 	
 	func disconnectFromPeers() async {
 		await withCheckedContinuation { continuation in
+			closeStream()
 			disconnectFromPeers { continuation.resume() }
 		}
 	}
@@ -226,6 +171,7 @@ extension NearbyDevice {
 	}
 	
 	public func disconnect() {
+		closeStream()
 		self.state = .disconnected
 		Notifications.deviceDisconnected.post(with: self)
 		self.stopSession()

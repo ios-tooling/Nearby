@@ -37,10 +37,8 @@ final public class NearbyDevice: NSObject, Comparable {
 	public var disconnectedAt: Date? { didSet {
 		if disconnectedAt != oldValue { Task { @MainActor in NearbySession.instance.updateDisconnectTimer() }} 
 	}}
-	public var incomingStream: InputStream?
+	public var incomingStream: IncomingStream?
 	public var outgoingStream: OutputStream?
-	public var incomingStreamBuffer: [UInt8]?
-	public var totalBytesStreamed = 0
 
 	public var isVisible: Bool {
 		if state == .hidden { return false }
