@@ -39,6 +39,8 @@ final public class NearbyDevice: NSObject, Comparable {
 	}}
 	public var incomingStream: IncomingStream?
 	public var outgoingStream: OutputStream?
+	public var bytesSent: UInt64 = 0
+	public var bytesReceived: UInt64 = 0
 
 	public var isVisible: Bool {
 		if state == .hidden { return false }

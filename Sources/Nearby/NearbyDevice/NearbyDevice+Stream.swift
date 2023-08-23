@@ -13,17 +13,11 @@ import Studio
 extension NearbyDevice: StreamDelegate {
 	public func stream(_ aStream: Stream, handle eventCode: Stream.Event) {
 		switch eventCode {
-		case .hasBytesAvailable:
-				break
-			
 		case .endEncountered:
 			closeStream()
 			
-		case .hasSpaceAvailable:
-			break
-			
 		default:
-			print("Stream event: \(eventCode)")
+			break
 		}
 	}
 }
@@ -36,12 +30,14 @@ extension NearbyDevice {
 		stream.schedule(in: RunLoop.main, forMode: .common)
 		stream.open()
 		
+		self.bytesSent = 0
 		outgoingStream = stream
 		
 		return stream
 	}
 	
 	func received(streamData data: Data) {
+		bytesReceived += UInt64(data.count)
 		print("Got data: \(data.count) bytes")
 	}
 	
@@ -50,7 +46,8 @@ extension NearbyDevice {
 			print("No outgoing stream")
 			throw NearbyDeviceError.noOutgoingStream
 		}
-		print("Sending \(data.count) bytes")
+		
+		bytesSent += UInt64(data.count)
 		try outgoingStream.writeCountedData(data: data)
 	}
 	
@@ -60,6 +57,7 @@ extension NearbyDevice {
 			return
 		}
 		DispatchQueue.main.async {
+			self.bytesReceived = 0
 			self.incomingStream = IncomingStream(stream: stream, device: self)
 			self.objectWillChange.send()
 		}
@@ -69,15 +67,11 @@ extension NearbyDevice {
 		if outgoingStream == nil, incomingStream == nil { return }
 		
 		if let outgoingStream {
-			print("Closing outgoing stream: \(outgoingStream), \(outgoingStream.streamStatus)")
 			outgoingStream.remove(from: RunLoop.main, forMode: .default)
 			outgoingStream.close()
 		}
 
-		if let incomingStream {
-			print("Closing outgoing stream: \(incomingStream.stream?.description ?? ""), \(incomingStream.stream?.streamStatus) \(incomingStream.stream.hasBytesAvailable)")
-			incomingStream.close()
-		}
+		incomingStream?.close()
 		outgoingStream = nil
 		incomingStream = nil
 		objectWillChange.sendOnMain()
