@@ -39,7 +39,6 @@ extension NearbyDevice: StreamDelegate {
 }
 
 extension NearbyDevice {
-	enum NearbyDeviceError: Error { case failedToCreateStream }
 	public func startStream(named name: String = "nearby-stream") throws -> OutputStream {
 		if let outgoingStream { return outgoingStream }
 		guard let stream = try session?.startStream(withName: name, toPeer: peerID) else { throw NearbyDeviceError.failedToCreateStream }
@@ -53,7 +52,12 @@ extension NearbyDevice {
 	}
 	
 	public func send(data: Data) throws {
-		try outgoingStream?.writeCountedData(data: data)
+		guard let outgoingStream else {
+			print("No outgoing stream")
+			throw NearbyDeviceError.noOutgoingStream
+		}
+		print("Sending \(data.count) bytes")
+		try outgoingStream.writeCountedData(data: data)
 	}
 	
 	func session(didReceive stream: InputStream, withName streamName: String) {

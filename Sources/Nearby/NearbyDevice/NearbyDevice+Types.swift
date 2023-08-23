@@ -11,6 +11,8 @@ import CrossPlatformKit
 import Studio
 
 extension NearbyDevice {
+	enum NearbyDeviceError: Error { case failedToCreateStream, noOutgoingStream }
+
 	struct Keys {
 		static let name = "name"
 		static let idiom = "idiom"
