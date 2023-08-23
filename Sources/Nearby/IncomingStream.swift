@@ -52,7 +52,7 @@ public class IncomingStream {
 			while true {
 				if currentChunkSize == 0 {
 					currentChunkSize = Int(buffer.withUnsafeBytes { bytes in
-						bytes.load(fromByteOffset: bufferReadOffset, as: UInt32.self)
+						bytes.loadUnaligned(fromByteOffset: bufferReadOffset, as: UInt32.self)
 					}.bigEndian)
 					currentChunkRead = 0
 					bufferReadOffset += 4
