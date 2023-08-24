@@ -41,6 +41,8 @@ final public class NearbyDevice: NSObject, Comparable {
 	public var outgoingStream: OutputStream?
 	public var bytesSent: UInt64 = 0
 	public var bytesReceived: UInt64 = 0
+	
+	public var receivedStreamedData: ((Data) -> Void)?
 
 	public var isVisible: Bool {
 		if state == .hidden { return false }

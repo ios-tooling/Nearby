@@ -38,7 +38,7 @@ extension NearbyDevice {
 	
 	func received(streamData data: Data) {
 		bytesReceived += UInt64(data.count)
-		print("Got data: \(data.count) bytes")
+		receivedStreamedData?(data)
 	}
 	
 	public func send(data: Data) throws {
