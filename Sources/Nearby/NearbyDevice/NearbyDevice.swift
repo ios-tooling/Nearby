@@ -185,8 +185,10 @@ final public class NearbyDevice: NSObject, Comparable {
 	}
 	
 	func sendChanges() {
-		NearbySession.instance.updateCollections(for: self)
-		Task { await MainActor.run { objectWillChange.send() } }
+		Task {
+			await NearbySession.instance.updateCollections(for: self)
+			await MainActor.run { objectWillChange.send() }
+		}
 	}
 	
 	func didConnect() {

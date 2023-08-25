@@ -49,10 +49,10 @@ public class NearbySession: NSObject {
 	public var visibleDevices = NearbyDeviceCollection(label: "Visible") { device in device.isVisible }
 	public var provisionedDevices = NearbyDeviceCollection(label: "Provisioned", filter: .provisioned)
 	
-	func updateCollections(for device: NearbyDevice) {
-		connectedDevices.update()
-		visibleDevices.update()
-		provisionedDevices.update()
+	func updateCollections(for device: NearbyDevice) async {
+		await connectedDevices.update()
+		await visibleDevices.update()
+		await provisionedDevices.update()
 	}
 }
 
@@ -74,8 +74,10 @@ extension NearbySession {
 		guard let message else { return }
 		NearbyLogger.instance.log("Sending \(message.command) as a \(type(of: message)) to all", onlyWhenDebugging: true)
 		let payload = NearbyMessagePayload(message: message)
-		for device in self.connectedDevices.devices {
-			device.send(payload: payload)
+		Task {
+			for device in await self.connectedDevices.devices {
+				device.send(payload: payload)
+			}
 		}
 	}
 }

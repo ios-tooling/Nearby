@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class NearbyDeviceCollection: ObservableObject {
+public actor NearbyDeviceCollection: ObservableObject {
 	let filter: (NearbyDevice) -> Bool
 	let label: String
 	var lastHash = 0
