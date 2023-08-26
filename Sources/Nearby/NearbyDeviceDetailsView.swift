@@ -9,7 +9,7 @@ import SwiftUI
 
 public struct NearbyDeviceDetailsView: View {
 	@ObservedObject var device: NearbyDevice
-	@Environment(\.dismiss) var dismiss
+	@Environment(\.presentationMode) var dismiss
 	
 	public init(device: NearbyDevice) {
 		self.device = device
@@ -19,7 +19,7 @@ public struct NearbyDeviceDetailsView: View {
 		VStack(alignment: .leading) {
 			ZStack {
 				Text("Device Details").bold()
-				Button("Done") { dismiss() }
+				Button("Done") { dismiss.wrappedValue.dismiss() }
 					.frame(maxWidth: .infinity, alignment: .trailing)
 					.padding()
 			}
@@ -81,9 +81,14 @@ public struct NearbyDeviceDetailsView: View {
 			}
 			
 			HStack {
-				if device.state.isConnected {
-					Button("Disconnect", role: .destructive) { device.disconnectFromPeers() }
-						.padding()
+				if #available(iOS 15.0, *) {
+					if device.state.isConnected {
+						Button("Disconnect", role: .destructive) { device.disconnectFromPeers() }
+							.padding()
+					} else {
+						Button("Disconnect") { device.disconnectFromPeers() }
+							.padding()
+					}
 				} else if device.state == .connecting {
 					HStack {
 						Text("Connecting…")

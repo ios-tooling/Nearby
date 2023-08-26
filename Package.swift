@@ -7,7 +7,7 @@ let package = Package(
     name: "Nearby",
 	 platforms: [
 			  .macOS(.v12),
-			  .iOS(.v15),
+			  .iOS(.v14),
 			  .watchOS(.v5)
 		 ],
     products: [
