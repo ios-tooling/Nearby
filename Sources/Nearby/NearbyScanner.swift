@@ -70,13 +70,15 @@ extension NearbyScanner {
 extension NearbyScanner: MCNearbyServiceAdvertiserDelegate {
 	func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
 		//print("Received invitation from \(peerID)")
-		if let device = NearbySession.instance.device(for: peerID) {
-			device.receivedInvitation(from: peerID, withContext: context, handler: invitationHandler)
-		} else if let data = context, let info = try? JSONDecoder().decode([String: String].self, from: data) {
-			let device = NearbySession.deviceClass.init(peerID: peerID, info: info)
-			self.delegate.didLocate(device: device)
-		} else {
-			invitationHandler(false, nil)
+		Task {
+			if let device = await NearbySession.instance.device(for: peerID) {
+				device.receivedInvitation(from: peerID, withContext: context, handler: invitationHandler)
+			} else if let data = context, let info = try? JSONDecoder().decode([String: String].self, from: data) {
+				let device = await NearbySession.deviceClass.init(peerID: peerID, info: info)
+				self.delegate.didLocate(device: device)
+			} else {
+				invitationHandler(false, nil)
+			}
 		}
 	}
 	
@@ -93,23 +95,29 @@ extension NearbyScanner: MCNearbyServiceBrowserDelegate {
 			return
 		}
 		NearbyLogger.instance.log("Found peer: \(peerID.displayName)", onlyWhenDebugging: true)
-		let device = NearbySession.instance.device(for: peerID) ?? NearbySession.deviceClass.init(peerID: peerID, info: info)
-		device.lastSeenAt = Date()
-		self.delegate.didLocate(device: device)
-		if device.state != .connected && device.state != .invited && device.state != .connecting {
-			if device.state != .none {
-				device.stopSession()
+		Task {
+			var device = await NearbySession.instance.device(for: peerID)
+			if device == nil { device = await NearbySession.deviceClass.init(peerID: peerID, info: info) }
+			guard let device else { return }
+			device.lastSeenAt = Date()
+			self.delegate.didLocate(device: device)
+			if device.state != .connected && device.state != .invited && device.state != .connecting {
+				if device.state != .none {
+					device.stopSession()
+				}
+				
+				device.state = .found
 			}
-
-			device.state = .found
+			device.invite(with: self.browser)
 		}
-		device.invite(with: self.browser)
 	}
 	
 	func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
 		NearbyLogger.instance.log("Lost peer: \(peerID.displayName)", onlyWhenDebugging: true)
-		if let device = NearbySession.instance.device(for: peerID) {
-			device.disconnect()
+		Task {
+			if let device = await NearbySession.instance.device(for: peerID) {
+				device.disconnect()
+			}
 		}
 	}
 	

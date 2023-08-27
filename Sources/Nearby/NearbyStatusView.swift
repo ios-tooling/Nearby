@@ -39,7 +39,7 @@ public class NearbyStatusView: UIView {
 	}
 	
 	@objc func reloadTapped() {
-		self.updateUI()
+		Task { await self.updateUI() }
 	}
 	
 	var buttons: [DeviceButton] = []
@@ -69,9 +69,9 @@ public class NearbyStatusView: UIView {
 		}
 	}
 	
-	@objc func updateUI() {
+	@objc func updateUI() async {
 		
-		for device in NearbySession.instance.devices.values {
+		for device in await NearbySession.instance.devices.values {
 			if let button = self.button(for: device) {
 				button.update()
 				continue

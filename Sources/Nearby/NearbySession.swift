@@ -19,6 +19,25 @@ extension NearbySession: ObservableObject {
 }
 #endif
 
+public actor CachedDevices {
+	var devices: [Int: NearbyDevice] = [:]
+	public var values: [NearbyDevice] { Array(devices.values) }
+	func clear() { devices = [:] }
+	
+	func add(device: NearbyDevice) {
+		devices[device.peerID.hashValue] = device
+	}
+	
+	func device(for peerID: MCPeerID) -> NearbyDevice? {
+		devices[peerID.hashValue]
+	}
+	
+	subscript(id: Int) -> NearbyDevice? {
+		get { devices[id] }
+		set { devices[id] = newValue }
+	}
+}
+
 public class NearbySession: NSObject {
 	public static let instance = NearbySession()
 	
@@ -39,7 +58,7 @@ public class NearbySession: NSObject {
 	public var expectedStreamDataSize = 1024 * 20
 
 	public var peerID: MCPeerID { return NearbyDevice.localDevice.peerID }
-	public private(set) var devices: [Int: NearbyDevice] = [:]
+	public private(set) var devices = CachedDevices()
 	public func enableLogging(on: Bool) {
 		MessageHistory.instance.limit = on ? 100 : 0
 	}
@@ -85,31 +104,32 @@ extension NearbySession {
 extension NearbySession {
 	public func cycle() {
 		if !isActive { return }
-		shutdown()
-		DispatchQueue.main.async(after: 1.0) {
-			self.startup()
+		Task {
+			await shutdown()
+			try await Task.sleep(nanoseconds: 1_000_000_000)
+			startup()
 		}
 	}
 	
-	@MainActor func updateDisconnectTimer() {
+	@MainActor func updateDisconnectTimer() async {
 		guard let disconnectDisappearInterval else { return }
 		var minTime = disconnectDisappearInterval + 1
 		
-		for device in devices.values {
+		for device in await devices.values {
 			if device.state != .hidden, let time = device.disconnectedAt?.timeIntervalSinceNow, abs(time) < disconnectDisappearInterval, abs(time) < minTime { minTime = abs(time) }
 		}
 		
 		if minTime < disconnectDisappearInterval {
 			disconnectTimer = Timer.scheduledTimer(withTimeInterval: (disconnectDisappearInterval - minTime) + 1, repeats: false) { _ in
-				self.hideDisconnectedDevices()
+				Task { await self.hideDisconnectedDevices() }
 			}
 		}
 	}
 	
-	func hideDisconnectedDevices() {
+	func hideDisconnectedDevices() async {
 		guard let disconnectDisappearInterval else { return }
 
-		for device in devices.values {
+		for device in await devices.values {
 			if device.state != .hidden, let time = device.disconnectedAt?.timeIntervalSinceNow, abs(time) >= disconnectDisappearInterval {
 				device.state = .hidden
 			}
@@ -135,47 +155,49 @@ extension NearbySession {
 		if self.isActive { return }
 		self.isActive = true
 		self.isShuttingDown = false
-		self.devices = [:]
-		self.locateDevice()
-		DispatchQueue.main.async { NotificationCenter.default.post(name: Notifications.didStartUp, object: self)}
+		Task {
+			await self.devices.clear()
+			self.locateDevice()
+			await MainActor.run { NotificationCenter.default.post(name: Notifications.didStartUp, object: self) }
+		}
 	}
 	
-	public func shutdown() {
+	public func shutdown() async {
 		NearbyLogger.instance.log("Shutting Down: \(peerID.displayName)", onlyWhenDebugging: true)
 		if !self.isActive || self.isShuttingDown { return }
 		self.isActive = false
 		self.isShuttingDown = true
 		self.deviceLocator?.stopLocating()
 		self.deviceLocator = nil
-		for device in self.devices.values {
+		for device in await devices.values {
 			device.state = .none
 		}
 		DispatchQueue.main.async { NotificationCenter.default.post(name: Notifications.didShutDown, object: self)}
 	}
 	
 	@objc func didEnterBackground() {
-		self.shutdown()
+		Task { await shutdown() }
 	}
 	
 	@objc func willEnterForeground() {
-		self.startup(withRouter: self.messageRouter, application: application)
+		startup(withRouter: messageRouter, application: application)
 	}
 	
 	public func locateDevice() {
-		if self.deviceLocator != nil { return }			//already locating
+		if deviceLocator != nil { return }			//already locating
 		
 		self.deviceLocator = NearbyScanner(delegate: self)
 		self.deviceLocator?.startLocating()
 	}
 	
-	func uniqueDisplayName(from name: String) -> String {
+	func uniqueDisplayName(from name: String) async -> String {
 		var count = name == self.peerID.displayName ? 1 : 0
 		var current = name + (count == 0 ? "" : " - \(count)")
 		var nameExists = false
 		
 		repeat {
 			nameExists = false
-			for device in self.devices.values {
+			for device in await devices.values {
 				if device.name == current {
 					count += 1
 					current = name + " - \(count)"
@@ -190,8 +212,8 @@ extension NearbySession {
 
 extension NearbySession: DeviceLocatorDelegate {
 	func didLocate(device: NearbyDevice) {
-		DispatchQueue.main.async {
-			self.devices[device.peerID.hashValue] = device
+		Task {
+			await devices.add(device: device)
 			self.messageRouter?.didDiscover(device: device)
 
 			withAnimation {
@@ -204,12 +226,8 @@ extension NearbySession: DeviceLocatorDelegate {
 		self.deviceLocator?.stopLocating()
 	}
 	
-	func device(for peerID: MCPeerID) -> NearbyDevice? {
-		if let device = self.devices[peerID.hashValue] {
-			return device
-		}
-		
-		return nil
+	func device(for peerID: MCPeerID) async -> NearbyDevice? {
+		await devices.device(for: peerID)
 	}
 
 }

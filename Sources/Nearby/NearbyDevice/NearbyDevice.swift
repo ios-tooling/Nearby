@@ -35,7 +35,8 @@ final public class NearbyDevice: NSObject, Comparable {
 	public var avatarRequestedAt: Date?
 	public var infoRequestedAt: Date?
 	public var disconnectedAt: Date? { didSet {
-		if disconnectedAt != oldValue { Task { @MainActor in NearbySession.instance.updateDisconnectTimer() }} 
+		if disconnectedAt == oldValue { return }
+		Task { await NearbySession.instance.updateDisconnectTimer() }
 	}}
 	public var incomingStream: IncomingStream?
 	public var outgoingStream: OutputStream?
@@ -146,17 +147,17 @@ final public class NearbyDevice: NSObject, Comparable {
 		#endif
 	}
 	
-	public required init(peerID: MCPeerID, info: [String: String]) {
+	public required init(peerID: MCPeerID, info: [String: String]) async {
 		isLocalDevice = false
 		self.peerID = peerID
-		name = NearbySession.instance.uniqueDisplayName(from: peerID.displayName)
+		name = await NearbySession.instance.uniqueDisplayName(from: peerID.displayName)
 		discoveryInfo = info
 		uniqueID = info[Keys.unique] ?? peerID.displayName
 		if let idiom = info[Keys.idiom] { self.idiom = idiom }
 		if info[Keys.simulator] != nil { self.isSimulator = true }
 		super.init()
 		#if os(iOS)
-			NotificationCenter.default.addObserver(self, selector: #selector(enteredBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+			await NotificationCenter.default.addObserver(self, selector: #selector(enteredBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
 		#endif
 		startSession()
 		//print("Received discovery info: \(info)")

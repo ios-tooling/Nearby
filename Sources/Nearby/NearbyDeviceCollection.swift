@@ -13,7 +13,12 @@ public actor NearbyDeviceCollection: ObservableObject {
 	var lastHash = 0
 	public var devices: [NearbyDevice] = []
 	
-	var computedDevices: [NearbyDevice] { NearbySession.instance.devices.values.filter { filter($0) } }
+	var computedDevices: [NearbyDevice] {
+		get async {
+			let all = await NearbySession.instance.devices.values
+			return all.filter { filter($0) }
+		}
+	}
 	
 	init(label: String, filter: NearbyDevice.State) {
 		self.filter = { $0.matches(filter: filter) }
@@ -28,8 +33,8 @@ public actor NearbyDeviceCollection: ObservableObject {
 	public var first: NearbyDevice? { devices.first }
 	public var count: Int { devices.count }
 	
-	func update() {
-		let newDevices = computedDevices
+	func update() async {
+		let newDevices = await computedDevices
 		
 		if newDevices != devices {
 			devices = newDevices
