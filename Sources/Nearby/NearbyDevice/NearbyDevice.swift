@@ -11,7 +11,7 @@ import CrossPlatformKit
 import Studio
 import SwiftUI
 
-final public class NearbyDevice: NSObject, Comparable {
+open class NearbyDevice: NSObject, Comparable {
 	public static var autoReconnect = true
 	public var session: MCSession?
 	public var invitationTimeout: TimeInterval = 30.0

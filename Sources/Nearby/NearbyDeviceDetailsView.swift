@@ -25,6 +25,7 @@ public struct NearbyDeviceDetailsView: View {
 			}
 			ScrollView {
 				VStack {
+					Text("Device: \(String(describing: type(of: device)))")
 					if let avatar = device.avatarImage {
 						HStack {
 							Image(uxImage: avatar)
