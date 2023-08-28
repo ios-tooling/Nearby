@@ -23,35 +23,44 @@ public struct NearbyDevicesHUD: View {
 	@ObservedObject var history = MessageHistory.instance
 	@AppStorage("show_simulators_in_nearby_hud") var showSimulators = true
 	@State var areSimulatorsPresent = false
-	
-	public init() { }
+	var showDevices = true
+	var showLog = true
+
+	public init(showDevices: Bool = true, showLog: Bool = true) {
+		self.showDevices = showDevices
+		self.showLog = showLog
+	}
 		
 	public var body: some View {
 		DeviceContainer(nearby.visibleDevices) { devices in
-			let visibleDevices = showSimulators ? devices : devices.filter { $0.isSimulator }
-			
-			VStack {
-				ForEach(visibleDevices.sorted()) { device in
-					Button(action: { selectedDevice = device }) {
-						DeviceRow(device: device)
+			if showDevices {
+				let visibleDevices = showSimulators ? devices : devices.filter { $0.isSimulator }
+				
+				VStack {
+					ForEach(visibleDevices.sorted()) { device in
+						Button(action: { selectedDevice = device }) {
+							DeviceRow(device: device)
+						}
+						.buttonStyle(.plain)
 					}
-					.buttonStyle(.plain)
-				}
-				if areSimulatorsPresent {
-					Toggle("Show Simulators", isOn: $showSimulators.animation())
-						.padding(.horizontal)
+					if areSimulatorsPresent {
+						Toggle("Show Simulators", isOn: $showSimulators.animation())
+							.padding(.horizontal)
+					}
 				}
 				
-				ScrollView {
-					VStack {
-						ForEach(history.history) { item in
-							HistoryCell(item: item)
+				if showLog {
+					ScrollView {
+						VStack {
+							ForEach(history.history) { item in
+								HistoryCell(item: item)
+							}
 						}
+						.font(.body)
 					}
-					.font(.body)
+					Button("Clear Log") { history.clearHistory() }
+						.font(.body)
 				}
-				Button("Clear Log") { history.clearHistory() }
-					.font(.body)
 			}
 		}
 		.sheet(item: $selectedDevice) { device in NearbyDeviceDetailsView(device: device) }
