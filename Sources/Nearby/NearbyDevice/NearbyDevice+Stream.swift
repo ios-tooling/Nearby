@@ -37,7 +37,7 @@ extension NearbyDevice {
 	}
 	
 	func received(streamData data: Data) {
-		bytesReceived += UInt64(data.count)
+		bytesReceived += Int64(data.count)
 		receivedStreamedData?(data)
 	}
 	
@@ -47,7 +47,7 @@ extension NearbyDevice {
 			throw NearbyDeviceError.noOutgoingStream
 		}
 		
-		bytesSent += UInt64(data.count)
+		bytesSent += Int64(data.count)
 		try outgoingStream.writeCountedData(data: data)
 	}
 	
