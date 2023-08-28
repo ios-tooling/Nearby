@@ -126,7 +126,7 @@ extension NearbySession {
 		}
 	}
 	
-	func hideDisconnectedDevices() async {
+	@MainActor func hideDisconnectedDevices() async {
 		guard let disconnectDisappearInterval else { return }
 
 		for device in await devices.values {
@@ -216,8 +216,8 @@ extension NearbySession: DeviceLocatorDelegate {
 			await devices.add(device: device)
 			self.messageRouter?.didDiscover(device: device)
 
-			withAnimation {
-				self.objectWillChange.send()
+			await MainActor.run {
+				withAnimation { self.objectWillChange.send() }
 			}
 		}
 	}
