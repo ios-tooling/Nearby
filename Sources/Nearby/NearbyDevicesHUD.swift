@@ -23,51 +23,40 @@ public struct NearbyDevicesHUD: View {
 	@ObservedObject var history = MessageHistory.instance
 	@AppStorage("show_simulators_in_nearby_hud") var showSimulators = true
 	@State var areSimulatorsPresent = false
-	@State var visibleDevices: [NearbyDevice] = []
 	
 	public init() { }
 		
 	public var body: some View {
-		VStack {
-			ForEach(visibleDevices) { device in
-				Button(action: { selectedDevice = device }) {
-					DeviceRow(device: device)
-				}
-				.buttonStyle(.plain)
-			}
-			if areSimulatorsPresent {
-				Toggle("Show Simulators", isOn: $showSimulators.animation())
-					.padding(.horizontal)
-			}
+		DeviceContainer(nearby.visibleDevices) { devices in
+			let visibleDevices = showSimulators ? devices : devices.filter { $0.isSimulator }
 			
-			ScrollView {
-				VStack {
-					ForEach(history.history) { item in
-						HistoryCell(item: item)
+			VStack {
+				ForEach(visibleDevices.sorted()) { device in
+					Button(action: { selectedDevice = device }) {
+						DeviceRow(device: device)
 					}
+					.buttonStyle(.plain)
 				}
-				.font(.body)
+				if areSimulatorsPresent {
+					Toggle("Show Simulators", isOn: $showSimulators.animation())
+						.padding(.horizontal)
+				}
+				
+				ScrollView {
+					VStack {
+						ForEach(history.history) { item in
+							HistoryCell(item: item)
+						}
+					}
+					.font(.body)
+				}
+				Button("Clear Log") { history.clearHistory() }
+					.font(.body)
 			}
-			Button("Clear Log") { history.clearHistory() }
-				.font(.body)
 		}
 		.sheet(item: $selectedDevice) { device in NearbyDeviceDetailsView(device: device) }
-		.onAppear { updateDevices() }
-		.onReceive(nearby.objectWillChange) { updateDevices() }
 	}
-	
-	func updateDevices() {
-		Task { @MainActor in
-			areSimulatorsPresent = await nearby.devices.values.contains { $0.isSimulator }
-			
-			if showSimulators {
-				visibleDevices = await nearby.devices.values.sorted()
-			} else {
-				visibleDevices = await nearby.devices.values.filter { !$0.isSimulator }.sorted()
-			}
-		}
-	}
-	
+
 	struct HistoryCell: View {
 		let item: MessageHistory.RecordedMessage
 		

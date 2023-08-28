@@ -38,7 +38,7 @@ public actor NearbyDeviceCollection: ObservableObject {
 		
 		if newDevices != devices {
 			devices = newDevices
-			objectWillChange.send()
+			await MainActor.run { objectWillChange.send() }
 		}
 				
 //		if label == "Provisioned" {
