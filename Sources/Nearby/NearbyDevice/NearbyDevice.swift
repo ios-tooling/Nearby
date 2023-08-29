@@ -40,8 +40,8 @@ open class NearbyDevice: NSObject, Comparable {
 	}}
 	public var incomingStream: IncomingStream?
 	public var outgoingStream: OutputStream?
-	public var bytesSent: Int64 = 0
-	public var bytesReceived: Int64 = 0
+	public var bytesSent: Int64 = 0 { didSet { objectWillChange.sendOnMain() }}
+	public var bytesReceived: Int64 = 0 { didSet { objectWillChange.sendOnMain() }}
 	
 	public var receivedStreamedData: ((Data) -> Void)?
 
