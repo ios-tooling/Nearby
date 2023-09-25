@@ -268,6 +268,7 @@ open class NearbyDevice: NSObject, Comparable {
 		self.state = .provisioned
 		if oldValue == nil {
 			delegate?.didReceiveFirstInfo(from: self)
+			NearbySession.instance.messageRouter?.didProvision(device: self)
 		} else if deviceInfo != oldValue {
 			delegate?.didChangeInfo(from: self)
 			NearbyDevice.Notifications.deviceChangedInfo.post(with: self)

@@ -12,6 +12,7 @@ public protocol NearbyMessageRouter {
 	func received(dictionary: [String: String], from device: NearbyDevice)
 	var fileID: String { get }
 	func didDiscover(device: NearbyDevice)
+	func didProvision(device: NearbyDevice)
 }
 
 extension NearbyMessageRouter {
@@ -25,7 +26,8 @@ class InternalRouter: NearbyMessageRouter {
 	var fileID: String { #fileID }
 	
 	func didDiscover(device: NearbyDevice) { }
-	
+	func didProvision(device: NearbyDevice) { }
+
 	func received(dictionary: [String: String], from device: NearbyDevice) { }
 	
 	func route(_ payload: NearbyMessagePayload, from device: NearbyDevice) -> NearbyMessage? {
