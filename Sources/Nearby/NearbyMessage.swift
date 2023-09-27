@@ -8,13 +8,14 @@
 
 import Foundation
 import CrossPlatformKit
+import Suite
 
 public protocol NearbyMessage: AnyObject, Codable {
 	var command: String { get }
 }
 
 public class NearbySystemMessage: NearbyMessage {
-	public enum Kind: String, Codable { case ping = "*system-ping*", disconnect = "*system-disconnect*", requestDeviceInfo = "*request-device-info*", deviceInfo = "*device-info*", dictionary = "*dictionary*", requestAvatar = "*request-avatar*", avatar = "*avatar*" }
+	public enum Kind: String, RawCodable { case ping = "*system-ping*", disconnect = "*system-disconnect*", requestDeviceInfo = "*request-device-info*", deviceInfo = "*device-info*", dictionary = "*dictionary*", requestAvatar = "*request-avatar*", avatar = "*avatar*" }
 	
 	public static var ping: NearbySystemMessage = NearbySystemMessage(kind: Kind.ping)
 	public static var requestDeviceInfo: NearbySystemMessage = NearbySystemMessage(kind: Kind.requestDeviceInfo)
