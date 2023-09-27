@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "Nearby",
 	 platforms: [
-			  .macOS(.v12),
+			  .macOS(.v11),
 			  .iOS(.v14),
 			  .watchOS(.v5)
 		 ],

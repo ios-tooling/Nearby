@@ -82,7 +82,7 @@ public struct NearbyDeviceDetailsView: View {
 			}
 			
 			HStack {
-				if #available(iOS 15.0, *) {
+				if #available(iOS 15.0, macOS 12, *) {
 					if device.state.isConnected {
 						Button("Disconnect", role: .destructive) { device.disconnectFromPeers() }
 							.padding()

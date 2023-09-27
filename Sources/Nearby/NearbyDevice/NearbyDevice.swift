@@ -106,13 +106,16 @@ open class NearbyDevice: NSObject, Comparable {
 	func updateDiscoveryInfo() {
 		if discoveryInfo == nil {
 			discoveryInfo = [
-				Keys.deviceRawType: Gestalt.simulatedRawDeviceType ?? Gestalt.rawDeviceType,
 				Keys.name: NearbySession.instance.localDeviceName,
 				Keys.unique: uniqueID
 			]
 		} else {
 			discoveryInfo?[Keys.name] = NearbySession.instance.localDeviceName
 		}
+		
+		#if os(iOS)
+			discoveryInfo?[Keys.deviceRawType] = Gestalt.simulatedRawDeviceType ?? Gestalt.rawDeviceType
+		#endif
 		
 		if let md5 = [avatarName, avatarImage?.pngData()].md5 { discoveryInfo?[Keys.avatarHash] = md5 }
 		name = NearbySession.instance.localDeviceName
