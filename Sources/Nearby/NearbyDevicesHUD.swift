@@ -36,7 +36,7 @@ public struct NearbyDevicesHUD: View {
 			if showDevices {
 				let visibleDevices = showSimulators ? devices : devices.filter { $0.isSimulator }
 				
-				VStack {
+				VStack(alignment: .leading) {
 					ForEach(visibleDevices.sorted()) { device in
 						Button(action: { selectedDevice = device }) {
 							DeviceRow(device: device)
@@ -48,7 +48,7 @@ public struct NearbyDevicesHUD: View {
 							.padding(.horizontal)
 					}
 				}
-				
+
 				if showLog {
 					ScrollView {
 						VStack {
@@ -100,6 +100,7 @@ public struct NearbyDevicesHUD: View {
 				}
 				if device.isSimulator { Text("[sim]") }
 			}
+			.padding(.vertical, 4)
 		}
 	}
 }
