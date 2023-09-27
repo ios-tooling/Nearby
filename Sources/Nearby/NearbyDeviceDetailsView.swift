@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CrossPlatformKit
 
 public struct NearbyDeviceDetailsView: View {
 	@ObservedObject var device: NearbyDevice
