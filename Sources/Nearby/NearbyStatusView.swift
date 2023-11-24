@@ -71,7 +71,7 @@ public class NearbyStatusView: UIView {
 	
 	@objc func updateUI() async {
 		
-		for device in await NearbySession.instance.devices.values {
+		for device in await NearbySession.instance.devices.computedDevices {
 			if let button = self.button(for: device) {
 				button.update()
 				continue

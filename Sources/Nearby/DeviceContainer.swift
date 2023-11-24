@@ -42,7 +42,7 @@ public struct DeviceContainer<Content: View>: View {
 	
 	func loadDevices() {
 		Task { @MainActor in
-			devices = await collection.devices
+			devices = await collection.computedDevices
 		}
 	}
 	

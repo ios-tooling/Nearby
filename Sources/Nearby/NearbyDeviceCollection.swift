@@ -6,18 +6,48 @@
 //
 
 import Foundation
+import MultipeerConnectivity
+import Combine
 
 public actor NearbyDeviceCollection: ObservableObject {
-	let filter: (NearbyDevice) -> Bool
+	let filter: ((NearbyDevice) -> Bool)?
 	let label: String
 	var lastHash = 0
-	public var devices: [NearbyDevice] = []
+	public var cachedDevices: [NearbyDevice] = []
+	nonisolated let currentDevices = CurrentValueSubject<[NearbyDevice], Never>([])
 	
 	var computedDevices: [NearbyDevice] {
 		get async {
-			let all = await NearbySession.instance.devices.values
+			guard let filter else { return cachedDevices }
+			let all = await NearbySession.instance.devices.computedDevices
 			return all.filter { filter($0) }
 		}
+	}
+	
+	func clear() {
+		cachedDevices = []
+		currentDevices.send(cachedDevices)
+	}
+	
+	func add(device: NearbyDevice) {
+		if !cachedDevices.contains(where: { $0.peerID == device.peerID }) {
+			cachedDevices.append(device)
+			currentDevices.send(cachedDevices)
+		}
+	}
+	
+	func device(for peerID: MCPeerID) -> NearbyDevice? {
+		cachedDevices.first { $0.peerID == peerID }
+	}
+	
+	public nonisolated var devices: [NearbyDevice] { currentDevices.value }
+	public nonisolated var count: Int { currentDevices.value.count }
+	public nonisolated var first: NearbyDevice? { currentDevices.value.first }
+
+	init(devices: [NearbyDevice]) {
+		self.cachedDevices = devices
+		self.label = ""
+		self.filter = nil
 	}
 	
 	init(label: String, filter: NearbyDevice.State) {
@@ -30,14 +60,14 @@ public actor NearbyDeviceCollection: ObservableObject {
 		self.label = label
 	}
 	
-	public var first: NearbyDevice? { devices.first }
-	public var count: Int { devices.count }
+//	public var count: Int { cachedDevices.count }
 	
 	func update() async {
 		let newDevices = await computedDevices
 		
-		if newDevices != devices {
-			devices = newDevices
+		if newDevices != cachedDevices {
+			cachedDevices = newDevices
+			currentDevices.send(cachedDevices)
 			await MainActor.run { objectWillChange.send() }
 		}
 				

@@ -19,25 +19,6 @@ extension NearbySession: ObservableObject {
 }
 #endif
 
-public actor CachedDevices {
-	var devices: [Int: NearbyDevice] = [:]
-	public var values: [NearbyDevice] { Array(devices.values) }
-	func clear() { devices = [:] }
-	
-	func add(device: NearbyDevice) {
-		devices[device.peerID.hashValue] = device
-	}
-	
-	func device(for peerID: MCPeerID) -> NearbyDevice? {
-		devices[peerID.hashValue]
-	}
-	
-	subscript(id: Int) -> NearbyDevice? {
-		get { devices[id] }
-		set { devices[id] = newValue }
-	}
-}
-
 public class NearbySession: NSObject {
 	public static let instance = NearbySession()
 	
@@ -58,7 +39,7 @@ public class NearbySession: NSObject {
 	public var expectedStreamDataSize = 1024 * 20
 
 	public var peerID: MCPeerID { return NearbyDevice.localDevice.peerID }
-	public private(set) var devices = CachedDevices()
+	public private(set) var devices = NearbyDeviceCollection(devices: [])
 	public func enableLogging(on: Bool) {
 		MessageHistory.instance.limit = on ? 100 : 0
 	}
@@ -94,7 +75,7 @@ extension NearbySession {
 		NearbyLogger.instance.log("Sending \(message.command) as a \(type(of: message)) to all", onlyWhenDebugging: true)
 		let payload = NearbyMessagePayload(message: message)
 		Task {
-			for device in await self.connectedDevices.devices {
+			for device in await self.connectedDevices.computedDevices {
 				device.send(payload: payload)
 			}
 		}
@@ -115,7 +96,7 @@ extension NearbySession {
 		guard let disconnectDisappearInterval else { return }
 		var minTime = disconnectDisappearInterval + 1
 		
-		for device in await devices.values {
+		for device in await devices.computedDevices {
 			if device.state != .hidden, let time = device.disconnectedAt?.timeIntervalSinceNow, abs(time) < disconnectDisappearInterval, abs(time) < minTime { minTime = abs(time) }
 		}
 		
@@ -129,7 +110,7 @@ extension NearbySession {
 	@MainActor func hideDisconnectedDevices() async {
 		guard let disconnectDisappearInterval else { return }
 
-		for device in await devices.values {
+		for device in await devices.cachedDevices {
 			if device.state != .hidden, let time = device.disconnectedAt?.timeIntervalSinceNow, abs(time) >= disconnectDisappearInterval {
 				device.state = .hidden
 			}
@@ -169,7 +150,7 @@ extension NearbySession {
 		self.isShuttingDown = true
 		self.deviceLocator?.stopLocating()
 		self.deviceLocator = nil
-		for device in await devices.values {
+		for device in await devices.computedDevices {
 			device.state = .none
 		}
 		DispatchQueue.main.async { NotificationCenter.default.post(name: Notifications.didShutDown, object: self)}
@@ -197,7 +178,7 @@ extension NearbySession {
 		
 		repeat {
 			nameExists = false
-			for device in await devices.values {
+			for device in await devices.computedDevices {
 				if device.name == current {
 					count += 1
 					current = name + " - \(count)"
