@@ -17,7 +17,7 @@ let package = Package(
             targets: ["Nearby"]),
     ],
     dependencies: [
-		.package(url: "https://github.com/bengottlieb/crossplatformkit.git", from: "1.0.3"),
+		.package(url: "https://github.com/bengottlieb/crossplatformkit.git", from: "1.0.9"),
 	   .package(url: "https://github.com/bengottlieb/suite.git", from: "1.0.90")
     ],
     targets: [
