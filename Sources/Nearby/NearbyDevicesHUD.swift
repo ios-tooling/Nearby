@@ -63,6 +63,8 @@ public struct NearbyDevicesHUD: View {
 				}
 			}
 		}
+		.frame(minWidth: 300, minHeight: 400)
+		.padding()
 		.sheet(item: $selectedDevice) { device in NearbyDeviceDetailsView(device: device) }
 	}
 
