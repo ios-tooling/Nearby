@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CrossPlatformKit
+import Suite
 
 public struct NearbyDeviceDetailsView: View {
 	@ObservedObject var device: NearbyDevice
@@ -104,6 +105,14 @@ public struct NearbyDeviceDetailsView: View {
 				
 				Spacer()
 				
+				AsyncButton("Cycle") {
+					device.disconnect()
+					try? await Task.sleep(nanoseconds: 3_000_000_000)
+					device.requestInfo()
+					device.requestAvatar()
+				}
+				.padding()
+
 				if device.state.isConnected {
 					Button("Refresh Info") {
 						device.requestInfo()

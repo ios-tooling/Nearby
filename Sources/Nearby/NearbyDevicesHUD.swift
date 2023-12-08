@@ -17,18 +17,22 @@ extension Date {
 	}
 }
 
+@available(macOS 12.0, iOS 14.0, *)
 public struct NearbyDevicesHUD: View {
 	@ObservedObject var nearby = NearbySession.instance
 	@State var selectedDevice: NearbyDevice?
 	@ObservedObject var history = MessageHistory.instance
 	@AppStorage("show_simulators_in_nearby_hud") var showSimulators = true
 	@State var areSimulatorsPresent = false
+	@Environment(\.dismiss) var dismiss
 	var showDevices = true
 	var showLog = true
+	var showCloseButton = false
 
-	public init(showDevices: Bool = true, showLog: Bool = true) {
+	public init(showDevices: Bool = true, showLog: Bool = true, showCloseButton: Bool = false) {
 		self.showDevices = showDevices
 		self.showLog = showLog
+		self.showCloseButton = showCloseButton
 	}
 		
 	public var body: some View {
@@ -65,6 +69,18 @@ public struct NearbyDevicesHUD: View {
 		}
 		.frame(minWidth: 300, minHeight: 400)
 		.padding()
+		.overlay {
+			if showCloseButton {
+				Button("Close", systemImage: "xmark.circle") {
+					dismiss()
+				}
+				.labelStyle(.iconOnly)
+				.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+				.padding()
+				.imageScale(.large)
+				.buttonStyle(.plain)
+			}
+		}
 		.sheet(item: $selectedDevice) { device in NearbyDeviceDetailsView(device: device) }
 	}
 
