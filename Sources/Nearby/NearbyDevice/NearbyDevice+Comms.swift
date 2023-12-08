@@ -98,9 +98,10 @@ extension NearbyDevice {
 			self.startSession()
 		}
 		
-		if self.state != .connected, oldState == .connected {
+		if !self.state.isConnected, oldState.isConnected {
 			Notifications.deviceDisconnected.post(with: self)
 		}
+		objectWillChange.sendOnMain()
 	}
 	
 	public func send(dictionary: [String: String], completion: (() -> Void)? = nil) {
