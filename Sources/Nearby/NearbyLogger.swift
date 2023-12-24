@@ -19,7 +19,7 @@ public class NearbyLogger {
 	let logger = Logger(subsystem: "Nearby", category: "comms")
 	
 	public var logs: [String] = []
-	public var echo = Gestalt.isAttachedToDebugger
+	public var echo = false //Gestalt.isAttachedToDebugger
 	
 	
 	public func log(_ string: String, onlyWhenDebugging: Bool = false) {

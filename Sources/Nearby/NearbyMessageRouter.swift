@@ -31,7 +31,7 @@ class InternalRouter: NearbyMessageRouter {
 	func received(dictionary: [String: String], from device: NearbyDevice) { }
 	
 	func route(_ payload: NearbyMessagePayload, from device: NearbyDevice) -> NearbyMessage? {
-		print("message received: \(payload)")
+		//print("message received: \(payload)")
 		guard let kind = NearbySystemMessage.Kind(rawValue: payload.command) else { return nil }
 		
 		do {

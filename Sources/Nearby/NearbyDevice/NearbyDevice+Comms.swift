@@ -118,13 +118,13 @@ extension NearbyDevice {
 	
 	public func send<MessageType: NearbyMessage>(message: MessageType, completion: (() -> Void)? = nil) {
 		if isLocalDevice {
-			print("Not sending \(message) to local device.")
+			NearbyLogger.instance.log("Not sending \(message) to local device.")
 			completion?()
 			return
 		}
 		
 		if session == nil {
-			print("Not sending \(message), no session.")
+			NearbyLogger.instance.log("Not sending \(message), no session.")
 			completion?()
 			return
 		}

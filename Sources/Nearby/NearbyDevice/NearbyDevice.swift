@@ -247,7 +247,7 @@ open class NearbyDevice: NSObject, Comparable {
 	}
 	
 	func avatarReceived(via message: NearbySystemMessage.Avatar) {
-		print("Received avatar image \(message.image?.size ?? .zero) and name \(message.name ?? "--")")
+		//print("Received avatar image \(message.image?.size ?? .zero) and name \(message.name ?? "--")")
 		clearAvatarRequestTimer()
 		avatarImage = message.image
 		avatarName = message.name

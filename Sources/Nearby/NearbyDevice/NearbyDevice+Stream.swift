@@ -43,7 +43,7 @@ extension NearbyDevice {
 	
 	public func send(data: Data) throws {
 		guard let outgoingStream else {
-			print("No outgoing stream")
+			NearbyLogger.instance.log("No outgoing stream")
 			throw NearbyDeviceError.noOutgoingStream
 		}
 		
@@ -53,7 +53,7 @@ extension NearbyDevice {
 	
 	func session(didReceive stream: InputStream, withName streamName: String) {
 		if let incomingStream {
-			print("Already have a stream (\(incomingStream) for \(name)")
+			NearbyLogger.instance.log("Already have a stream (\(incomingStream) for \(name)")
 			return
 		}
 		DispatchQueue.main.async {
