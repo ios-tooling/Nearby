@@ -8,7 +8,7 @@
 import Foundation
 import MultipeerConnectivity
 import CrossPlatformKit
-import Studio
+import Suite
 
 #if canImport(Combine)
 import SwiftUI

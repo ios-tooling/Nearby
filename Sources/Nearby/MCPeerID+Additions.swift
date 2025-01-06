@@ -7,7 +7,7 @@
 
 import Foundation
 import MultipeerConnectivity
-import Studio
+import Suite
 
 extension MCPeerID {
 	static var deviceName: String {

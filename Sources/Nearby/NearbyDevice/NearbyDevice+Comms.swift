@@ -8,7 +8,7 @@
 import Foundation
 import MultipeerConnectivity
 import CrossPlatformKit
-import Studio
+import Suite
 
 extension NearbyDevice {
 	func session(didStartReceivingResourceWithName resourceName: String, with progress: Progress) {

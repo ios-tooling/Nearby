@@ -8,7 +8,7 @@
 import Foundation
 import MultipeerConnectivity
 import CrossPlatformKit
-import Studio
+import Suite
 
 extension NearbyDevice {
 	enum NearbyDeviceError: Error { case failedToCreateStream, noOutgoingStream }
@@ -23,7 +23,7 @@ extension NearbyDevice {
 	}
 }
 
-extension MCSessionState: CustomStringConvertible {
+extension MCSessionState: @retroactive CustomStringConvertible {
 	public var description: String {
 		switch self {
 		case .connected: return "*connected*"

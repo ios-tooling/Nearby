@@ -8,7 +8,7 @@
 import Foundation
 import MultipeerConnectivity
 import CrossPlatformKit
-import Studio
+import Suite
 
 extension NearbyDevice: StreamDelegate {
 	public func stream(_ aStream: Stream, handle eventCode: Stream.Event) {
