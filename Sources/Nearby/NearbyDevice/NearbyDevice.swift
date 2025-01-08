@@ -53,12 +53,14 @@ open class NearbyDevice: NSObject, Comparable {
 
 	let maxAvatarSize = 200.0
 	public var avatarImage: UXImage? { didSet {
-		if self.isLocalDevice, let avatarImage, (avatarImage.size.height > maxAvatarSize || avatarImage.size.width > maxAvatarSize) {
-			self.avatarImage = avatarImage.resized(to: CGSize(width: maxAvatarSize, height: maxAvatarSize))
-		}
-		if isLocalDevice, NearbySession.instance.isActive, avatarImage != oldValue {
-			updateDiscoveryInfo()
-			NearbySession.instance.sendToAll(message: NearbySystemMessage.Avatar(name: avatarName, image: avatarImage))
+		Task {
+			if self.isLocalDevice, let avatarImage, (avatarImage.size.height > maxAvatarSize || avatarImage.size.width > maxAvatarSize) {
+				self.avatarImage = await avatarImage.resized(to: CGSize(width: maxAvatarSize, height: maxAvatarSize))
+			}
+			if isLocalDevice, NearbySession.instance.isActive, avatarImage != oldValue {
+				updateDiscoveryInfo()
+				NearbySession.instance.sendToAll(message: NearbySystemMessage.Avatar(name: avatarName, image: avatarImage))
+			}
 		}
 	}}
 	public var avatarName: String? { didSet {
@@ -160,7 +162,7 @@ open class NearbyDevice: NSObject, Comparable {
 		if info[Keys.simulator] != nil { self.isSimulator = true }
 		super.init()
 		#if os(iOS)
-			await NotificationCenter.default.addObserver(self, selector: #selector(enteredBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+			NotificationCenter.default.addObserver(self, selector: #selector(enteredBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
 		#endif
 		startSession()
 		//print("Received discovery info: \(info)")

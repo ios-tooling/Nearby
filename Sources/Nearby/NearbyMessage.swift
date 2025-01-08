@@ -15,7 +15,7 @@ public protocol NearbyMessage: AnyObject, Codable {
 }
 
 public class NearbySystemMessage: NearbyMessage {
-	public enum Kind: String, RawCodable { case ping = "*system-ping*", disconnect = "*system-disconnect*", requestDeviceInfo = "*request-device-info*", deviceInfo = "*device-info*", dictionary = "*dictionary*", requestAvatar = "*request-avatar*", avatar = "*avatar*" }
+	public enum Kind: String, Codable { case ping = "*system-ping*", disconnect = "*system-disconnect*", requestDeviceInfo = "*request-device-info*", deviceInfo = "*device-info*", dictionary = "*dictionary*", requestAvatar = "*request-avatar*", avatar = "*avatar*" }
 	
 	public static var ping: NearbySystemMessage = NearbySystemMessage(kind: Kind.ping)
 	public static var requestDeviceInfo: NearbySystemMessage = NearbySystemMessage(kind: Kind.requestDeviceInfo)
@@ -131,8 +131,10 @@ public struct NearbyMessagePayload: CustomStringConvertible {
 	
 	public var description: String {
 		var result = "\(command): \(identifier) -> \(modulelessClassName)"
-		if let json = data.jsonDictionary {
-			result += "\n\(json.prettyPrinted)"
+		if #available(iOS 15.0, *) {
+			if let json = data.jsonDictionary {
+				result += "\n\(json.prettyPrinted)"
+			}
 		}
 		return result
 	}

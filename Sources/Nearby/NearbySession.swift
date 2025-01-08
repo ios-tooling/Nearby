@@ -33,7 +33,7 @@ public class NearbySession: NSObject {
 	public var application: UXApplication?
 	public var serviceType: String! { didSet { try! serviceType.validateBonjourServiceType() }}
 	public var alwaysRequestInfo = true
-	public var localDeviceName = Gestalt.deviceName { didSet { NearbyDevice.localDevice.updateDiscoveryInfo() }}
+	public var localDeviceName = ProcessInfo.processInfo.hostName { didSet { NearbyDevice.localDevice.updateDiscoveryInfo() }}
 	public var disconnectDisappearInterval: TimeInterval? = 5
 	static public var deviceClass = NearbyDevice.self
 	public var expectedStreamDataSize = 1024 * 20
