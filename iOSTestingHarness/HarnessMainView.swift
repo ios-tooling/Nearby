@@ -31,6 +31,9 @@ struct HarnessMainView: View {
 				Text("\(device.displayName)")
 				Spacer()
 				Text("\(device.state)")
+				Button("Info") {
+					print(device)
+				}
 			}
 		}
 	}

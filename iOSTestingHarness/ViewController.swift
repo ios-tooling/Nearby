@@ -36,7 +36,13 @@ class ViewController: UIViewController {
 		// Do any additional setup after loading the view, typically from a nib.
 	}
 
-
+	override func viewDidAppear(_ animated: Bool) {
+		if #available(iOSApplicationExtension 15.0, *) {
+			present(UIHostingController(rootView: NearbyDevicesHUD()), animated: true)
+		} else {
+			// Fallback on earlier versions
+		}
+	}
 }
 
 extension ViewController: UITableViewDataSource {
