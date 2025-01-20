@@ -261,6 +261,7 @@ open class NearbyDevice: NSObject, Comparable {
 	func updateDeviceInfo(from oldValue: [String: String]?) {
 		clearInfoRequestTimer()
 		
+		print("Info updated")
 		guard !isLocalDevice else {
 			NearbySession.instance.localDeviceInfo = deviceInfo ?? [:]
 			return

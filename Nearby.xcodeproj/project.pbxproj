@@ -28,6 +28,7 @@
 		B54A9B572125B418008E646E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B54A9B552125B418008E646E /* LaunchScreen.storyboard */; };
 		B5C8C7E92A3873020095788D /* CrossPlatformKit in Frameworks */ = {isa = PBXBuildFile; productRef = B5C8C7E82A3873020095788D /* CrossPlatformKit */; };
 		B5F4443D2D3DF52E00AF950B /* Suite in Frameworks */ = {isa = PBXBuildFile; productRef = B5F4443C2D3DF52E00AF950B /* Suite */; };
+		B5F4443F2D3E069500AF950B /* HarnessMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F4443E2D3E069500AF950B /* HarnessMainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 		B54A9B582125B418008E646E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B54A9B5D2125B418008E646E /* iOSTestingHarnessTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSTestingHarnessTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B54A9B682125B418008E646E /* iOSTestingHarnessUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSTestingHarnessUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5F4443E2D3E069500AF950B /* HarnessMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarnessMainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -127,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				B54A9B4C2125B417008E646E /* AppDelegate.swift */,
+				B5F4443E2D3E069500AF950B /* HarnessMainView.swift */,
 				B54A9B4E2125B417008E646E /* ViewController.swift */,
 				B54A9B502125B417008E646E /* Main.storyboard */,
 				B54A9B532125B418008E646E /* Assets.xcassets */,
@@ -324,6 +327,7 @@
 			files = (
 				B54A9B4F2125B417008E646E /* ViewController.swift in Sources */,
 				B54A9B4D2125B417008E646E /* AppDelegate.swift in Sources */,
+				B5F4443F2D3E069500AF950B /* HarnessMainView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

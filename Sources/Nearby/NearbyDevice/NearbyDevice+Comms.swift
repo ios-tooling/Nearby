@@ -68,6 +68,7 @@ extension NearbyDevice {
 		var newState = self.state
 		let oldState = self.state
 		
+		print("Ne state: \(state)")
 		switch state {
 		case .connected:
 			lastSeenAt = Date()

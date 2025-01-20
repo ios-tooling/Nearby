@@ -106,6 +106,7 @@ extension NearbyScanner: MCNearbyServiceBrowserDelegate {
 					device.stopSession()
 				}
 				
+				print("Setting state to found")
 				device.state = .found
 			}
 			device.invite(with: self.browser)
