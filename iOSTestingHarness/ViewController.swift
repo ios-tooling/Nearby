@@ -44,3 +44,10 @@ extension ViewController: UITableViewDataSource {
 	}
 }
 
+extension ViewController: UITableViewDelegate {
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		print("Device: \(devices[indexPath.row])")
+		self.devices[indexPath.row].connect()
+	}
+}
+
