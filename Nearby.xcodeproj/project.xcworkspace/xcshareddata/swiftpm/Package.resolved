@@ -1,4 +1,5 @@
 {
+  "originHash" : "1436312c29af1c3b4da63b2f077fd4b14fd03c8a8b11485a7cdce6ff03d35f49",
   "pins" : [
     {
       "identity" : "crossplatformkit",
@@ -12,12 +13,21 @@
     {
       "identity" : "suite",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/bengottlieb/suite",
+      "location" : "https://github.com/ios-tooling/suite",
       "state" : {
-        "revision" : "dde3c9ab50a55c698fd0cb11fddad27c6d6c4694",
-        "version" : "1.0.87"
+        "revision" : "94b8b18d3e1e21dc5052a83b4f851d90841d8cba",
+        "version" : "1.2.5"
+      }
+    },
+    {
+      "identity" : "swift-syntax",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-syntax",
+      "state" : {
+        "revision" : "0687f71944021d616d34d922343dcef086855920",
+        "version" : "600.0.1"
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

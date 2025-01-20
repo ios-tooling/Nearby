@@ -15,7 +15,7 @@ class ViewController: UIViewController {
 	var devices: [NearbyDevice] = []
 	
 	@objc func reload( ){
-		self.devices = Array(NearbySession.instance.devices.values).sorted(by: { $0.displayName < $1.displayName })
+		self.devices = Array(NearbySession.instance.devices.cachedDevices).sorted(by: { $0.displayName < $1.displayName })
 		self.tableView.reloadData()
 	}
 	
