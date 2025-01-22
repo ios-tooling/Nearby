@@ -58,7 +58,7 @@ public class NearbySession: NSObject {
 
 extension NearbySession {
 	func sendChanges() {
-		self.objectWillChange.send()
+		self.objectWillChange.sendOnMain()
 	}
 	
 	public struct Notifications {

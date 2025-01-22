@@ -8,6 +8,7 @@
 
 import SwiftUI
 import CrossPlatformKit
+import MultipeerConnectivity
 
 extension Date {
 	var secondAndNanosecond: String {
@@ -62,7 +63,17 @@ public struct NearbyDevicesHUD: View {
 						}
 						.font(.body)
 					}
-					Button("Clear Log") { history.clearHistory() }
+					HStack {
+						Button("Clear Log") { history.clearHistory() }
+						Button(action: { MCPeerID.resetLocalPeerID() }) {
+							VStack {
+								Text(MCPeerID.cachedLocalPeerID?.displayName ?? "")
+									.font(.caption)
+									.opacity(0.66)
+								Text("Reset Local ID")
+							}
+						}
+					}
 						.font(.body)
 				}
 			}
@@ -107,16 +118,24 @@ public struct NearbyDevicesHUD: View {
 		@ObservedObject var device: NearbyDevice
 		
 		var body: some View {
-			HStack(spacing: 2) {
-				Image(systemName: device.imageName)
-					.foregroundColor(Color(device.stateColor))
-					.padding(.horizontal, 4)
-				
-				Text(device.name)
-				if let info = device.deviceInfo, !info.isEmpty {
-					Text("{\(info.count)}")
-				}
-				if device.isSimulator { Text("[sim]") }
+				HStack(spacing: 2) {
+					Image(systemName: "checkmark")
+						.opacity(device.state.isConnected ? 1 : 0.1)
+					Image(systemName: device.imageName)
+						.foregroundColor(Color(device.stateColor))
+						.padding(.horizontal, 4)
+					
+					VStack(alignment: .leading) {
+						HStack {
+							Text(device.name)
+							if let info = device.deviceInfo, !info.isEmpty {
+								Text("{\(info.count)}")
+							}
+							if device.isSimulator { Text("[sim]") }
+						}
+						Text(device.state.description)
+							.font(.caption)
+					}
 			}
 			.padding(.vertical, 4)
 		}
