@@ -12,9 +12,15 @@ import Suite
 public struct NearbyDeviceDetailsView: View {
 	@ObservedObject var device: NearbyDevice
 	@Environment(\.presentationMode) var dismiss
+	@State var isReconnecting = false
 	
 	public init(device: NearbyDevice) {
 		self.device = device
+	}
+	
+	func requestInfo() {
+		device.requestInfo()
+		device.requestAvatar()
 	}
 	
 	public var body: some View {
@@ -108,8 +114,14 @@ public struct NearbyDeviceDetailsView: View {
 				AsyncButton("Cycle") {
 					device.disconnect()
 					try? await Task.sleep(nanoseconds: 3_000_000_000)
-					device.requestInfo()
-					device.requestAvatar()
+					isReconnecting = true
+					device.connect()
+				}
+				.onReceive(device.objectWillChange) { note in
+					print("Device state changed: \(device.state)")
+					if device.state.isConnected, isReconnecting {
+						requestInfo()
+					}
 				}
 				.padding()
 
