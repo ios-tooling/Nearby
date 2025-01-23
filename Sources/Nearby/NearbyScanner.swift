@@ -46,12 +46,14 @@ extension NearbyScanner {
 	}
 	
 	func startLocating() {
-		self.isLocating = true
-		self.isBrowsing = true
-		self.isAdvertising = true
+		if isLocating, isBrowsing, isAdvertising { return }
+		isLocating = true
+		isBrowsing = true
+		isAdvertising = true
 		
-		self.browser.startBrowsingForPeers()
-		self.advertiser.startAdvertisingPeer()
+		browser.startBrowsingForPeers()
+		advertiser.startAdvertisingPeer()
+		print("Advertising started at \(Date())")
 	}
 	
 	func updateState() {
@@ -69,7 +71,7 @@ extension NearbyScanner {
 
 extension NearbyScanner: MCNearbyServiceAdvertiserDelegate {
 	func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-		print("Received invitation from \(peerID)")
+		print("Received invitation from \(peerID) at \(Date())")
 		Task {
 			if let device = await NearbySession.instance.device(for: peerID) {
 				device.receivedInvitation(from: peerID, withContext: context, handler: invitationHandler)
@@ -97,6 +99,7 @@ extension NearbyScanner: MCNearbyServiceBrowserDelegate {
 		}
 		NearbyLogger.instance.log("Found peer: \(peerID.displayName)", onlyWhenDebugging: true)
 		Task {
+			try? await Task.sleep(nanoseconds: 1_000_000_000)
 			var device = await NearbySession.instance.device(for: peerID)
 			if device == nil { device = await NearbySession.deviceClass.init(peerID: peerID, info: info) }
 			guard let device else { return }

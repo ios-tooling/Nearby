@@ -971,7 +971,7 @@
 			repositoryURL = "https://github.com/ios-tooling/suite";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.5;
+				minimumVersion = 1.2.6;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
