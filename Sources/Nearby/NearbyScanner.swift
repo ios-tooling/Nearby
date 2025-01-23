@@ -71,15 +71,17 @@ extension NearbyScanner {
 
 extension NearbyScanner: MCNearbyServiceAdvertiserDelegate {
 	func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-		print("Received invitation from \(peerID) at \(Date())")
 		Task {
 			if let device = await NearbySession.instance.device(for: peerID) {
+				print("Received invitation from \(peerID) at \(Date())")
 				device.receivedInvitation(from: peerID, withContext: context, handler: invitationHandler)
 			} else if let data = context, let info = try? JSONDecoder().decode([String: String].self, from: data) {
+				print("Located \(peerID) at \(Date())")
 				let device = await NearbySession.deviceClass.init(peerID: peerID, info: info)
 				self.delegate.didLocate(device: device)
 				invitationHandler(true, device.session)
 			} else {
+				print("Received invitation from \(peerID) at \(Date()), no device available, rejecting")
 				invitationHandler(false, nil)
 			}
 		}
