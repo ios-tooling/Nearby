@@ -15,7 +15,7 @@ actor Manager {
 	var scanner: NearbyScanner!
 	
 	init() {
-		NotificationCenter.default.addObserver(self, selector: #selector(discoveredDevice), name: NearbyDevice.Notifications.deviceConnected, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(deviceConnected), name: NearbyDevice.Notifications.deviceConnected, object: nil)
 		
 		NearbySession.instance.serviceType = "Nearby-test"
 		Task {
@@ -30,7 +30,7 @@ actor Manager {
 		scanner.startLocating()
 	}
 	
-	@objc nonisolated func discoveredDevice(note: Notification) {
+	@objc nonisolated func deviceConnected(note: Notification) {
 		guard let device = note.object as? NearbyDevice else { return }
 		
 		print("Device discovered: \(device.name)")
