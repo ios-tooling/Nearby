@@ -46,7 +46,13 @@ extension NearbyDevice {
 
 	@discardableResult
 	func invite(with browser: MCNearbyServiceBrowser) -> Bool {
+		if let lastInvitedAt, abs(lastInvitedAt.timeIntervalSinceNow) < 3 {
+			print("cooling down before next invitation")
+			return false
+		}
+		
 		guard let info = NearbyDevice.localDevice.discoveryInfo, let data = try? JSONEncoder().encode(info) else { return false }
+		lastInvitedAt = Date()
 		self.startSession()
 		guard let session = self.session else { return false }
 		self.state = .invited
@@ -56,6 +62,8 @@ extension NearbyDevice {
 		
 	func receivedInvitation(from: MCPeerID, withContext context: Data?, handler: @escaping (Bool, MCSession?) -> Void) {
 		if !state.isConnected, state != .provisioned {
+			print("Received invitation, current state: \(state), device info: \(deviceInfo == nil ? "missing" : "present")")
+
 			state = deviceInfo == nil ? .connected : .provisioned
 		}
 		startSession()
@@ -187,6 +195,7 @@ extension NearbyDevice {
 	
 	func startSession() {
 		if self.session == nil {
+			print("Starting session with \(peerID)")
 			self.session = MCSession(peer: NearbyDevice.localDevice.peerID, securityIdentity: nil, encryptionPreference: NearbySession.instance.useEncryption ? .required : .none)
 			self.session?.delegate = self
 		}

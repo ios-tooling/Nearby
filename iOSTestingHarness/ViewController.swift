@@ -6,7 +6,7 @@
 //  Copyright © 2018 Stand Alone, inc. All rights reserved.
 //
 
-import UIKit
+import SwiftUI
 
 
 class ViewController: UIViewController {
@@ -23,12 +23,26 @@ class ViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		tableView.isHidden = true
+		let controller = UIHostingController(rootView: HarnessMainView())
+		addChild(controller)
+		view.addSubview(controller.view)
+		controller.view.frame = view.bounds
+		controller.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		
+		
 		NotificationCenter.default.addObserver(self, selector: #selector(reload), name: NearbyDevice.Notifications.deviceConnected, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(reload), name: NearbyDevice.Notifications.deviceDisconnected, object: nil)
 		// Do any additional setup after loading the view, typically from a nib.
 	}
 
-
+	override func viewDidAppear(_ animated: Bool) {
+		if #available(iOSApplicationExtension 15.0, *) {
+			present(UIHostingController(rootView: NearbyDevicesHUD()), animated: true)
+		} else {
+			// Fallback on earlier versions
+		}
+	}
 }
 
 extension ViewController: UITableViewDataSource {

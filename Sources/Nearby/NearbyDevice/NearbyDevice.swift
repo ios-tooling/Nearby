@@ -44,6 +44,7 @@ open class NearbyDevice: NSObject, Comparable {
 	public var bytesReceived: Int64 = 0 { didSet { objectWillChange.sendOnMain() }}
 	
 	public var receivedStreamedData: ((Data) -> Void)?
+	var lastInvitedAt: Date?
 
 	public var isVisible: Bool {
 		if state == .hidden { return false }
@@ -261,6 +262,7 @@ open class NearbyDevice: NSObject, Comparable {
 	func updateDeviceInfo(from oldValue: [String: String]?) {
 		clearInfoRequestTimer()
 		
+		print("Info updated")
 		guard !isLocalDevice else {
 			NearbySession.instance.localDeviceInfo = deviceInfo ?? [:]
 			return

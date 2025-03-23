@@ -46,12 +46,14 @@ extension NearbyScanner {
 	}
 	
 	func startLocating() {
-		self.isLocating = true
-		self.isBrowsing = true
-		self.isAdvertising = true
+		if isLocating, isBrowsing, isAdvertising { return }
+		isLocating = true
+		isBrowsing = true
+		isAdvertising = true
 		
-		self.browser.startBrowsingForPeers()
-		self.advertiser.startAdvertisingPeer()
+		browser.startBrowsingForPeers()
+		advertiser.startAdvertisingPeer()
+		print("Advertising started at \(Date())")
 	}
 	
 	func updateState() {
@@ -69,14 +71,17 @@ extension NearbyScanner {
 
 extension NearbyScanner: MCNearbyServiceAdvertiserDelegate {
 	func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-		//print("Received invitation from \(peerID)")
 		Task {
 			if let device = await NearbySession.instance.device(for: peerID) {
+				print("Received invitation from \(peerID) at \(Date())")
 				device.receivedInvitation(from: peerID, withContext: context, handler: invitationHandler)
 			} else if let data = context, let info = try? JSONDecoder().decode([String: String].self, from: data) {
+				print("Located \(peerID) at \(Date())")
 				let device = await NearbySession.deviceClass.init(peerID: peerID, info: info)
 				self.delegate.didLocate(device: device)
+				invitationHandler(true, device.session)
 			} else {
+				print("Received invitation from \(peerID) at \(Date()), no device available, rejecting")
 				invitationHandler(false, nil)
 			}
 		}
@@ -96,6 +101,7 @@ extension NearbyScanner: MCNearbyServiceBrowserDelegate {
 		}
 		NearbyLogger.instance.log("Found peer: \(peerID.displayName)", onlyWhenDebugging: true)
 		Task {
+			try? await Task.sleep(nanoseconds: 1_000_000_000)
 			var device = await NearbySession.instance.device(for: peerID)
 			if device == nil { device = await NearbySession.deviceClass.init(peerID: peerID, info: info) }
 			guard let device else { return }
@@ -106,6 +112,7 @@ extension NearbyScanner: MCNearbyServiceBrowserDelegate {
 					device.stopSession()
 				}
 				
+				print("Setting state to found")
 				device.state = .found
 			}
 			device.invite(with: self.browser)

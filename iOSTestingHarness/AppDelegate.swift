@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	var window: UIWindow?
 
 	
-	@objc func discoveredDevice(note: Notification) {
+	@objc func deviceConnected(note: Notification) {
 		if let device = note.object as? NearbyDevice {
 			NearbyLogger.instance.log("Found: \(device.deviceInfo ?? [:])", onlyWhenDebugging: true)
 		}
@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
 		
-		NotificationCenter.default.addObserver(self, selector: #selector(discoveredDevice), name: NearbyDevice.Notifications.deviceConnected, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(deviceConnected), name: NearbyDevice.Notifications.deviceConnected, object: nil)
 		
 		NearbySession.instance.serviceType = "Nearby-test"
 		NearbySession.instance.startup(application: application)

@@ -26,18 +26,25 @@ extension MCPeerID {
 		#endif
 	}
 	
+	static let defaultsKey = "local-peerID"
+
+	public static func resetLocalPeerID() {
+		cachedLocalPeerID = nil
+		UserDefaults.standard.removeObject(forKey: defaultsKey)
+		_ = localPeerID
+	}
+	
 	static var cachedLocalPeerID: MCPeerID?
 	static var localPeerID: MCPeerID {
 		if let id = self.cachedLocalPeerID { return id }
 		
-		let key = "local-peerID"
-		if let data = UserDefaults.standard.data(forKey: key), let id = MCPeerID.from(data: data) {
+		if let data = UserDefaults.standard.data(forKey: defaultsKey), let id = MCPeerID.from(data: data) {
 			self.cachedLocalPeerID = id
 			return id
 		}
 		
 		let peerID = MCPeerID(displayName: NearbySession.instance.localDeviceName)
-		UserDefaults.standard.set(peerID.data, forKey: key)
+		UserDefaults.standard.set(peerID.data, forKey: defaultsKey)
 		self.cachedLocalPeerID = peerID
 		return peerID
 	}
