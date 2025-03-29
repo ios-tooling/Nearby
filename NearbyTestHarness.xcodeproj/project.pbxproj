@@ -1,0 +1,659 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B50CE8E92D92353F004F81EF /* Nearby in Frameworks */ = {isa = PBXBuildFile; productRef = B50CE8E82D92353F004F81EF /* Nearby */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B50CE8812D92336E004F81EF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B50CE8672D92336D004F81EF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B50CE86E2D92336D004F81EF;
+			remoteInfo = NearbyTestHarness;
+		};
+		B50CE88B2D92336E004F81EF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B50CE8672D92336D004F81EF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B50CE86E2D92336D004F81EF;
+			remoteInfo = NearbyTestHarness;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B50CE86F2D92336D004F81EF /* NearbyTestHarness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NearbyTestHarness.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B50CE8802D92336E004F81EF /* NearbyTestHarnessTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NearbyTestHarnessTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B50CE88A2D92336E004F81EF /* NearbyTestHarnessUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NearbyTestHarnessUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		B50CE8B62D9233AA004F81EF /* Exceptions for "Tests" folder in "NearbyTestHarness" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				NearbyTestHarnessTests/NearbyTestHarnessTests.swift,
+				NearbyTestHarnessUITests/NearbyTestHarnessUITests.swift,
+				NearbyTestHarnessUITests/NearbyTestHarnessUITestsLaunchTests.swift,
+			);
+			target = B50CE86E2D92336D004F81EF /* NearbyTestHarness */;
+		};
+		B50CE8B72D9233AA004F81EF /* Exceptions for "Tests" folder in "NearbyTestHarnessTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				NearbyTestHarnessTests/NearbyTestHarnessTests.swift,
+			);
+			target = B50CE87F2D92336E004F81EF /* NearbyTestHarnessTests */;
+		};
+		B50CE8B82D9233AA004F81EF /* Exceptions for "Tests" folder in "NearbyTestHarnessUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				NearbyTestHarnessUITests/NearbyTestHarnessUITests.swift,
+				NearbyTestHarnessUITests/NearbyTestHarnessUITestsLaunchTests.swift,
+			);
+			target = B50CE8892D92336E004F81EF /* NearbyTestHarnessUITests */;
+		};
+		B554E52E2D9651AC00C4C335 /* Exceptions for "NearbyTestHarness" folder in "NearbyTestHarness" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = B50CE86E2D92336D004F81EF /* NearbyTestHarness */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		B50CE8712D92336D004F81EF /* NearbyTestHarness */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				B554E52E2D9651AC00C4C335 /* Exceptions for "NearbyTestHarness" folder in "NearbyTestHarness" target */,
+			);
+			path = NearbyTestHarness;
+			sourceTree = "<group>";
+		};
+		B50CE8AD2D9233AA004F81EF /* Tests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				B50CE8B62D9233AA004F81EF /* Exceptions for "Tests" folder in "NearbyTestHarness" target */,
+				B50CE8B72D9233AA004F81EF /* Exceptions for "Tests" folder in "NearbyTestHarnessTests" target */,
+				B50CE8B82D9233AA004F81EF /* Exceptions for "Tests" folder in "NearbyTestHarnessUITests" target */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B50CE86C2D92336D004F81EF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B50CE8E92D92353F004F81EF /* Nearby in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B50CE87D2D92336E004F81EF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B50CE8872D92336E004F81EF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B50CE8662D92336D004F81EF = {
+			isa = PBXGroup;
+			children = (
+				B50CE8712D92336D004F81EF /* NearbyTestHarness */,
+				B50CE8AD2D9233AA004F81EF /* Tests */,
+				B50CE8702D92336D004F81EF /* Products */,
+			);
+			sourceTree = "<group>";
+			usesTabs = 1;
+		};
+		B50CE8702D92336D004F81EF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B50CE86F2D92336D004F81EF /* NearbyTestHarness.app */,
+				B50CE8802D92336E004F81EF /* NearbyTestHarnessTests.xctest */,
+				B50CE88A2D92336E004F81EF /* NearbyTestHarnessUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B50CE86E2D92336D004F81EF /* NearbyTestHarness */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B50CE8942D92336E004F81EF /* Build configuration list for PBXNativeTarget "NearbyTestHarness" */;
+			buildPhases = (
+				B50CE86B2D92336D004F81EF /* Sources */,
+				B50CE86C2D92336D004F81EF /* Frameworks */,
+				B50CE86D2D92336D004F81EF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				B50CE8712D92336D004F81EF /* NearbyTestHarness */,
+				B50CE8AD2D9233AA004F81EF /* Tests */,
+			);
+			name = NearbyTestHarness;
+			packageProductDependencies = (
+				B50CE8E82D92353F004F81EF /* Nearby */,
+			);
+			productName = NearbyTestHarness;
+			productReference = B50CE86F2D92336D004F81EF /* NearbyTestHarness.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B50CE87F2D92336E004F81EF /* NearbyTestHarnessTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B50CE8972D92336E004F81EF /* Build configuration list for PBXNativeTarget "NearbyTestHarnessTests" */;
+			buildPhases = (
+				B50CE87C2D92336E004F81EF /* Sources */,
+				B50CE87D2D92336E004F81EF /* Frameworks */,
+				B50CE87E2D92336E004F81EF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B50CE8822D92336E004F81EF /* PBXTargetDependency */,
+			);
+			name = NearbyTestHarnessTests;
+			packageProductDependencies = (
+			);
+			productName = NearbyTestHarnessTests;
+			productReference = B50CE8802D92336E004F81EF /* NearbyTestHarnessTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B50CE8892D92336E004F81EF /* NearbyTestHarnessUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B50CE89A2D92336E004F81EF /* Build configuration list for PBXNativeTarget "NearbyTestHarnessUITests" */;
+			buildPhases = (
+				B50CE8862D92336E004F81EF /* Sources */,
+				B50CE8872D92336E004F81EF /* Frameworks */,
+				B50CE8882D92336E004F81EF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B50CE88C2D92336E004F81EF /* PBXTargetDependency */,
+			);
+			name = NearbyTestHarnessUITests;
+			packageProductDependencies = (
+			);
+			productName = NearbyTestHarnessUITests;
+			productReference = B50CE88A2D92336E004F81EF /* NearbyTestHarnessUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B50CE8672D92336D004F81EF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1630;
+				TargetAttributes = {
+					B50CE86E2D92336D004F81EF = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					B50CE87F2D92336E004F81EF = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = B50CE86E2D92336D004F81EF;
+					};
+					B50CE8892D92336E004F81EF = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = B50CE86E2D92336D004F81EF;
+					};
+				};
+			};
+			buildConfigurationList = B50CE86A2D92336D004F81EF /* Build configuration list for PBXProject "NearbyTestHarness" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B50CE8662D92336D004F81EF;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				B50CE8E72D92353F004F81EF /* XCLocalSwiftPackageReference "../Nearby" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = B50CE8702D92336D004F81EF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B50CE86E2D92336D004F81EF /* NearbyTestHarness */,
+				B50CE87F2D92336E004F81EF /* NearbyTestHarnessTests */,
+				B50CE8892D92336E004F81EF /* NearbyTestHarnessUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B50CE86D2D92336D004F81EF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B50CE87E2D92336E004F81EF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B50CE8882D92336E004F81EF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B50CE86B2D92336D004F81EF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B50CE87C2D92336E004F81EF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B50CE8862D92336E004F81EF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B50CE8822D92336E004F81EF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B50CE86E2D92336D004F81EF /* NearbyTestHarness */;
+			targetProxy = B50CE8812D92336E004F81EF /* PBXContainerItemProxy */;
+		};
+		B50CE88C2D92336E004F81EF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B50CE86E2D92336D004F81EF /* NearbyTestHarness */;
+			targetProxy = B50CE88B2D92336E004F81EF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		B50CE8922D92336E004F81EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = YY6CWUX533;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B50CE8932D92336E004F81EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = YY6CWUX533;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		B50CE8952D92336E004F81EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = NearbyTestHarness/Resources/NearbyTestHarness.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"NearbyTestHarness/Resources/Preview Content\"";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NearbyTestHarness/Info.plist;
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "To find other devices";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.standalone.NearbyTestHarness;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Debug;
+		};
+		B50CE8962D92336E004F81EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = NearbyTestHarness/Resources/NearbyTestHarness.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"NearbyTestHarness/Resources/Preview Content\"";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NearbyTestHarness/Info.plist;
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "To find other devices";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.standalone.NearbyTestHarness;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Release;
+		};
+		B50CE8982D92336E004F81EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MACOSX_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.standalone.NearbyTestHarnessTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NearbyTestHarness.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/NearbyTestHarness";
+				XROS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Debug;
+		};
+		B50CE8992D92336E004F81EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MACOSX_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.standalone.NearbyTestHarnessTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NearbyTestHarness.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/NearbyTestHarness";
+				XROS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Release;
+		};
+		B50CE89B2D92336E004F81EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MACOSX_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.standalone.NearbyTestHarnessUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_TARGET_NAME = NearbyTestHarness;
+				XROS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Debug;
+		};
+		B50CE89C2D92336E004F81EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MACOSX_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.standalone.NearbyTestHarnessUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_TARGET_NAME = NearbyTestHarness;
+				XROS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B50CE86A2D92336D004F81EF /* Build configuration list for PBXProject "NearbyTestHarness" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B50CE8922D92336E004F81EF /* Debug */,
+				B50CE8932D92336E004F81EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B50CE8942D92336E004F81EF /* Build configuration list for PBXNativeTarget "NearbyTestHarness" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B50CE8952D92336E004F81EF /* Debug */,
+				B50CE8962D92336E004F81EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B50CE8972D92336E004F81EF /* Build configuration list for PBXNativeTarget "NearbyTestHarnessTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B50CE8982D92336E004F81EF /* Debug */,
+				B50CE8992D92336E004F81EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B50CE89A2D92336E004F81EF /* Build configuration list for PBXNativeTarget "NearbyTestHarnessUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B50CE89B2D92336E004F81EF /* Debug */,
+				B50CE89C2D92336E004F81EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		B50CE8E72D92353F004F81EF /* XCLocalSwiftPackageReference "../Nearby" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Nearby;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B50CE8E82D92353F004F81EF /* Nearby */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Nearby;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = B50CE8672D92336D004F81EF /* Project object */;
+}
