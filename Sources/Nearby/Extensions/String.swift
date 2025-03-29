@@ -42,12 +42,12 @@ extension String {
         if !services.contains(udpID) { throw BonjourValidationError.noUDPID }
     }
     
-    @MainActor static var localDeviceName: String {
+    static var localDeviceName: String {
         get {
             #if os(macOS)
                 ProcessInfo.processInfo.hostName
             #elseif os(iOS)
-                UIDevice.current.name
+                DispatchQueue.main.sync { UIDevice.current.name }
             #else
                 ProcessInfo.processInfo.hostName
             #endif

@@ -1,17 +1,17 @@
 //
-//  NearbySession+MCSessionDelegate.swift
+//  NearbyDevice+SessionDelegate.swift
 //  Nearby
 //
-//  Created by Ben Gottlieb on 3/28/25.
+//  Created by Ben Gottlieb on 3/29/25.
 //
 
+import Foundation
 import MultipeerConnectivity
 
-extension NearbySession: MCSessionDelegate {
+extension NearbyDevice: MCSessionDelegate {
     public nonisolated func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        print("\(peerID.displayName) changed state to \(state.description)")
         Task { @NearbyActor in
-            self[peerID]?.setSessionState(state)
+            self.setSessionState(state)
         }
     }
 

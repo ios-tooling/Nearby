@@ -10,9 +10,9 @@ import MultipeerConnectivity
 
 extension NearbyScanner: MCNearbyServiceAdvertiserDelegate {
     nonisolated func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-        print("Received invitation from \(peerID)")
         
-        invitationHandler(true, NearbySession.session)
+        let session = NearbySession.session(for: peerID)
+        invitationHandler(true, session)
         
 //        Task { @NearbyActor in
 //            invitationHandler(true, NearbySession.instance.session)

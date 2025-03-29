@@ -25,7 +25,11 @@ public struct VisibleDevicesList: View {
         var body: some View {
             VStack {
                 Text(device.id.description)
-                Text(device.state.rawValue)
+                HStack {
+                    Text(device.connectivityDescription)
+                }
+                Text(device.discoveryInfo.description)
+                Text(device.provisionedInfo.description)
             }
         }
     }

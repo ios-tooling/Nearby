@@ -17,16 +17,19 @@ extension MCSession: @unchecked Sendable { }
     var devices: Set<NearbyDevice> = [] { didSet {
         UI.setDevices(Array(devices).sorted())
     }}
+    var provisionedDevices: Set<NearbyDevice> { devices.filter { $0.state == .provisioned }}
     
-    static nonisolated let sessionWrapper = NonIsolatedWrapper(MCSession?.none)
-    static nonisolated var session: MCSession? {
-        get { sessionWrapper.value }
-        set { sessionWrapper.value = newValue }
+    static nonisolated let sessionWrapper = NonIsolatedWrapper([MCPeerID: MCSession]())
+    static nonisolated func session(for peerID: MCPeerID) -> MCSession? {
+        sessionWrapper.value[peerID]
+    }
+    static nonisolated func setSession(_ session: MCSession?, for peerID: MCPeerID) {
+        sessionWrapper.value[peerID] = session
     }
     
-    public var isActive: Bool { scanner.isBrowsing || scanner.isAdvertising || Self.session != nil }
+    public var isActive: Bool { scanner.isBrowsing || scanner.isAdvertising }
     
-    @MainActor public static var localDeviceName: String { get { String.localDeviceName }}
+    nonisolated public static var localDeviceName: String { get { String.localDeviceName }}
     public static var localDeviceInfo: [String: Sendable] = [:]
     
     func updateLocalDeviceInfo(_ info: [String: Sendable]) {
@@ -34,15 +37,11 @@ extension MCSession: @unchecked Sendable { }
     }
     
     @NearbyActor public static func setup() async {
-        NearbyDevice.local = await .init()
     }
 
     public func start() async {
         do {
             if isActive { return }
-            let session = MCSession(peer: await .localPeerID, securityIdentity: nil, encryptionPreference: .optional)
-            session.delegate = self
-            Self.session = session
             try scanner.startBrowsing()
             try scanner.startAdvertising()
             
@@ -55,7 +54,6 @@ extension MCSession: @unchecked Sendable { }
     public func stop() {
         if !isActive { return }
         
-        Self.session = nil
         scanner.stopBrowsing()
         scanner.stopAdvertising()
 

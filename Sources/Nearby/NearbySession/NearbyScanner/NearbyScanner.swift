@@ -11,8 +11,8 @@ import MultipeerConnectivity
 @NearbyActor class NearbyScanner: NSObject {
     enum ScannerError: Error { case advertising(Error), browsing(Error) }
     
-    var scanner: MCNearbyServiceBrowser!
-    var advertiser: MCNearbyServiceAdvertiser!
+    var scanner: MCNearbyServiceBrowser
+    var advertiser: MCNearbyServiceAdvertiser
     
     var recentError: Error?
     var isAdvertising = false
@@ -25,19 +25,17 @@ import MultipeerConnectivity
     }
 
     override init() {
-        super.init()
-        Task { await setup() }
-    }
-    
-    func setup() async {
+
         let serviceType = try! String.serviceType
-        let peerID = await MCPeerID.localPeerID
+        let peerID = MCPeerID.localPeerID
         
         try! serviceType.validateBonjourServiceType()
         
         scanner = MCNearbyServiceBrowser(peer: peerID, serviceType: serviceType)
         advertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: Self.discoveryInfo, serviceType: serviceType)
-        
+
+        super.init()
+
         scanner.delegate = self
         advertiser.delegate = self
     }

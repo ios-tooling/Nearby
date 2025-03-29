@@ -11,20 +11,25 @@ import MultipeerConnectivity
 extension NearbyDevice {
     
     @NearbyActor public class LocalDevice: NearbyDevice {
-        public private(set) var discoveryInfo: [String: String] = [:]
-
-        init() async {
-            super.init(peerID: await .localPeerID)
+        init() {
+            super.init(peerID: .localPeerID, info: nil)
         }
         
-        public func updateDiscoveryInfo(_ info: [String: String]) {
+        public func setDiscoveryInfo(_ info: [String: String]) {
             self.discoveryInfo = info
             Task {
-                Task {
-                    await NearbySession.instance.scanner.updateDiscoveryInfo(discoveryInfo)
+                await NearbySession.instance.scanner.updateDiscoveryInfo(discoveryInfo)
+            }
+        }
+        
+        public func setProvisionedInfo(_ info: [String: Sendable]) {
+            provisionedInfo = info
+            let provisioned = NearbySession.instance.provisionedDevices
+            Task {
+                for device in provisioned {
+                    await device.send(message: PairMessage())
                 }
             }
         }
-
     }
 }

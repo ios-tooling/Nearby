@@ -22,10 +22,16 @@ struct ContentView: View {
 				}
 			}
 			
+			AsyncButton("Update Discovery Info") {
+				await NearbyDevice.local.setProvisionedInfo(["Date": Date.now])
+			}
+			
 			VisibleDevicesList()
         }
         .padding()
-		.task {
+		.task { @NearbyActor in
+			NearbyDevice.local.setDiscoveryInfo(["Test": "Name"])
+			NearbyDevice.local.setProvisionedInfo(["Paired": "Yes"])
 			await NearbySession.instance.start()
 		}
     }

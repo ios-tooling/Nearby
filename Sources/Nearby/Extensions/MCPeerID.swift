@@ -18,11 +18,10 @@ extension MCPeerID: Comparable {
 
 public extension MCPeerID {
     static let defaultsKey = "local-peerID"
-    @MainActor static let localPeerID: MCPeerID = {
+    static let localPeerID: MCPeerID = {
         if let data = UserDefaults.standard.data(forKey: defaultsKey), let id = MCPeerID.from(data: data) {
             return id
         }
-        
         let peerID = MCPeerID(displayName: NearbySession.localDeviceName)
         UserDefaults.standard.set(peerID.data, forKey: defaultsKey)
         return peerID

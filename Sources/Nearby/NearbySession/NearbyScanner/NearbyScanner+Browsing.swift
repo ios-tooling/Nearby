@@ -12,11 +12,13 @@ extension NearbyScanner: MCNearbyServiceBrowserDelegate {
     nonisolated func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         Task { @NearbyActor in
             let device = await NearbySession.instance.buildDevice(for: peerID, info: info)
+            print("Found \(peerID.displayName), inviting…")
             await device.invite()
         }
     }
     
     nonisolated func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
+        print("Browser disconnected \(peerID.displayName)")
         Task {
             await NearbySession.instance.didLose(peerID: peerID)
         }

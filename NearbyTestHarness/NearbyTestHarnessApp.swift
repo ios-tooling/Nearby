@@ -11,7 +11,7 @@ import Nearby
 @main
 struct NearbyTestHarnessApp: App {
 	init() {
-		Task {
+		Task { @NearbyActor in
 			await NearbySession.setup()
 		}
 	}
