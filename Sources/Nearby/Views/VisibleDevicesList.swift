@@ -21,6 +21,7 @@ public struct VisibleDevicesList: View {
     }
     
     struct Row: View {
+        @State private var flash = false
         var device: NearbyDevice.UI
         var body: some View {
             VStack {
@@ -38,9 +39,22 @@ public struct VisibleDevicesList: View {
                     
                     Button("Reconnect") { device.reconnect() }
                         .disabled(!device.canReconnect)
+                    
+                    Circle()
+                        .fill(.red)
+                        .frame(width: 12, height: 12)
+                        .opacity(flash ? 1 : 0)
                 }
+                
             }
             .buttonStyle(.plain)
+            .onChange(of: device.lastPingReceivedAt) {
+                withAnimation {
+                    flash = true
+                } completion: {
+                    flash = false
+                }
+            }
         }
     }
 }

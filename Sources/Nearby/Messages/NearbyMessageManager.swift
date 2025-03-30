@@ -15,6 +15,13 @@ import MultipeerConnectivity
     
     var registeredMessageKinds: [String: any NearbyMessage.Type] = [:]
     
+    init() {
+        Task {
+            PingMessage.register()
+            ProvisionMessage.register()
+        }
+    }
+    
     func register(kind: any NearbyMessage.Type) {
         registeredMessageKinds[kind.kind] = kind
     }
@@ -37,6 +44,8 @@ import MultipeerConnectivity
         }
         if let message: ProvisionMessage = try? data.extract() {
             NearbySession.instance[peerID]?.updateProvisionedInfo(message.info.dictionary)
+        } else if let message: PingMessage = try? data.extract() {
+            NearbySession.instance[peerID]?.didReceivePing()
         }
     }
 }

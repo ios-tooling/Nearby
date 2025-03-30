@@ -17,6 +17,7 @@ extension NearbyDevice {
 
         public private(set) var state: NearbyDevice.State = .disconnected
         public private(set) var connectivityDescription: String = ""
+        public var lastPingReceivedAt: Date?
         
         @NearbyActor init(_ device: NearbyDevice) {
             self.device = device

@@ -20,6 +20,8 @@ enum NearbyLoggedEvent {
     case createdNewDevice(MCPeerID)
     case sendingMessage(String, MCPeerID)
     case receivedMessage(String, MCPeerID)
+    case pingSent(MCPeerID)
+    case pingReceived(MCPeerID)
 
     var text: String {
         switch self {
@@ -39,6 +41,8 @@ enum NearbyLoggedEvent {
         case .createdNewDevice(let id): "created new device for: \(id)"
         case .sendingMessage(let kind, let id): "sending message: \(kind) to: \(id)"
         case .receivedMessage(let kind, let id): "received message: \(kind) from: \(id)"
+        case .pingSent(let id): "sent ping to \(id)"
+        case .pingReceived(let id): "received ping from \(id)"
         }
     }
 }

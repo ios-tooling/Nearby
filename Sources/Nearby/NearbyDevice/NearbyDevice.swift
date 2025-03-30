@@ -15,7 +15,9 @@ import Suite
     public var ui: UI!
     public static let local: LocalDevice = .init()
     public var visibleInBrowser = false
-    
+    var lastPingReceivedAt: Date?
+    var pingTask: Task<Void, Never>?
+
     public var lastConnectedAt: Date?
     public var disconnectedAt: Date?
     
@@ -61,12 +63,37 @@ import Suite
     
     func didDisconnect() {
         disconnectedAt = .now
+        stopPinging()
         updateUI()
     }
     
     func didConnect() {
         disconnectedAt = nil
+        startPinging()
         updateUI()
+    }
+    
+    func didReceivePing() {
+        NearbyLog.log(.pingReceived(peerID))
+        lastPingReceivedAt = .now
+        Task { @MainActor in
+            await ui.lastPingReceivedAt = .now
+        }
+    }
+    
+    static nonisolated let pingDuration = 3.0
+    func startPinging() {
+        pingTask = Task {
+            try? await Task.sleep(for: .seconds(Self.pingDuration))
+            NearbyLog.log(.pingSent(peerID))
+            await send(message: PingMessage())
+            startPinging()
+        }
+    }
+    
+    func stopPinging() {
+        pingTask?.cancel()
+        pingTask = nil
     }
     
     func updateProvisionedInfo(_ info: [String: Sendable]) {
