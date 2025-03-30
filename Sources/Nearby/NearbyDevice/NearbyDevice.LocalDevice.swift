@@ -27,7 +27,7 @@ extension NearbyDevice {
             let provisioned = NearbySession.instance.provisionedDevices
             Task {
                 for device in provisioned {
-                    await device.send(message: PairMessage())
+                    await device.send(message: ProvisionMessage())
                 }
             }
         }

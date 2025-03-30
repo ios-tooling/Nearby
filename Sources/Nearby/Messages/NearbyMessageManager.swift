@@ -33,9 +33,9 @@ import MultipeerConnectivity
     
     func received(data: Data, from peerID: MCPeerID) {
         if let kind = try? data.messageKind {
-            print("Received \(kind)")
+            NearbyLog.log(.receivedMessage(kind, peerID))
         }
-        if let message: PairMessage = try? data.extract() {
+        if let message: ProvisionMessage = try? data.extract() {
             NearbySession.instance[peerID]?.updateProvisionedInfo(message.info.dictionary)
         }
     }

@@ -44,26 +44,26 @@ import MultipeerConnectivity
         if isAdvertising { return }
         try advertiser.startAdvertisingPeer()
         isAdvertising = true
-        print("Started advertising at \(Date.now.formatted()), service type: \(try! String.serviceType)")
+        NearbyLog.log(.advertisingStarted(.now, try! .serviceType))
     }
     
     func stopAdvertising() {
         advertiser.stopAdvertisingPeer()
         isAdvertising = false
-        print("Stopped advertising at \(Date.now.formatted())")
+        NearbyLog.log(.advertisingStopped(.now))
     }
     
     func startBrowsing() {
         if isBrowsing { return }
         scanner.startBrowsingForPeers()
         isBrowsing = true
-        print("Started browsing at \(Date.now.formatted())")
+        NearbyLog.log(.browsingStarted(.now))
     }
     
     func stopBrowsing() {
         scanner.stopBrowsingForPeers()
         isBrowsing = false
-        print("Stopped browsing at \(Date.now.formatted())")
+        NearbyLog.log(.browsingStopped(.now))
     }
     
     func updateDiscoveryInfo(_ info: [String: String]) async {

@@ -10,7 +10,8 @@ import Foundation
 extension NearbyDevice {
     public func send<Message: NearbyMessage>(message: Message) async {
         do {
-            print("Sending \(type(of: message)) to \(peerID.displayName)")
+            NearbyLog.log(.sendingMessage(type(of: message).kind, peerID))
+
             try session?.send(Data(message: message), toPeers: [peerID], with: .reliable)
         } catch {
             print("Failed to send \(message) to \(peerID.displayName): \(error.localizedDescription)")

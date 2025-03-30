@@ -10,15 +10,18 @@ import MultipeerConnectivity
 
 extension NearbyScanner: MCNearbyServiceBrowserDelegate {
     nonisolated func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
+        NearbyLog.log(.browserFoundPeer(peerID, info))
         Task { @NearbyActor in
             let device = await NearbySession.instance.buildDevice(for: peerID, info: info)
-            print("Found \(peerID.displayName), inviting…")
+            device.appearedInBrowser()
+            if device.state.isConnected { return }
+            NearbyLog.log(.foundInvitablePeer(peerID))
             await device.invite()
         }
     }
     
     nonisolated func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
-        print("Browser disconnected \(peerID.displayName)")
+        NearbyLog.log(.browserLostPeer(peerID))
         Task {
             await NearbySession.instance.didLose(peerID: peerID)
         }
@@ -26,6 +29,7 @@ extension NearbyScanner: MCNearbyServiceBrowserDelegate {
     
     nonisolated func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error) {
         Task {
+            NearbyLog.log(.browserFailedToStart(error))
             await self.setRecentError(ScannerError.browsing(error))
             await self.setIsAdvertising(false)
         }

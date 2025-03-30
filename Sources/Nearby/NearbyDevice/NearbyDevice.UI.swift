@@ -37,5 +37,26 @@ extension NearbyDevice {
         func setProvisionedInfo(_ info: [String: Sendable]) {
             self.provisionedInfo = info
         }
+
+        public func disconnect() {
+            Task { @NearbyActor in
+                NearbyLog.log(.disconnectedFrom(device.peerID))
+                device.didDisconnect()
+            }
+        }
+        
+        public var canDisconnect: Bool {
+            state.isConnected
+        }
+        
+        public var canReconnect: Bool {
+            !state.isConnected
+        }
+        
+        public func reconnect() {
+            Task { @NearbyActor in
+                device.reconnect()
+            }
+        }
     }
 }

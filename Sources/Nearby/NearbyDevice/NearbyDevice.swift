@@ -14,6 +14,7 @@ import Suite
     public internal(set) var provisionedInfo: [String: Sendable]?
     public var ui: UI!
     public static let local: LocalDevice = .init()
+    public var visibleInBrowser = false
     
     public var lastConnectedAt: Date?
     public var disconnectedAt: Date?
@@ -24,14 +25,17 @@ import Suite
 
     public var state: State {
         switch sessionState {
-        case .connected: return provisionedInfo == nil ? .connected : .provisioned
+        case .connected:
+            if let disconnectedAt { return .disconnected }
+            return provisionedInfo == nil ? .connected : .provisioned
         case .connecting: return .connecting
         case .notConnected:
-            if disconnectedAt != nil { return lastConnectedAt != nil ? .disconnected : .unknown }
+            return visibleInBrowser ? .offline : .unknown
         default: return .unknown
         }
-        return .visible
+        return .unknown
     }
+    
     
     var connectivityDescription: String {
         var base = state.description + " (\(sessionState.description))"
@@ -57,13 +61,12 @@ import Suite
     
     func didDisconnect() {
         disconnectedAt = .now
-        Task { await ui.setState(state, connectivityDescription: connectivityDescription) }
+        updateUI()
     }
     
     func didConnect() {
-        Task {
-            await ui.setState(state, connectivityDescription: connectivityDescription)
-        }
+        disconnectedAt = nil
+        updateUI()
     }
     
     func updateProvisionedInfo(_ info: [String: Sendable]) {
@@ -79,10 +82,26 @@ import Suite
         Task {
             if newState == .connected {
                 lastConnectedAt = .now
-                await send(message: PairMessage())
+                await send(message: ProvisionMessage())
             }
             await ui.setState(state, connectivityDescription: connectivityDescription)
         }
+    }
+    
+    func updateUI() {
+        Task {
+            await ui.setState(state, connectivityDescription: connectivityDescription)
+        }
+    }
+    
+    func appearedInBrowser() {
+        visibleInBrowser = true
+        updateUI()
+    }
+    
+    func disappearedFromBrowser() {
+        visibleInBrowser = false
+        updateUI()
     }
     
     public nonisolated static func == (lhs: NearbyDevice, rhs: NearbyDevice) -> Bool {

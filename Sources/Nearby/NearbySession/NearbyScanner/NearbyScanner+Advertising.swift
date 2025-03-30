@@ -20,7 +20,7 @@ extension NearbyScanner: MCNearbyServiceAdvertiserDelegate {
     }
     
     nonisolated public func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
-        print("Failed to start for peer: \(error)")
+        NearbyLog.log(.advertisingFailedToStart(error))
         Task {
             await self.setRecentError(ScannerError.advertising(error))
             await self.stopAdvertising()

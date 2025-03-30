@@ -27,10 +27,20 @@ public struct VisibleDevicesList: View {
                 Text(device.id.description)
                 HStack {
                     Text(device.connectivityDescription)
+                        .foregroundStyle(Color(uxColor: device.state.color))
                 }
                 Text(device.discoveryInfo.description)
                 Text(device.provisionedInfo.description)
+                
+                HStack {
+                    Button("Disconnect") { device.disconnect() }
+                        .disabled(!device.canDisconnect)
+                    
+                    Button("Reconnect") { device.reconnect() }
+                        .disabled(!device.canReconnect)
+                }
             }
+            .buttonStyle(.plain)
         }
     }
 }

@@ -9,7 +9,7 @@ import Suite
 import CrossPlatformKit
 
 extension NearbyDevice {
-    public enum State: Int, Comparable, CustomStringConvertible, RawCodable, Sendable { case unknown, hidden, visible, invited, connecting, connected, provisioned, disconnected
+    public enum State: Int, Comparable, CustomStringConvertible, RawCodable, Sendable { case unknown, hidden, visible, invited, connecting, connected, provisioned, disconnected, offline
         
         public var canConnect: Bool {
             switch self {
@@ -28,6 +28,7 @@ extension NearbyDevice {
             case .connecting: "Connecting"
             case .disconnected: "Disconnected"
             case .hidden: "Hidden"
+            case .offline: "Offline"
             }
         }
         
@@ -41,6 +42,7 @@ extension NearbyDevice {
             case .connected: .blue
             case .provisioned: .purple
             case .hidden: .black
+            case .offline: .lightGray
             }
         }
         
@@ -50,7 +52,14 @@ extension NearbyDevice {
             default: false
             }
         }
-        
+
+        public var isNotAvailable: Bool {
+            switch self {
+            case .offline, .unknown: true
+            default: false
+            }
+        }
+
         public static func < (lhs: State, rhs: State) -> Bool { lhs.rawValue < rhs.rawValue }
     }
 }

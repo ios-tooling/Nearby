@@ -15,7 +15,7 @@ extension NearbySession {
             return existing
         }
         
-        print("Creating nearby device for \(id)")
+        NearbyLog.log(.createdNewDevice(id))
         let new = NearbyDevice(peerID: id, info: info)
         devices.insert(new)
         new.didConnect()
@@ -29,7 +29,6 @@ extension NearbySession {
     }
     
     func didLose(peerID: MCPeerID) {
-        print("\(peerID.displayName) disconnected")
-        self[peerID]?.didDisconnect()
+        self[peerID]?.disappearedFromBrowser()
     }
 }

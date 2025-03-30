@@ -27,6 +27,8 @@ struct ContentView: View {
 			}
 			
 			VisibleDevicesList()
+			
+			LogList()
         }
         .padding()
 		.task { @NearbyActor in

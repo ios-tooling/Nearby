@@ -1,5 +1,5 @@
 //
-//  PairMessage.swift
+//  ProvisionMessage.swift
 //  Nearby
 //
 //  Created by Ben Gottlieb on 3/29/25.
@@ -7,8 +7,8 @@
 
 import Suite
 
-public struct PairMessage: NearbyMessage {
-    public static let kind = "pair"
+public struct ProvisionMessage: NearbyMessage {
+    public static let kind = "provision"
     
     var info: CodableJSONDictionary = [:]
     

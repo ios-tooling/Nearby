@@ -9,7 +9,7 @@ import MultipeerConnectivity
 
 extension NearbySession: MCSessionDelegate {
     public nonisolated func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        print("\(peerID.displayName) changed state to \(state.description)")
+        NearbyLog.log(.peerStateChanged(peerID, state))
         Task { @NearbyActor in
             self[peerID]?.setSessionState(state)
         }
