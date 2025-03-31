@@ -28,6 +28,7 @@ extension MCSession: @unchecked Sendable { }
     }
     
     public var isActive: Bool { scanner.isBrowsing || scanner.isAdvertising }
+    public var devicePingTimeout: TimeInterval? = 10
     
     nonisolated public static var localDeviceName: String { get { String.localDeviceName }}
     public static var localDeviceInfo: [String: Sendable] = [:]

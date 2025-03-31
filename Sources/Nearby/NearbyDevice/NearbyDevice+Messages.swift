@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MultipeerConnectivity
 
 extension NearbyDevice {
     public func send<Message: NearbyMessage>(message: Message) async {
@@ -14,7 +15,13 @@ extension NearbyDevice {
 
             try session?.send(Data(message: message), toPeers: [peerID], with: .reliable)
         } catch {
-            print("Failed to send \(message) to \(peerID.displayName): \(error.localizedDescription)")
+            if (error as NSError).domain == MCErrorDomain,
+               (error as NSError).code == MCError.notConnected.rawValue {
+                    didDisconnect()
+                    return
+            }
+
+            print("Failed to send \(message) to \(peerID.displayName): \(error)")
         }
     }
 }

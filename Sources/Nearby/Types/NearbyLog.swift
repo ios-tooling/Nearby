@@ -22,27 +22,29 @@ enum NearbyLoggedEvent {
     case receivedMessage(String, MCPeerID)
     case pingSent(MCPeerID)
     case pingReceived(MCPeerID)
+    case deviceTimedOut(MCPeerID)
 
     var text: String {
         switch self {
-        case .browserFoundPeer(let id, _): "found peer: \(id)"
-        case .browserLostPeer(let id): "lost peer: \(id)"
-        case .browserFailedToStart(let id): "failed to start: \(id)"
+        case .browserFoundPeer(let id, _): "found peer: \(id.displayName)"
+        case .browserLostPeer(let id): "lost peer: \(id.displayName)"
+        case .browserFailedToStart(let error): "failed to start: \(error)"
         case .advertisingStarted(let date, _): "advertising started: \(date.formatted())"
         case .advertisingStopped(let date): "advertising stopped: \(date.formatted())"
         case .advertisingFailedToStart(let error): "advertising failed to start: \(error)"
         case .browsingStarted(let date): "browsing started at \(date.formatted())"
         case .browsingStopped(let date): "browsing stopped at \(date.formatted())"
-        case .peerStateChanged(let id, let state): "peer state of \(id) is now: \(state.description))"
-        case .reinvited(let id): "reinvited: \(id)"
-        case .reconnected(let id): "reconnected: \(id)"
-        case .disconnectedFrom(let id): "disconnected from: \(id)"
-        case .foundInvitablePeer(let id): "invited: \(id)"
-        case .createdNewDevice(let id): "created new device for: \(id)"
-        case .sendingMessage(let kind, let id): "sending message: \(kind) to: \(id)"
-        case .receivedMessage(let kind, let id): "received message: \(kind) from: \(id)"
-        case .pingSent(let id): "sent ping to \(id)"
-        case .pingReceived(let id): "received ping from \(id)"
+        case .peerStateChanged(let id, let state): "peer state of \(id.displayName) is now: \(state.description))"
+        case .reinvited(let id): "reinvited: \(id.displayName)"
+        case .reconnected(let id): "reconnected: \(id.displayName)"
+        case .disconnectedFrom(let id): "disconnected from: \(id.displayName)"
+        case .foundInvitablePeer(let id): "invited: \(id.displayName)"
+        case .createdNewDevice(let id): "created new device for: \(id.displayName)"
+        case .sendingMessage(let kind, let id): "sending message: \(kind) to: \(id.displayName)"
+        case .receivedMessage(let kind, let id): "received message: \(kind) from: \(id.displayName)"
+        case .pingSent(let id): "sent ping to \(id.displayName)"
+        case .pingReceived(let id): "received ping from \(id.displayName)"
+        case .deviceTimedOut(let id): "device timed out: \(id.displayName)"
         }
     }
 }
