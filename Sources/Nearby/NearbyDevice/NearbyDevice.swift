@@ -120,7 +120,7 @@ open class NearbyDevice: NSObject, Comparable {
 			discoveryInfo?[Keys.deviceRawType] = Gestalt.simulatedRawDeviceType ?? Gestalt.rawDeviceType
 		#endif
 		
-		if let md5 = [avatarName, avatarImage?.pngData()].md5 { discoveryInfo?[Keys.avatarHash] = md5 }
+		if let md5 = try? [avatarName ?? "", avatarImage?.pngData() ?? Data()].md5 { discoveryInfo?[Keys.avatarHash] = md5 }
 		name = NearbySession.instance.localDeviceName
 		if isLocalDevice {
 			discoveryInfo?[Keys.idiom] = idiomString

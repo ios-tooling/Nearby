@@ -88,7 +88,8 @@ extension NearbySystemMessage {
 		init?(name: String?, image: UXImage?) {
 			self.name = name
 			self.image = image
-			guard let hash = [name, image?.pngData()].md5 else { return nil }
+			let hashSource: [MD5able] = [name ?? "", image?.pngData() ?? Data()]
+			guard let hash = try? hashSource.md5 else { return nil }
 			self.hash = hash
 		}
 	}
